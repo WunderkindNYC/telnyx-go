@@ -27,19 +27,19 @@ var (
 
 type CredentialConnectionsApiService service
 /*
-CredentialConnectionsApiService Creates a credential connection
+CredentialConnectionsApiService Create a credential connection
 Creates a credential connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Parameters that can be defined during credential connection creation
-@return InlineResponse2011
+@return CredentialConnectionResponse
 */
-func (a *CredentialConnectionsApiService) CreateCredentialConnection(ctx context.Context, body CredentialConnectionCreate) (InlineResponse2011, *http.Response, error) {
+func (a *CredentialConnectionsApiService) CreateCredentialConnection(ctx context.Context, body CreateCredentialConnectionRequest) (CredentialConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2011
+		localVarReturnValue CredentialConnectionResponse
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *CredentialConnectionsApiService) CreateCredentialConnection(ctx context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse2011
+			var v CredentialConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -113,19 +113,19 @@ func (a *CredentialConnectionsApiService) CreateCredentialConnection(ctx context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CredentialConnectionsApiService Deletes a credential connection
+CredentialConnectionsApiService Delete a credential connection
 Deletes an existing credential connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse2011
+@return CredentialConnectionResponse
 */
-func (a *CredentialConnectionsApiService) DeleteCredentialConnection(ctx context.Context, id string) (InlineResponse2011, *http.Response, error) {
+func (a *CredentialConnectionsApiService) DeleteCredentialConnection(ctx context.Context, id string) (CredentialConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2011
+		localVarReturnValue CredentialConnectionResponse
 	)
 
 	// create path and map variables
@@ -183,7 +183,7 @@ func (a *CredentialConnectionsApiService) DeleteCredentialConnection(ctx context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2011
+			var v CredentialConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -198,33 +198,33 @@ func (a *CredentialConnectionsApiService) DeleteCredentialConnection(ctx context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CredentialConnectionsApiService List all credential connections
+CredentialConnectionsApiService List credential connections
 Returns a list of your credential connections.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CredentialConnectionsApiFindCredentialConnectionsOpts - Optional Parameters:
+ * @param optional nil or *CredentialConnectionsApiListCredentialConnectionsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
      * @param "FilterConnectionNameContains" (optional.String) -  If present, connections with &lt;code&gt;connection_name&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
-     * @param "FilterOutboundVoiceProfileId" (optional.String) -  Identifies the associated outbound voice profile.
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorterd in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
-@return InlineResponse20015
+     * @param "FilterOutboundOutboundVoiceProfileId" (optional.String) -  Identifies the associated outbound voice profile.
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
+@return ListCredentialConnectionsResponse
 */
 
-type CredentialConnectionsApiFindCredentialConnectionsOpts struct {
+type CredentialConnectionsApiListCredentialConnectionsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
     FilterConnectionNameContains optional.String
-    FilterOutboundVoiceProfileId optional.String
+    FilterOutboundOutboundVoiceProfileId optional.String
     Sort optional.String
 }
 
-func (a *CredentialConnectionsApiService) FindCredentialConnections(ctx context.Context, localVarOptionals *CredentialConnectionsApiFindCredentialConnectionsOpts) (InlineResponse20015, *http.Response, error) {
+func (a *CredentialConnectionsApiService) ListCredentialConnections(ctx context.Context, localVarOptionals *CredentialConnectionsApiListCredentialConnectionsOpts) (ListCredentialConnectionsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20015
+		localVarReturnValue ListCredentialConnectionsResponse
 	)
 
 	// create path and map variables
@@ -243,8 +243,8 @@ func (a *CredentialConnectionsApiService) FindCredentialConnections(ctx context.
 	if localVarOptionals != nil && localVarOptionals.FilterConnectionNameContains.IsSet() {
 		localVarQueryParams.Add("filter[connection_name][contains]", parameterToString(localVarOptionals.FilterConnectionNameContains.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.FilterOutboundVoiceProfileId.IsSet() {
-		localVarQueryParams.Add("filter[outbound_voice_profile_id]", parameterToString(localVarOptionals.FilterOutboundVoiceProfileId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.FilterOutboundOutboundVoiceProfileId.IsSet() {
+		localVarQueryParams.Add("filter[outbound.outbound_voice_profile_id]", parameterToString(localVarOptionals.FilterOutboundOutboundVoiceProfileId.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
@@ -296,7 +296,7 @@ func (a *CredentialConnectionsApiService) FindCredentialConnections(ctx context.
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20015
+			var v ListCredentialConnectionsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -311,19 +311,19 @@ func (a *CredentialConnectionsApiService) FindCredentialConnections(ctx context.
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CredentialConnectionsApiService Retrieve a connection
+CredentialConnectionsApiService Retrieve a credential connection
 Retrieves the details of an existing credential connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse2011
+@return CredentialConnectionResponse
 */
-func (a *CredentialConnectionsApiService) GetCredentialConnection(ctx context.Context, id string) (InlineResponse2011, *http.Response, error) {
+func (a *CredentialConnectionsApiService) RetrieveCredentialConnection(ctx context.Context, id string) (CredentialConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2011
+		localVarReturnValue CredentialConnectionResponse
 	)
 
 	// create path and map variables
@@ -381,7 +381,7 @@ func (a *CredentialConnectionsApiService) GetCredentialConnection(ctx context.Co
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2011
+			var v CredentialConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -396,20 +396,20 @@ func (a *CredentialConnectionsApiService) GetCredentialConnection(ctx context.Co
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CredentialConnectionsApiService Updates a credential connection
+CredentialConnectionsApiService Update a credential connection
 Updates settings of an existing credential connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Parameters that can be updated in a credential connection
  * @param id Identifies the resource.
-@return InlineResponse2011
+@return CredentialConnectionResponse
 */
-func (a *CredentialConnectionsApiService) UpdateCredentialConnection(ctx context.Context, body CredentialConnectionUpdate, id string) (InlineResponse2011, *http.Response, error) {
+func (a *CredentialConnectionsApiService) UpdateCredentialConnection(ctx context.Context, body UpdateCredentialConnectionRequest, id string) (CredentialConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2011
+		localVarReturnValue CredentialConnectionResponse
 	)
 
 	// create path and map variables
@@ -469,7 +469,7 @@ func (a *CredentialConnectionsApiService) UpdateCredentialConnection(ctx context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2011
+			var v CredentialConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

@@ -31,15 +31,15 @@ AddressesApiService Creates an address
 Creates an address.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Parameters that can be defined during address creation
-@return InlineResponse2002
+@return InlineResponse2001
 */
-func (a *AddressesApiService) CreateAddress(ctx context.Context, body Body1) (InlineResponse2002, *http.Response, error) {
+func (a *AddressesApiService) CreateAddress(ctx context.Context, body AddressCreate) (InlineResponse2001, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2002
+		localVarReturnValue InlineResponse2001
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *AddressesApiService) CreateAddress(ctx context.Context, body Body1) (In
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2002
+			var v InlineResponse2001
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -117,15 +117,15 @@ AddressesApiService Deletes an address
 Deletes an existing address.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id address ID
-@return InlineResponse2002
+@return InlineResponse2001
 */
-func (a *AddressesApiService) DeleteAddress(ctx context.Context, id string) (InlineResponse2002, *http.Response, error) {
+func (a *AddressesApiService) DeleteAddress(ctx context.Context, id string) (InlineResponse2001, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2002
+		localVarReturnValue InlineResponse2001
 	)
 
 	// create path and map variables
@@ -136,114 +136,6 @@ func (a *AddressesApiService) DeleteAddress(ctx context.Context, id string) (Inl
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2002
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-/*
-AddressesApiService List all addresses
-Returns a list of your addresses.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *AddressesApiFindAddresssOpts - Optional Parameters:
-     * @param "PageNumber" (optional.Int32) -  The page number to load
-     * @param "PageSize" (optional.Int32) -  The size of the page
-     * @param "FilterStreetAddressContains" (optional.String) -  If present, addresses with &lt;code&gt;street_address&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorterd in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;street_address&lt;/code&gt;: sorts the result by the     &lt;code&gt;street_address&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-street_address&lt;/code&gt;: sorts the result by the     &lt;code&gt;street_address&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
-@return InlineResponse2001
-*/
-
-type AddressesApiFindAddresssOpts struct {
-    PageNumber optional.Int32
-    PageSize optional.Int32
-    FilterStreetAddressContains optional.String
-    Sort optional.String
-}
-
-func (a *AddressesApiService) FindAddresss(ctx context.Context, localVarOptionals *AddressesApiFindAddresssOpts) (InlineResponse2001, *http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2001
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/addresses"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
-		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
-		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.FilterStreetAddressContains.IsSet() {
-		localVarQueryParams.Add("filter[street_address][contains]", parameterToString(localVarOptionals.FilterStreetAddressContains.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
-		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -306,19 +198,147 @@ func (a *AddressesApiService) FindAddresss(ctx context.Context, localVarOptional
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-AddressesApiService Retrieve an address
-Retrieves the details of an existing address.
+AddressesApiService List all addresses
+Returns a list of your addresses.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id address ID
-@return InlineResponse2002
+ * @param optional nil or *AddressesApiFindAddresssOpts - Optional Parameters:
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+     * @param "FilterCustomerReferenceEq" (optional.String) -  Filter addresses via the customer reference set. Matching is not case-sensitive.
+     * @param "FilterCustomerReferenceContains" (optional.String) -  If present, addresses with &lt;code&gt;customer_reference&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive.
+     * @param "FilterUsedAsEmergency" (optional.String) -  If set as &#x27;true&#x27;, only addresses used as the emergency address for at least one active phone-number will be returned. When set to &#x27;false&#x27;, the opposite happens: only addresses not used as the emergency address from phone-numbers will be returned.
+     * @param "FilterStreetAddressContains" (optional.String) -  If present, addresses with &lt;code&gt;street_address&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
+     * @param "FilterAddressBookEq" (optional.String) -  If present, only returns results with the &lt;code&gt;address_book&lt;/code&gt; flag set to the given value.
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;street_address&lt;/code&gt;: sorts the result by the     &lt;code&gt;street_address&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-street_address&lt;/code&gt;: sorts the result by the     &lt;code&gt;street_address&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
+@return InlineResponse200
 */
-func (a *AddressesApiService) GetAddress(ctx context.Context, id string) (InlineResponse2002, *http.Response, error) {
+
+type AddressesApiFindAddresssOpts struct {
+    PageNumber optional.Int32
+    PageSize optional.Int32
+    FilterCustomerReferenceEq optional.String
+    FilterCustomerReferenceContains optional.String
+    FilterUsedAsEmergency optional.String
+    FilterStreetAddressContains optional.String
+    FilterAddressBookEq optional.String
+    Sort optional.String
+}
+
+func (a *AddressesApiService) FindAddresss(ctx context.Context, localVarOptionals *AddressesApiFindAddresssOpts) (InlineResponse200, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2002
+		localVarReturnValue InlineResponse200
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/addresses"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterCustomerReferenceEq.IsSet() {
+		localVarQueryParams.Add("filter[customer_reference][eq]", parameterToString(localVarOptionals.FilterCustomerReferenceEq.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterCustomerReferenceContains.IsSet() {
+		localVarQueryParams.Add("filter[customer_reference][contains]", parameterToString(localVarOptionals.FilterCustomerReferenceContains.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterUsedAsEmergency.IsSet() {
+		localVarQueryParams.Add("filter[used_as_emergency]", parameterToString(localVarOptionals.FilterUsedAsEmergency.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterStreetAddressContains.IsSet() {
+		localVarQueryParams.Add("filter[street_address][contains]", parameterToString(localVarOptionals.FilterStreetAddressContains.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterAddressBookEq.IsSet() {
+		localVarQueryParams.Add("filter[address_book][eq]", parameterToString(localVarOptionals.FilterAddressBookEq.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
+		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v InlineResponse200
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+AddressesApiService Retrieve an address
+Retrieves the details of an existing address.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param id address ID
+@return InlineResponse2001
+*/
+func (a *AddressesApiService) GetAddress(ctx context.Context, id string) (InlineResponse2001, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue InlineResponse2001
 	)
 
 	// create path and map variables
@@ -376,7 +396,93 @@ func (a *AddressesApiService) GetAddress(ctx context.Context, id string) (Inline
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2002
+			var v InlineResponse2001
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+AddressesApiService Validate an address
+Validates an address for emergency services.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Parameters that can be defined during address validation
+@return ValidateAddressActionResponse
+*/
+func (a *AddressesApiService) ValidateAddress(ctx context.Context, body ValidateAddressRequest) (ValidateAddressActionResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue ValidateAddressActionResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/addresses/actions/validate"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ValidateAddressActionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

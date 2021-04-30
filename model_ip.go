@@ -10,18 +10,18 @@
 package telnyx
 
 type Ip struct {
+	// ID of the IP Connection to which this IP should be attached.
+	ConnectionId string `json:"connection_id,omitempty"`
+	// ISO 8601 formatted date indicating when the resource was created.
+	CreatedAt string `json:"created_at,omitempty"`
 	// Identifies the type of resource.
 	Id string `json:"id,omitempty"`
-	// Identifies the type of the resource.
-	RecordType string `json:"record_type,omitempty"`
-	// ID of the IPConnection to which this IP should be attached.
-	ConnectionId string `json:"connection_id,omitempty"`
 	// IP adddress represented by this resource.
 	IpAddress string `json:"ip_address,omitempty"`
 	// Port to use when connecting to this IP.
 	Port int32 `json:"port,omitempty"`
-	// ISO 8601 formatted date indicating when the resource was created.
-	CreatedAt string `json:"created_at,omitempty"`
+	// Identifies the type of the resource.
+	RecordType string `json:"record_type,omitempty"`
 	// ISO 8601 formatted date indicating when the resource was updated.
 	UpdatedAt string `json:"updated_at,omitempty"`
 }

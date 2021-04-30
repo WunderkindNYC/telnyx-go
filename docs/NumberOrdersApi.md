@@ -4,31 +4,31 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateNumberOrder**](NumberOrdersApi.md#CreateNumberOrder) | **Post** /number_orders | Create Phone Number Order
-[**ListNumberOrders**](NumberOrdersApi.md#ListNumberOrders) | **Get** /number_orders | Retrieve multiple Number Orders
-[**RetrieveNumberOrder**](NumberOrdersApi.md#RetrieveNumberOrder) | **Get** /number_orders/{number_order_id} | Retrieve a single phone number order
-[**UpdateNumberOrder**](NumberOrdersApi.md#UpdateNumberOrder) | **Patch** /number_orders/{number_order_id} | Update phone number order
+[**CreateNumberOrder**](NumberOrdersApi.md#CreateNumberOrder) | **Post** /number_orders | Create a number order
+[**ListNumberOrders**](NumberOrdersApi.md#ListNumberOrders) | **Get** /number_orders | List number orders
+[**RetrieveNumberOrder**](NumberOrdersApi.md#RetrieveNumberOrder) | **Get** /number_orders/{number_order_id} | Retrieve a number order
+[**UpdateNumberOrder**](NumberOrdersApi.md#UpdateNumberOrder) | **Patch** /number_orders/{number_order_id} | Update a number order
 
 # **CreateNumberOrder**
-> InlineResponse20034 CreateNumberOrder(ctx, body)
-Create Phone Number Order
+> NumberOrderResponse CreateNumberOrder(ctx, body)
+Create a number order
 
-Creates a Phone Number Order
+Creates a phone number order.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**Body24**](Body24.md)|  | 
+  **body** | [**CreateNumberOrderRequest**](CreateNumberOrderRequest.md)|  | 
 
 ### Return type
 
-[**InlineResponse20034**](inline_response_200_34.md)
+[**NumberOrderResponse**](Number Order Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -38,10 +38,10 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListNumberOrders**
-> InlineResponse20033 ListNumberOrders(ctx, optional)
-Retrieve multiple Number Orders
+> ListNumberOrdersResponse ListNumberOrders(ctx, optional)
+List number orders
 
-Retrieve a paginated list of Number Orders
+Get a paginated list of number orders.
 
 ### Required Parameters
 
@@ -54,20 +54,22 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a NumberOrdersApiListNumberOrdersOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filterStatus** | **optional.String**| Filter number orders by status | 
- **filterCreatedAtGt** | **optional.String**| Filter number orders later than this value | 
- **filterCreatedAtLt** | **optional.String**| Filter number orders earlier than this value | 
- **filterPhoneNumbersPhoneNumber** | **optional.String**| Filter number orders having these phone numbers | 
- **filterCustomerReference** | **optional.String**| Filter number orders via the customer reference set | 
- **filterRequirementsMet** | **optional.Bool**| Filter number orders by requirements met | 
+ **filterStatus** | **optional.String**| Filter number orders by status. | 
+ **filterCreatedAtGt** | **optional.String**| Filter number orders later than this value. | 
+ **filterCreatedAtLt** | **optional.String**| Filter number orders earlier than this value. | 
+ **filterPhoneNumbersPhoneNumber** | **optional.String**| Filter number orders having these phone numbers. | 
+ **filterCustomerReference** | **optional.String**| Filter number orders via the customer reference set. | 
+ **filterRequirementsMet** | **optional.Bool**| Filter number orders by requirements met. | 
+ **pageNumber** | **optional.Int32**| The page number to load | [default to 1]
+ **pageSize** | **optional.Int32**| The size of the page | [default to 20]
 
 ### Return type
 
-[**InlineResponse20033**](inline_response_200_33.md)
+[**ListNumberOrdersResponse**](List Number Orders Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -77,25 +79,25 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RetrieveNumberOrder**
-> InlineResponse20034 RetrieveNumberOrder(ctx, numberOrderId)
-Retrieve a single phone number order
+> NumberOrderResponse RetrieveNumberOrder(ctx, numberOrderId)
+Retrieve a number order
 
-Retrieve an existing single phone number order
+Get an existing phone number order.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **numberOrderId** | **string**| The number order id | 
+  **numberOrderId** | **string**| The number order ID. | 
 
 ### Return type
 
-[**InlineResponse20034**](inline_response_200_34.md)
+[**NumberOrderResponse**](Number Order Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -105,26 +107,26 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateNumberOrder**
-> InlineResponse20034 UpdateNumberOrder(ctx, body, numberOrderId)
-Update phone number order
+> NumberOrderResponse UpdateNumberOrder(ctx, body, numberOrderId)
+Update a number order
 
-Updates a Phone Number Order
+Updates a phone number order.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**Body25**](Body25.md)|  | 
-  **numberOrderId** | **string**| The number order id | 
+  **body** | [**UpdateNumberOrderRequest**](UpdateNumberOrderRequest.md)|  | 
+  **numberOrderId** | **string**| The number order ID. | 
 
 ### Return type
 
-[**InlineResponse20034**](inline_response_200_34.md)
+[**NumberOrderResponse**](Number Order Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

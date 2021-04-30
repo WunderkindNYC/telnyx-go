@@ -10,38 +10,41 @@
 package telnyx
 
 type CredentialConnection struct {
-	// Identifies the type of resource.
-	Id string `json:"id,omitempty"`
-	// Identifies the type of the resource.
-	RecordType string `json:"record_type,omitempty"`
 	// Defaults to true
 	Active bool `json:"active,omitempty"`
-	// The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
-	UserName string `json:"user_name,omitempty"`
-	// The password to be used as part of the credentials. Must be 8 to 128 characters long.
-	Password string `json:"password,omitempty"`
+	AnchorsiteOverride *AnchorsiteOverride `json:"anchorsite_override,omitempty"`
+	ConnectionName string `json:"connection_name,omitempty"`
 	// ISO-8601 formatted date indicating when the resource was created.
 	CreatedAt string `json:"created_at,omitempty"`
-	// Identifies the associated outbound voice profile.
-	OutboundVoiceProfileId string `json:"outbound_voice_profile_id,omitempty"`
-	// ISO-8601 formatted date indicating when the resource was updated.
-	UpdatedAt string `json:"updated_at,omitempty"`
-	// `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-	AnchorsiteOverride string `json:"anchorsite_override,omitempty"`
-	ConnectionName string `json:"connection_name,omitempty"`
-	// This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
-	SipUriCallingPreference string `json:"sip_uri_calling_preference,omitempty"`
 	// When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
 	DefaultOnHoldComfortNoiseEnabled bool `json:"default_on_hold_comfort_noise_enabled,omitempty"`
-	// Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-	DtmfType string `json:"dtmf_type,omitempty"`
+	DtmfType *DtmfType `json:"dtmf_type,omitempty"`
 	// Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
 	EncodeContactHeaderEnabled bool `json:"encode_contact_header_enabled,omitempty"`
-	// Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-	EncryptedMedia string `json:"encrypted_media,omitempty"`
+	EncryptedMedia *EncryptedMedia `json:"encrypted_media,omitempty"`
+	// Identifies the type of resource.
+	Id string `json:"id,omitempty"`
+	Inbound *CredentialInbound `json:"inbound,omitempty"`
 	// Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
 	OnnetT38PassthroughEnabled bool `json:"onnet_t38_passthrough_enabled,omitempty"`
-	RtcpSettings *CredentialConnectionsRtcpSettings `json:"rtcp_settings,omitempty"`
-	Inbound *InboundConfiguration `json:"inbound,omitempty"`
-	Outbound *OutboundConfiguration `json:"outbound,omitempty"`
+	Outbound *CredentialOutbound `json:"outbound,omitempty"`
+	// The password to be used as part of the credentials. Must be 8 to 128 characters long.
+	Password string `json:"password,omitempty"`
+	// Identifies the type of the resource.
+	RecordType string `json:"record_type,omitempty"`
+	RtcpSettings *ConnectionRtcpSettings `json:"rtcp_settings,omitempty"`
+	// This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
+	SipUriCallingPreference string `json:"sip_uri_calling_preference,omitempty"`
+	// ISO-8601 formatted date indicating when the resource was updated.
+	UpdatedAt string `json:"updated_at,omitempty"`
+	// The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
+	UserName string `json:"user_name,omitempty"`
+	// Determines which webhook format will be used, Telnyx API v1 or v2.
+	WebhookApiVersion string `json:"webhook_api_version,omitempty"`
+	// The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+	WebhookEventFailoverUrl string `json:"webhook_event_failover_url,omitempty"`
+	// The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+	WebhookEventUrl string `json:"webhook_event_url,omitempty"`
+	// Specifies how many seconds to wait before timing out a webhook.
+	WebhookTimeoutSecs int32 `json:"webhook_timeout_secs,omitempty"`
 }

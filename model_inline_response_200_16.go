@@ -10,6 +10,5 @@
 package telnyx
 
 type InlineResponse20016 struct {
-	Data []FqdnConnection `json:"data,omitempty"`
-	Meta *InlineResponse20033Meta `json:"meta,omitempty"`
+	Data *NotificationChannel `json:"data,omitempty"`
 }

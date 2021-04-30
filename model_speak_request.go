@@ -10,6 +10,12 @@
 package telnyx
 
 type SpeakRequest struct {
+	// Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+	ClientState string `json:"client_state,omitempty"`
+	// Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
+	CommandId string `json:"command_id,omitempty"`
+	// The language you want spoken.
+	Language string `json:"language"`
 	// The text or SSML to be converted into speech. There is a 5,000 character limit.
 	Payload string `json:"payload"`
 	// The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
@@ -20,10 +26,4 @@ type SpeakRequest struct {
 	Stop string `json:"stop,omitempty"`
 	// The gender of the voice used to speak back the text.
 	Voice string `json:"voice"`
-	// The language you want spoken.
-	Language string `json:"language"`
-	// Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
-	ClientState string `json:"client_state,omitempty"`
-	// Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
-	CommandId string `json:"command_id,omitempty"`
 }

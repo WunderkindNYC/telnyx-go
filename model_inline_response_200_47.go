@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse20047 struct {
-	Data *InlineResponse20045Data `json:"data,omitempty"`
+	Data []WdrReport `json:"data,omitempty"`
 }

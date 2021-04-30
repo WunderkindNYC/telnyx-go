@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse20042 struct {
-	Data *InlineResponse20042Data `json:"data,omitempty"`
+	Data []TelephonyCredential `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

@@ -10,26 +10,35 @@
 package telnyx
 
 type OutboundVoiceProfile struct {
-	// A user-supplied name to help with organization.
-	Name string `json:"name,omitempty"`
-	// Specifies the type of traffic allowed in this profile.
-	TrafficType string `json:"traffic_type,omitempty"`
-	ServicePlan string `json:"service_plan,omitempty"`
+	// The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
+	BillingGroupId string `json:"billing_group_id,omitempty"`
+	CallRecording *OutboundCallRecording `json:"call_recording,omitempty"`
 	// Must be no more than your global concurrent call limit. Null means no limit.
 	ConcurrentCallLimit int32 `json:"concurrent_call_limit,omitempty"`
-	// Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
-	Enabled bool `json:"enabled,omitempty"`
-	Tags []string `json:"tags,omitempty"`
-	UsagePaymentMethod string `json:"usage_payment_method,omitempty"`
-	// The list of destinations you want to be able to call using this outbound voice profile formatted in alpha2.
-	WhitelistedDestinations []string `json:"whitelisted_destinations,omitempty"`
-	// Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
-	MaxDestinationRate float64 `json:"max_destination_rate,omitempty"`
+	// Amount of connections associated with this outbound voice profile.
+	ConnectionsCount int32 `json:"connections_count,omitempty"`
+	// ISO 8601 formatted date-time indicating when the resource was created.
+	CreatedAt string `json:"created_at,omitempty"`
 	// The maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls.
 	DailySpendLimit string `json:"daily_spend_limit,omitempty"`
 	// Specifies whether to enforce the daily_spend_limit on this outbound voice profile.
 	DailySpendLimitEnabled bool `json:"daily_spend_limit_enabled,omitempty"`
-	CallRecording *OutboundVoiceProfilesCallRecording `json:"call_recording,omitempty"`
-	// The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
-	BillingGroupId string `json:"billing_group_id,omitempty"`
+	// Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
+	Enabled bool `json:"enabled,omitempty"`
+	// Identifies the resource.
+	Id string `json:"id,omitempty"`
+	// Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
+	MaxDestinationRate float64 `json:"max_destination_rate,omitempty"`
+	// A user-supplied name to help with organization.
+	Name string `json:"name"`
+	// Identifies the type of the resource.
+	RecordType string `json:"record_type,omitempty"`
+	ServicePlan *ServicePlan `json:"service_plan,omitempty"`
+	Tags []string `json:"tags,omitempty"`
+	TrafficType *TrafficType `json:"traffic_type,omitempty"`
+	// ISO 8601 formatted date-time indicating when the resource was updated.
+	UpdatedAt string `json:"updated_at,omitempty"`
+	UsagePaymentMethod *UsagePaymentMethod `json:"usage_payment_method,omitempty"`
+	// The list of destinations you want to be able to call using this outbound voice profile formatted in alpha2.
+	WhitelistedDestinations []string `json:"whitelisted_destinations,omitempty"`
 }

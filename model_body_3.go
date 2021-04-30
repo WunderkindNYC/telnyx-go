@@ -10,6 +10,6 @@
 package telnyx
 
 type Body3 struct {
-	// A name for the billing group
-	Name string `json:"name,omitempty"`
+	// Comment to post on this portout request
+	Body string `json:"body,omitempty"`
 }

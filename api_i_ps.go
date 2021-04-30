@@ -27,25 +27,25 @@ var (
 
 type IPsApiService service
 /*
-IPsApiService Create an IP
+IPsApiService Create an Ip
 Create a new IP object.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *IPsApiAddIPOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body10) - 
-@return InlineResponse2015
+ * @param optional nil or *IPsApiCreateIpOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of CreateIpRequest) - 
+@return IpResponse
 */
 
-type IPsApiAddIPOpts struct {
+type IPsApiCreateIpOpts struct {
     Body optional.Interface
 }
 
-func (a *IPsApiService) AddIP(ctx context.Context, localVarOptionals *IPsApiAddIPOpts) (InlineResponse2015, *http.Response, error) {
+func (a *IPsApiService) CreateIp(ctx context.Context, localVarOptionals *IPsApiCreateIpOpts) (IpResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2015
+		localVarReturnValue IpResponse
 	)
 
 	// create path and map variables
@@ -108,7 +108,7 @@ func (a *IPsApiService) AddIP(ctx context.Context, localVarOptionals *IPsApiAddI
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse2015
+			var v IpResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -123,19 +123,19 @@ func (a *IPsApiService) AddIP(ctx context.Context, localVarOptionals *IPsApiAddI
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-IPsApiService Delete an IP
+IPsApiService Delete an Ip
 Delete an IP.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the type of resource.
-@return InlineResponse2015
+@return IpResponse
 */
-func (a *IPsApiService) DeleteIP(ctx context.Context, id string) (InlineResponse2015, *http.Response, error) {
+func (a *IPsApiService) DeleteIp(ctx context.Context, id string) (IpResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2015
+		localVarReturnValue IpResponse
 	)
 
 	// create path and map variables
@@ -193,7 +193,7 @@ func (a *IPsApiService) DeleteIP(ctx context.Context, id string) (InlineResponse
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2015
+			var v IpResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -208,104 +208,19 @@ func (a *IPsApiService) DeleteIP(ctx context.Context, id string) (InlineResponse
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-IPsApiService Get IP
-Return the details regarding a specific IP.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id Identifies the type of resource.
-@return InlineResponse2015
-*/
-func (a *IPsApiService) GetIPDetails(ctx context.Context, id string) (InlineResponse2015, *http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2015
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/ips/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2015
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-/*
-IPsApiService Get all IPs
+IPsApiService List Ips
 Get all IPs belonging to the user that match the given filters.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *IPsApiIPsGetOpts - Optional Parameters:
+ * @param optional nil or *IPsApiListIpsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-     * @param "FilterConnectionId" (optional.String) -  ID of the IPConnection to which this IP should be attached.
+     * @param "FilterConnectionId" (optional.String) -  ID of the IP Connection to which this IP should be attached.
      * @param "FilterIpAddress" (optional.String) -  IP adddress represented by this resource.
      * @param "FilterPort" (optional.Int32) -  Port to use when connecting to this IP.
-@return InlineResponse20019
+@return ListIpsResponse
 */
 
-type IPsApiIPsGetOpts struct {
+type IPsApiListIpsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
     FilterConnectionId optional.String
@@ -313,13 +228,13 @@ type IPsApiIPsGetOpts struct {
     FilterPort optional.Int32
 }
 
-func (a *IPsApiService) IPsGet(ctx context.Context, localVarOptionals *IPsApiIPsGetOpts) (InlineResponse20019, *http.Response, error) {
+func (a *IPsApiService) ListIps(ctx context.Context, localVarOptionals *IPsApiListIpsOpts) (ListIpsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20019
+		localVarReturnValue ListIpsResponse
 	)
 
 	// create path and map variables
@@ -391,7 +306,7 @@ func (a *IPsApiService) IPsGet(ctx context.Context, localVarOptionals *IPsApiIPs
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20019
+			var v ListIpsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -406,26 +321,111 @@ func (a *IPsApiService) IPsGet(ctx context.Context, localVarOptionals *IPsApiIPs
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-IPsApiService Update IP
+IPsApiService Retrieve an Ip
+Return the details regarding a specific IP.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param id Identifies the type of resource.
+@return IpResponse
+*/
+func (a *IPsApiService) RetrieveIp(ctx context.Context, id string) (IpResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue IpResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/ips/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v IpResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+IPsApiService Update an Ip
 Update the details of a specific IP.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the type of resource.
- * @param optional nil or *IPsApiUpdateIPOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body11) - 
-@return InlineResponse2015
+ * @param optional nil or *IPsApiUpdateIpOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of UpdateIpRequest) - 
+@return IpResponse
 */
 
-type IPsApiUpdateIPOpts struct {
+type IPsApiUpdateIpOpts struct {
     Body optional.Interface
 }
 
-func (a *IPsApiService) UpdateIP(ctx context.Context, id string, localVarOptionals *IPsApiUpdateIPOpts) (InlineResponse2015, *http.Response, error) {
+func (a *IPsApiService) UpdateIp(ctx context.Context, id string, localVarOptionals *IPsApiUpdateIpOpts) (IpResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2015
+		localVarReturnValue IpResponse
 	)
 
 	// create path and map variables
@@ -489,7 +489,7 @@ func (a *IPsApiService) UpdateIP(ctx context.Context, id string, localVarOptiona
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2015
+			var v IpResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

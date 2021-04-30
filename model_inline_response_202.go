@@ -10,5 +10,7 @@
 package telnyx
 
 type InlineResponse202 struct {
-	Data *AllOfinlineResponse202Data `json:"data,omitempty"`
+	// Multi requested SIM cards network preferences.
+	Data []SimCardNetworkPreferenceWithOtaUpdates `json:"data,omitempty"`
+	Errors []ModelError `json:"errors,omitempty"`
 }

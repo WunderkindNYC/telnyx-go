@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2012 struct {
-	Data *FqdnConnection `json:"data,omitempty"`
+	Data []PortabilityCheckDetails `json:"data,omitempty"`
 }

@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse20023 struct {
-	Data *InlineResponse20022Data `json:"data,omitempty"`
+	Data *NumberLookupRecord `json:"data,omitempty"`
 }

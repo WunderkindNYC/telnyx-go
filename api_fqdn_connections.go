@@ -27,19 +27,19 @@ var (
 
 type FQDNConnectionsApiService service
 /*
-FQDNConnectionsApiService Creates an FQDN connection
+FQDNConnectionsApiService Create an Fqdn connection
 Creates a FQDN connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Parameters that can be defined during FQDN connection creation
-@return InlineResponse2012
+@return FqdnConnectionResponse
 */
-func (a *FQDNConnectionsApiService) CreateFQDNConnection(ctx context.Context, body Body4) (InlineResponse2012, *http.Response, error) {
+func (a *FQDNConnectionsApiService) CreateFqdnConnection(ctx context.Context, body CreateFqdnConnectionRequest) (FqdnConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2012
+		localVarReturnValue FqdnConnectionResponse
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *FQDNConnectionsApiService) CreateFQDNConnection(ctx context.Context, bo
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse2012
+			var v FqdnConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -113,19 +113,19 @@ func (a *FQDNConnectionsApiService) CreateFQDNConnection(ctx context.Context, bo
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNConnectionsApiService Deletes an FQDN connection
+FQDNConnectionsApiService Delete an Fqdn connection
 Deletes an FQDN connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id FQDN Connection ID
-@return InlineResponse2012
+@return FqdnConnectionResponse
 */
-func (a *FQDNConnectionsApiService) DeleteFQDNConnection(ctx context.Context, id string) (InlineResponse2012, *http.Response, error) {
+func (a *FQDNConnectionsApiService) DeleteFqdnConnection(ctx context.Context, id string) (FqdnConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2012
+		localVarReturnValue FqdnConnectionResponse
 	)
 
 	// create path and map variables
@@ -183,7 +183,7 @@ func (a *FQDNConnectionsApiService) DeleteFQDNConnection(ctx context.Context, id
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2012
+			var v FqdnConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -198,33 +198,31 @@ func (a *FQDNConnectionsApiService) DeleteFQDNConnection(ctx context.Context, id
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNConnectionsApiService List all FQDN connections
+FQDNConnectionsApiService List Fqdn connections
 Returns a list of your FQDN connections.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *FQDNConnectionsApiFindFQDNConnectionsOpts - Optional Parameters:
+ * @param optional nil or *FQDNConnectionsApiListFqdnConnectionsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
      * @param "FilterConnectionNameContains" (optional.String) -  If present, connections with &lt;code&gt;connection_name&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
-     * @param "FilterOutboundVoiceProfileId" (optional.String) -  Identifies the associated outbound voice profile.
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorterd in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
-@return InlineResponse20016
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
+@return ListFqdnConnectionsResponse
 */
 
-type FQDNConnectionsApiFindFQDNConnectionsOpts struct {
+type FQDNConnectionsApiListFqdnConnectionsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
     FilterConnectionNameContains optional.String
-    FilterOutboundVoiceProfileId optional.String
     Sort optional.String
 }
 
-func (a *FQDNConnectionsApiService) FindFQDNConnections(ctx context.Context, localVarOptionals *FQDNConnectionsApiFindFQDNConnectionsOpts) (InlineResponse20016, *http.Response, error) {
+func (a *FQDNConnectionsApiService) ListFqdnConnections(ctx context.Context, localVarOptionals *FQDNConnectionsApiListFqdnConnectionsOpts) (ListFqdnConnectionsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20016
+		localVarReturnValue ListFqdnConnectionsResponse
 	)
 
 	// create path and map variables
@@ -242,9 +240,6 @@ func (a *FQDNConnectionsApiService) FindFQDNConnections(ctx context.Context, loc
 	}
 	if localVarOptionals != nil && localVarOptionals.FilterConnectionNameContains.IsSet() {
 		localVarQueryParams.Add("filter[connection_name][contains]", parameterToString(localVarOptionals.FilterConnectionNameContains.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.FilterOutboundVoiceProfileId.IsSet() {
-		localVarQueryParams.Add("filter[outbound_voice_profile_id]", parameterToString(localVarOptionals.FilterOutboundVoiceProfileId.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
@@ -296,7 +291,7 @@ func (a *FQDNConnectionsApiService) FindFQDNConnections(ctx context.Context, loc
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20016
+			var v ListFqdnConnectionsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -311,19 +306,19 @@ func (a *FQDNConnectionsApiService) FindFQDNConnections(ctx context.Context, loc
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNConnectionsApiService Retrieve a connection
+FQDNConnectionsApiService Retrieve an Fqdn connection
 Retrieves the details of an existing FQDN connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id FQDN Connection ID
-@return InlineResponse2012
+@return FqdnConnectionResponse
 */
-func (a *FQDNConnectionsApiService) GetFQDNConnection(ctx context.Context, id string) (InlineResponse2012, *http.Response, error) {
+func (a *FQDNConnectionsApiService) RetrieveFqdnConnection(ctx context.Context, id string) (FqdnConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2012
+		localVarReturnValue FqdnConnectionResponse
 	)
 
 	// create path and map variables
@@ -381,7 +376,7 @@ func (a *FQDNConnectionsApiService) GetFQDNConnection(ctx context.Context, id st
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2012
+			var v FqdnConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -396,20 +391,20 @@ func (a *FQDNConnectionsApiService) GetFQDNConnection(ctx context.Context, id st
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNConnectionsApiService Update a FQDN connection
+FQDNConnectionsApiService Update an Fqdn connection
 Updates settings of an existing FQDN connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Parameters that can be updated in a FQDN connection
  * @param id FQDN Connection ID
-@return InlineResponse2012
+@return FqdnConnectionResponse
 */
-func (a *FQDNConnectionsApiService) UpdateFQDNConnection(ctx context.Context, body Body5, id string) (InlineResponse2012, *http.Response, error) {
+func (a *FQDNConnectionsApiService) UpdateFqdnConnection(ctx context.Context, body UpdateFqdnConnectionRequest, id string) (FqdnConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2012
+		localVarReturnValue FqdnConnectionResponse
 	)
 
 	// create path and map variables
@@ -469,7 +464,7 @@ func (a *FQDNConnectionsApiService) UpdateFQDNConnection(ctx context.Context, bo
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2012
+			var v FqdnConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

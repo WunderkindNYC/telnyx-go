@@ -31,15 +31,15 @@ Answer an incoming call. You must issue this command before executing subsequent
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Answer call request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlAnswer(ctx context.Context, body AnswerRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallAnswer(ctx context.Context, body AnswerRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -99,7 +99,7 @@ func (a *CallCommandsApiService) CallControlAnswer(ctx context.Context, body Ans
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -109,7 +109,7 @@ func (a *CallCommandsApiService) CallControlAnswer(ctx context.Context, body Ans
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -129,15 +129,15 @@ Bridge two call control calls.  **Expected Webhooks:**  - &#x60;call.bridged&#x6
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Bridge call request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlBridge(ctx context.Context, body BridgeRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallBridge(ctx context.Context, body BridgeRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -197,7 +197,7 @@ func (a *CallCommandsApiService) CallControlBridge(ctx context.Context, body Bri
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -207,7 +207,7 @@ func (a *CallCommandsApiService) CallControlBridge(ctx context.Context, body Bri
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -223,18 +223,18 @@ func (a *CallCommandsApiService) CallControlBridge(ctx context.Context, body Bri
 }
 /*
 CallCommandsApiService Dial
-Dial a number from a given connection. A successful response will include a &#x60;call_leg_id&#x60; which can be used to correlate the command with subsequent webhooks.  **Expected Webhooks:**  - &#x60;call.initiated&#x60; - &#x60;call.answered&#x60; or &#x60;call.hangup&#x60; - &#x60;call.machine.detection.ended&#x60; if &#x60;answering_machine_detection&#x60; was requested - &#x60;call.machine.greeting.ended&#x60; if &#x60;answering_machine_detection&#x60; was requested to detect the end of machine greeting 
+Dial a number or SIP URI from a given connection. A successful response will include a &#x60;call_leg_id&#x60; which can be used to correlate the command with subsequent webhooks.  **Expected Webhooks:**  - &#x60;call.initiated&#x60; - &#x60;call.answered&#x60; or &#x60;call.hangup&#x60; - &#x60;call.machine.detection.ended&#x60; if &#x60;answering_machine_detection&#x60; was requested - &#x60;call.machine.greeting.ended&#x60; if &#x60;answering_machine_detection&#x60; was set to &#x60;detect_beep&#x60;, &#x60;greeting_end&#x60; or &#x60;detect_words&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Dial request
-@return InlineResponse2008
+ * @param body Call request
+@return RetrieveCallStatusResponse
 */
-func (a *CallCommandsApiService) CallControlDial(ctx context.Context, body DialRequest) (InlineResponse2008, *http.Response, error) {
+func (a *CallCommandsApiService) CallDial(ctx context.Context, body CallRequest) (RetrieveCallStatusResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2008
+		localVarReturnValue RetrieveCallStatusResponse
 	)
 
 	// create path and map variables
@@ -293,7 +293,7 @@ func (a *CallCommandsApiService) CallControlDial(ctx context.Context, body DialR
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2008
+			var v RetrieveCallStatusResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -303,7 +303,7 @@ func (a *CallCommandsApiService) CallControlDial(ctx context.Context, body DialR
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -323,15 +323,15 @@ Call forking allows you to stream the media from a call to a specific target in 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Fork media request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlForkStart(ctx context.Context, body StartForkingRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallForkStart(ctx context.Context, body StartForkingRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -391,7 +391,7 @@ func (a *CallCommandsApiService) CallControlForkStart(ctx context.Context, body 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -401,7 +401,7 @@ func (a *CallCommandsApiService) CallControlForkStart(ctx context.Context, body 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -421,15 +421,15 @@ Stop forking a call.  **Expected Webhooks:**  - &#x60;call.fork.stopped&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Stop forking media request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlForkStop(ctx context.Context, body StopForkingRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallForkStop(ctx context.Context, body StopForkingRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -489,7 +489,7 @@ func (a *CallCommandsApiService) CallControlForkStop(ctx context.Context, body S
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -499,7 +499,105 @@ func (a *CallCommandsApiService) CallControlForkStop(ctx context.Context, body S
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+CallCommandsApiService Gather stop
+Stop current gather.  **Expected Webhooks:**  - &#x60;call.gather.ended&#x60; 
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Stop current gather
+ * @param callControlId Unique identifier and token for controlling the call
+@return CallControlCommandResponse
+*/
+func (a *CallCommandsApiService) CallGatherStop(ctx context.Context, body StopGatherRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue CallControlCommandResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/calls/{call_control_id}/actions/gather_stop"
+	localVarPath = strings.Replace(localVarPath, "{"+"call_control_id"+"}", fmt.Sprintf("%v", callControlId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v CallControlCommandResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -519,15 +617,15 @@ Play an audio file on the call until the required DTMF signals are gathered to b
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Gather using audio request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlGatherUsingAudio(ctx context.Context, body GatherUsingAudioWithAllParametersRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallGatherUsingAudio(ctx context.Context, body GatherUsingAudioRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -587,7 +685,7 @@ func (a *CallCommandsApiService) CallControlGatherUsingAudio(ctx context.Context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -597,7 +695,7 @@ func (a *CallCommandsApiService) CallControlGatherUsingAudio(ctx context.Context
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -617,15 +715,15 @@ Convert text to speech and play it on the call until the required DTMF signals a
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Gather using speak request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlGatherUsingSpeak(ctx context.Context, body GatherUsingSpeakWithAllParametersRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallGatherUsingSpeak(ctx context.Context, body GatherUsingSpeakRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -685,7 +783,7 @@ func (a *CallCommandsApiService) CallControlGatherUsingSpeak(ctx context.Context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -695,7 +793,7 @@ func (a *CallCommandsApiService) CallControlGatherUsingSpeak(ctx context.Context
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -715,15 +813,15 @@ Hang up the call.  **Expected Webhooks:**  - &#x60;call.hangup&#x60; - &#x60;cal
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Hangup request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlHangup(ctx context.Context, body HangupRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallHangup(ctx context.Context, body HangupRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -783,7 +881,7 @@ func (a *CallCommandsApiService) CallControlHangup(ctx context.Context, body Han
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -793,7 +891,7 @@ func (a *CallCommandsApiService) CallControlHangup(ctx context.Context, body Han
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -813,15 +911,15 @@ Play an audio file on the call. If multiple play audio commands are issued conse
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Play audio URL request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlPlaybackStart(ctx context.Context, body PlayAudioUrlRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallPlaybackStart(ctx context.Context, body PlayAudioUrlRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -881,7 +979,7 @@ func (a *CallCommandsApiService) CallControlPlaybackStart(ctx context.Context, b
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -891,7 +989,7 @@ func (a *CallCommandsApiService) CallControlPlaybackStart(ctx context.Context, b
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -911,15 +1009,15 @@ Stop audio being played on the call.  **Expected Webhooks:**  - &#x60;call.playb
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Stop audio playback request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlPlaybackStop(ctx context.Context, body PlaybackStopRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallPlaybackStop(ctx context.Context, body PlaybackStopRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -979,7 +1077,7 @@ func (a *CallCommandsApiService) CallControlPlaybackStop(ctx context.Context, bo
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -989,7 +1087,203 @@ func (a *CallCommandsApiService) CallControlPlaybackStop(ctx context.Context, bo
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+CallCommandsApiService Record pause
+Pause recording the call. Recording can be resumed via Resume recording command.  **Expected Webhooks:**  There are no webhooks associated with this command. 
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Pause recording call request
+ * @param callControlId Unique identifier and token for controlling the call
+@return CallControlCommandResponse
+*/
+func (a *CallCommandsApiService) CallRecordPause(ctx context.Context, body PauseRecordingRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue CallControlCommandResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/calls/{call_control_id}/actions/record_pause"
+	localVarPath = strings.Replace(localVarPath, "{"+"call_control_id"+"}", fmt.Sprintf("%v", callControlId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v CallControlCommandResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+CallCommandsApiService Record resume
+Resume recording the call.  **Expected Webhooks:**  There are no webhooks associated with this command. 
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Resume recording call request
+ * @param callControlId Unique identifier and token for controlling the call
+@return CallControlCommandResponse
+*/
+func (a *CallCommandsApiService) CallRecordResume(ctx context.Context, body ResumeRecordingRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue CallControlCommandResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/calls/{call_control_id}/actions/record_resume"
+	localVarPath = strings.Replace(localVarPath, "{"+"call_control_id"+"}", fmt.Sprintf("%v", callControlId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v CallControlCommandResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1005,19 +1299,19 @@ func (a *CallCommandsApiService) CallControlPlaybackStop(ctx context.Context, bo
 }
 /*
 CallCommandsApiService Recording start
-Start recording the call. Recording will stop on call hang-up, or can be initiated via the Stop Recording command.  **Expected Webhooks:**  There are no webhooks associated with this Command. 
+Start recording the call. Recording will stop on call hang-up, or can be initiated via the Stop Recording command.  **Expected Webhooks:**  - &#x60;call.recording.saved&#x60; 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Start recording audio request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlRecordStart(ctx context.Context, body StartRecordingRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallRecordStart(ctx context.Context, body StartRecordingRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -1077,7 +1371,7 @@ func (a *CallCommandsApiService) CallControlRecordStart(ctx context.Context, bod
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1087,7 +1381,7 @@ func (a *CallCommandsApiService) CallControlRecordStart(ctx context.Context, bod
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1105,17 +1399,17 @@ func (a *CallCommandsApiService) CallControlRecordStart(ctx context.Context, bod
 CallCommandsApiService Recording stop
 Stop recording the call.  **Expected Webhooks:**  - &#x60;call.recording.saved&#x60; 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Answer call request
+ * @param body Stop recording call request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlRecordStop(ctx context.Context, body StropRecordingRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallRecordStop(ctx context.Context, body StopRecordingRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -1175,7 +1469,7 @@ func (a *CallCommandsApiService) CallControlRecordStop(ctx context.Context, body
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1185,7 +1479,7 @@ func (a *CallCommandsApiService) CallControlRecordStop(ctx context.Context, body
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1200,20 +1494,118 @@ func (a *CallCommandsApiService) CallControlRecordStop(ctx context.Context, body
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CallCommandsApiService Reject call
-Reject an incoming call.  **Expected Webhooks:**  - &#x60;call.hangup&#x60; 
+CallCommandsApiService SIP Refer a call
+Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer at any point in the duration of a call.  **Expected Webhooks:**  - &#x60;call.refer.started&#x60; - &#x60;call.refer.completed&#x60; - &#x60;call.refer.failed&#x60; 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Reject request
+ * @param body Refer request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlReject(ctx context.Context, body RejectRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallRefer(ctx context.Context, body ReferRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/calls/{call_control_id}/actions/refer"
+	localVarPath = strings.Replace(localVarPath, "{"+"call_control_id"+"}", fmt.Sprintf("%v", callControlId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v CallControlCommandResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+CallCommandsApiService Reject a call
+Reject an incoming call.  **Expected Webhooks:**  - &#x60;call.hangup&#x60; 
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Reject request
+ * @param callControlId Unique identifier and token for controlling the call
+@return CallControlCommandResponse
+*/
+func (a *CallCommandsApiService) CallReject(ctx context.Context, body RejectRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -1273,7 +1665,7 @@ func (a *CallCommandsApiService) CallControlReject(ctx context.Context, body Rej
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1283,7 +1675,7 @@ func (a *CallCommandsApiService) CallControlReject(ctx context.Context, body Rej
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1303,15 +1695,15 @@ Sends DTMF tones from this leg. DTMF tones will be heard by the other end of the
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Send DTMF request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlSendDTMF(ctx context.Context, body SendDtmfRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallSendDTMF(ctx context.Context, body SendDtmfRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -1371,7 +1763,7 @@ func (a *CallCommandsApiService) CallControlSendDTMF(ctx context.Context, body S
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1381,7 +1773,7 @@ func (a *CallCommandsApiService) CallControlSendDTMF(ctx context.Context, body S
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1401,15 +1793,15 @@ Convert text to speech and play it back on the call. If multiple speak text comm
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Speak request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlSpeak(ctx context.Context, body SpeakRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallSpeak(ctx context.Context, body SpeakRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -1469,7 +1861,7 @@ func (a *CallCommandsApiService) CallControlSpeak(ctx context.Context, body Spea
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1479,7 +1871,203 @@ func (a *CallCommandsApiService) CallControlSpeak(ctx context.Context, body Spea
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+CallCommandsApiService Transcription start
+Start real-time transcription. Transcription will stop on call hang-up, or can be initiated via the Transcription stop command.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Transcription start request
+ * @param callControlId Unique identifier and token for controlling the call
+@return CallControlCommandResponse
+*/
+func (a *CallCommandsApiService) CallTranscriptionStart(ctx context.Context, body TranscriptionStartRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue CallControlCommandResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/calls/{call_control_id}/actions/transcription_start"
+	localVarPath = strings.Replace(localVarPath, "{"+"call_control_id"+"}", fmt.Sprintf("%v", callControlId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v CallControlCommandResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+CallCommandsApiService Transcription stop
+Stop real-time transcription.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Transcription stop request
+ * @param callControlId Unique identifier and token for controlling the call
+@return CallControlCommandResponse
+*/
+func (a *CallCommandsApiService) CallTranscriptionStop(ctx context.Context, body TranscriptionStopRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue CallControlCommandResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/calls/{call_control_id}/actions/transcription_stop"
+	localVarPath = strings.Replace(localVarPath, "{"+"call_control_id"+"}", fmt.Sprintf("%v", callControlId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v CallControlCommandResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1495,19 +2083,19 @@ func (a *CallCommandsApiService) CallControlSpeak(ctx context.Context, body Spea
 }
 /*
 CallCommandsApiService Transfer call
-Transfer a call to a new destination. If the transfer is unsuccessful, a &#x60;call.hangup&#x60; webhook will be sent indicating that the transfer could not be completed. The original call will remain active and may be issued additional commands, potentially transfering the call to an alternate destination.  **Expected Webhooks:**  - &#x60;call.initiated&#x60; - &#x60;call.bridged&#x60; to Leg B - &#x60;call.answered&#x60; or &#x60;call.hangup&#x60; - &#x60;call.machine.detection.ended&#x60; if &#x60;answering_machine_detection&#x60; was requested - &#x60;call.machine.greeting.ended&#x60; if &#x60;answering_machine_detection&#x60; was requested to detect the end of machine greeting 
+Transfer a call to a new destination. If the transfer is unsuccessful, a &#x60;call.hangup&#x60; webhook for the other call (Leg B) will be sent indicating that the transfer could not be completed. The original call will remain active and may be issued additional commands, potentially transfering the call to an alternate destination.  **Expected Webhooks:**  - &#x60;call.initiated&#x60; - &#x60;call.bridged&#x60; to Leg B - &#x60;call.answered&#x60; or &#x60;call.hangup&#x60; - &#x60;call.machine.detection.ended&#x60; if &#x60;answering_machine_detection&#x60; was requested - &#x60;call.machine.greeting.ended&#x60; if &#x60;answering_machine_detection&#x60; was set to &#x60;detect_beep&#x60;, &#x60;greeting_end&#x60; or &#x60;detect_words&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Transfer call request
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2009
+@return CallControlCommandResponse
 */
-func (a *CallCommandsApiService) CallControlTransfer(ctx context.Context, body TransferCallRequest, callControlId string) (InlineResponse2009, *http.Response, error) {
+func (a *CallCommandsApiService) CallTransfer(ctx context.Context, body TransferCallRequest, callControlId string) (CallControlCommandResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2009
+		localVarReturnValue CallControlCommandResponse
 	)
 
 	// create path and map variables
@@ -1567,7 +2155,7 @@ func (a *CallCommandsApiService) CallControlTransfer(ctx context.Context, body T
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2009
+			var v CallControlCommandResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1577,7 +2165,7 @@ func (a *CallCommandsApiService) CallControlTransfer(ctx context.Context, body T
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

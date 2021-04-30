@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse2005 struct {
-	Data *InlineResponse2005Data `json:"data,omitempty"`
+	Data []DocServiceDocumentLink `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

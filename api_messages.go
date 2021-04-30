@@ -27,24 +27,24 @@ var (
 
 type MessagesApiService service
 /*
-MessagesApiService Send a Long Code message
+MessagesApiService Send a long code message
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *MessagesApiCreateLongCodeMessageOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body14) -  Message payload
-@return InlineResponse20021
+     * @param "Body" (optional.Interface of CreateLongCodeMessageRequest) -  Message payload
+@return MessageResponse
 */
 
 type MessagesApiCreateLongCodeMessageOpts struct {
     Body optional.Interface
 }
 
-func (a *MessagesApiService) CreateLongCodeMessage(ctx context.Context, localVarOptionals *MessagesApiCreateLongCodeMessageOpts) (InlineResponse20021, *http.Response, error) {
+func (a *MessagesApiService) CreateLongCodeMessage(ctx context.Context, localVarOptionals *MessagesApiCreateLongCodeMessageOpts) (MessageResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20021
+		localVarReturnValue MessageResponse
 	)
 
 	// create path and map variables
@@ -107,7 +107,7 @@ func (a *MessagesApiService) CreateLongCodeMessage(ctx context.Context, localVar
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20021
+			var v MessageResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -117,7 +117,7 @@ func (a *MessagesApiService) CreateLongCodeMessage(ctx context.Context, localVar
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -136,21 +136,21 @@ MessagesApiService Send a message
 Send a message with a Phone Number, Alphanumeric Sender ID, Short Code or Number Pool.  This endpoint allows you to send a message with any messaging resource. Current messaging resources include: long-code, short-code, number-pool, and alphanumeric-sender-id. 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *MessagesApiCreateMessageOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body13) -  Message payload
-@return InlineResponse20021
+     * @param "Body" (optional.Interface of CreateMessageRequest) -  Message payload
+@return MessageResponse
 */
 
 type MessagesApiCreateMessageOpts struct {
     Body optional.Interface
 }
 
-func (a *MessagesApiService) CreateMessage(ctx context.Context, localVarOptionals *MessagesApiCreateMessageOpts) (InlineResponse20021, *http.Response, error) {
+func (a *MessagesApiService) CreateMessage(ctx context.Context, localVarOptionals *MessagesApiCreateMessageOpts) (MessageResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20021
+		localVarReturnValue MessageResponse
 	)
 
 	// create path and map variables
@@ -213,7 +213,7 @@ func (a *MessagesApiService) CreateMessage(ctx context.Context, localVarOptional
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20021
+			var v MessageResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -223,7 +223,7 @@ func (a *MessagesApiService) CreateMessage(ctx context.Context, localVarOptional
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -238,24 +238,24 @@ func (a *MessagesApiService) CreateMessage(ctx context.Context, localVarOptional
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-MessagesApiService Send a message using Number Pool
+MessagesApiService Send a message using number pool
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *MessagesApiCreateNumberPoolMessageOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body15) -  Message payload
-@return InlineResponse20021
+     * @param "Body" (optional.Interface of CreateNumberPoolMessageRequest) -  Message payload
+@return MessageResponse
 */
 
 type MessagesApiCreateNumberPoolMessageOpts struct {
     Body optional.Interface
 }
 
-func (a *MessagesApiService) CreateNumberPoolMessage(ctx context.Context, localVarOptionals *MessagesApiCreateNumberPoolMessageOpts) (InlineResponse20021, *http.Response, error) {
+func (a *MessagesApiService) CreateNumberPoolMessage(ctx context.Context, localVarOptionals *MessagesApiCreateNumberPoolMessageOpts) (MessageResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20021
+		localVarReturnValue MessageResponse
 	)
 
 	// create path and map variables
@@ -318,7 +318,7 @@ func (a *MessagesApiService) CreateNumberPoolMessage(ctx context.Context, localV
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20021
+			var v MessageResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -328,7 +328,7 @@ func (a *MessagesApiService) CreateNumberPoolMessage(ctx context.Context, localV
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -343,24 +343,24 @@ func (a *MessagesApiService) CreateNumberPoolMessage(ctx context.Context, localV
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-MessagesApiService Send a Short Code message
+MessagesApiService Send a short code message
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *MessagesApiCreateShortCodeMessageOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body16) -  Message payload
-@return InlineResponse20021
+     * @param "Body" (optional.Interface of CreateShortCodeMessageRequest) -  Message payload
+@return MessageResponse
 */
 
 type MessagesApiCreateShortCodeMessageOpts struct {
     Body optional.Interface
 }
 
-func (a *MessagesApiService) CreateShortCodeMessage(ctx context.Context, localVarOptionals *MessagesApiCreateShortCodeMessageOpts) (InlineResponse20021, *http.Response, error) {
+func (a *MessagesApiService) CreateShortCodeMessage(ctx context.Context, localVarOptionals *MessagesApiCreateShortCodeMessageOpts) (MessageResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20021
+		localVarReturnValue MessageResponse
 	)
 
 	// create path and map variables
@@ -423,7 +423,7 @@ func (a *MessagesApiService) CreateShortCodeMessage(ctx context.Context, localVa
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20021
+			var v MessageResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -433,7 +433,7 @@ func (a *MessagesApiService) CreateShortCodeMessage(ctx context.Context, localVa
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -449,17 +449,18 @@ func (a *MessagesApiService) CreateShortCodeMessage(ctx context.Context, localVa
 }
 /*
 MessagesApiService Retrieve a message
+Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/docs/api/v1/reports/MDR-Reports)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the message
-@return InlineResponse20021
+@return MessageResponse
 */
-func (a *MessagesApiService) RetrieveMessage(ctx context.Context, id string) (InlineResponse20021, *http.Response, error) {
+func (a *MessagesApiService) RetrieveMessage(ctx context.Context, id string) (MessageResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20021
+		localVarReturnValue MessageResponse
 	)
 
 	// create path and map variables
@@ -517,7 +518,7 @@ func (a *MessagesApiService) RetrieveMessage(ctx context.Context, id string) (In
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20021
+			var v MessageResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -527,7 +528,7 @@ func (a *MessagesApiService) RetrieveMessage(ctx context.Context, id string) (In
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

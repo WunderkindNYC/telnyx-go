@@ -4,31 +4,31 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateNumberReservations**](NumberReservationsApi.md#CreateNumberReservations) | **Post** /number_reservations | Create a Phone Number Reservation
-[**ExtendNumberReservationExpiryTime**](NumberReservationsApi.md#ExtendNumberReservationExpiryTime) | **Post** /number_reservations/{number_reservation_id}/actions/extend | Extend a Phone Number Reservation
-[**ListNumberReservations**](NumberReservationsApi.md#ListNumberReservations) | **Get** /number_reservations | Retrieve multiple Number Reservations
-[**RetrieveNumberReservation**](NumberReservationsApi.md#RetrieveNumberReservation) | **Get** /number_reservations/{number_reservation_id} | Retrieve a Single Phone Number Reservation
+[**CreateNumberReservation**](NumberReservationsApi.md#CreateNumberReservation) | **Post** /number_reservations | Create a number reservation
+[**ExtendNumberReservationExpiryTime**](NumberReservationsApi.md#ExtendNumberReservationExpiryTime) | **Post** /number_reservations/{number_reservation_id}/actions/extend | Extend a number reservation
+[**ListNumberReservations**](NumberReservationsApi.md#ListNumberReservations) | **Get** /number_reservations | List number reservations
+[**RetrieveNumberReservation**](NumberReservationsApi.md#RetrieveNumberReservation) | **Get** /number_reservations/{number_reservation_id} | Retrieve a number reservation
 
-# **CreateNumberReservations**
-> InlineResponse20036 CreateNumberReservations(ctx, body)
-Create a Phone Number Reservation
+# **CreateNumberReservation**
+> NumberReservationResponse CreateNumberReservation(ctx, body)
+Create a number reservation
 
-Creates a Phone Number Reservation for multiple numbers
+Creates a Phone Number Reservation for multiple numbers.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**Body26**](Body26.md)|  | 
+  **body** | [**CreateNumberReservationRequest**](CreateNumberReservationRequest.md)|  | 
 
 ### Return type
 
-[**InlineResponse20036**](inline_response_200_36.md)
+[**NumberReservationResponse**](Number Reservation Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -38,25 +38,25 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ExtendNumberReservationExpiryTime**
-> InlineResponse20036 ExtendNumberReservationExpiryTime(ctx, numberReservationId)
-Extend a Phone Number Reservation
+> NumberReservationResponse ExtendNumberReservationExpiryTime(ctx, numberReservationId)
+Extend a number reservation
 
-Extends reservation expiry time on all phone numbers
+Extends reservation expiry time on all phone numbers.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **numberReservationId** | **string**| The number reservation id | 
+  **numberReservationId** | **string**| The number reservation ID. | 
 
 ### Return type
 
-[**InlineResponse20036**](inline_response_200_36.md)
+[**NumberReservationResponse**](Number Reservation Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -66,10 +66,10 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListNumberReservations**
-> InlineResponse20035 ListNumberReservations(ctx, optional)
-Retrieve multiple Number Reservations
+> ListNumberReservationsResponse ListNumberReservations(ctx, optional)
+List number reservations
 
-Gets a paginated list of Phone Number Reservations
+Gets a paginated list of phone number reservations.
 
 ### Required Parameters
 
@@ -82,19 +82,21 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a NumberReservationsApiListNumberReservationsOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filterStatus** | **optional.String**| Filter number reservations by status | 
- **filterCreatedAtGt** | **optional.String**| Filter number reservations later than this value | 
- **filterCreatedAtLt** | **optional.String**| Filter number reservations earlier than this value | 
- **filterPhoneNumbersPhoneNumber** | **optional.String**| Filter number reservations having these phone numbers | 
- **filterCustomerReference** | **optional.String**| Filter number reservations via the customer reference set | 
+ **filterStatus** | **optional.String**| Filter number reservations by status. | 
+ **filterCreatedAtGt** | **optional.String**| Filter number reservations later than this value. | 
+ **filterCreatedAtLt** | **optional.String**| Filter number reservations earlier than this value. | 
+ **filterPhoneNumbersPhoneNumber** | **optional.String**| Filter number reservations having these phone numbers. | 
+ **filterCustomerReference** | **optional.String**| Filter number reservations via the customer reference set. | 
+ **pageNumber** | **optional.Int32**| The page number to load | [default to 1]
+ **pageSize** | **optional.Int32**| The size of the page | [default to 20]
 
 ### Return type
 
-[**InlineResponse20035**](inline_response_200_35.md)
+[**ListNumberReservationsResponse**](List Number Reservations Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -104,25 +106,25 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RetrieveNumberReservation**
-> InlineResponse20036 RetrieveNumberReservation(ctx, numberReservationId)
-Retrieve a Single Phone Number Reservation
+> NumberReservationResponse RetrieveNumberReservation(ctx, numberReservationId)
+Retrieve a number reservation
 
-Gets a single Phone Number Reservation
+Gets a single phone number reservation.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **numberReservationId** | **string**| The number reservation id | 
+  **numberReservationId** | **string**| The number reservation ID. | 
 
 ### Return type
 
-[**InlineResponse20036**](inline_response_200_36.md)
+[**NumberReservationResponse**](Number Reservation Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**GetWdrReports**](ReportingApi.md#GetWdrReports) | **Get** /wireless/detail_records_reports | Get all Wireless Detail Records (WDRs) Reports
 
 # **CreateWdrReport**
-> InlineResponse2017 CreateWdrReport(ctx, body)
+> InlineResponse20110 CreateWdrReport(ctx, body)
 Create a Wireless Detail Records (WDRs) Report
 
 Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period. 
@@ -20,15 +20,15 @@ Asynchronously create a report containing Wireless Detail Records (WDRs) for the
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**Body37**](Body37.md)|  | 
+  **body** | [**WdrReportRequest**](WdrReportRequest.md)|  | 
 
 ### Return type
 
-[**InlineResponse2017**](inline_response_201_7.md)
+[**InlineResponse20110**](inline_response_201_10.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -38,7 +38,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteWdrReport**
-> InlineResponse2017 DeleteWdrReport(ctx, id)
+> InlineResponse20110 DeleteWdrReport(ctx, id)
 Delete a Wireless Detail Record (WDR) Report
 
 Deletes one specific WDR report
@@ -52,11 +52,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2017**](inline_response_201_7.md)
+[**InlineResponse20110**](inline_response_201_10.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -66,7 +66,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWdrReport**
-> InlineResponse2017 GetWdrReport(ctx, id)
+> InlineResponse20110 GetWdrReport(ctx, id)
 Get a Wireless Detail Record (WDR) Report
 
 Returns one specific WDR report
@@ -80,11 +80,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2017**](inline_response_201_7.md)
+[**InlineResponse20110**](inline_response_201_10.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -94,7 +94,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWdrReports**
-> InlineResponse20058 GetWdrReports(ctx, optional)
+> InlineResponse20047 GetWdrReports(ctx, optional)
 Get all Wireless Detail Records (WDRs) Reports
 
 Returns the WDR Reports that match the given parameters.
@@ -115,11 +115,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20058**](inline_response_200_58.md)
+[**InlineResponse20047**](inline_response_200_47.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -10,12 +10,12 @@
 package telnyx
 
 type Metadata struct {
-	// Total number of pages based on pagination settings
-	TotalPages float64 `json:"total_pages,omitempty"`
-	// Total number of results
-	TotalResults float64 `json:"total_results,omitempty"`
 	// Current Page based on pagination settings (included when defaults are used.)
 	PageNumber float64 `json:"page_number,omitempty"`
 	// Number of results to return per page based on pagination settings (included when defaults are used.)
 	PageSize float64 `json:"page_size,omitempty"`
+	// Total number of pages based on pagination settings
+	TotalPages float64 `json:"total_pages,omitempty"`
+	// Total number of results
+	TotalResults float64 `json:"total_results,omitempty"`
 }

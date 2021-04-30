@@ -27,29 +27,33 @@ var (
 
 type NumberOrderRegulatoryRequirementsApiService service
 /*
-NumberOrderRegulatoryRequirementsApiService Get list of Number Order Regulatory Requirements
-Gets a paginated list of Number Order Regulatory Requirements
+NumberOrderRegulatoryRequirementsApiService List number order regulatory requirements
+Gets a paginated list of number order regulatory requirements.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *NumberOrderRegulatoryRequirementsApiListNumberOrderRegulatoryRequirementsOpts - Optional Parameters:
-     * @param "FilterRequirementId" (optional.String) -  Filter number order regulatory requirements by requirement_id
-     * @param "FilterFieldType" (optional.String) -  Filter number order regulatory requirements by field_type
-     * @param "FilterRequirementType" (optional.String) -  Filter number order regulatory requirements by requirement_type
-@return InlineResponse20052
+     * @param "FilterRequirementId" (optional.String) -  Filter number order regulatory requirements by &#x60;requirement_id&#x60;.
+     * @param "FilterFieldType" (optional.String) -  Filter number order regulatory requirements by &#x60;field_type&#x60;.
+     * @param "FilterRequirementType" (optional.String) -  Filter number order regulatory requirements by &#x60;requirement_type&#x60;.
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+@return ListNumberOrderRegulatoryRequirementsResponse
 */
 
 type NumberOrderRegulatoryRequirementsApiListNumberOrderRegulatoryRequirementsOpts struct {
     FilterRequirementId optional.String
     FilterFieldType optional.String
     FilterRequirementType optional.String
+    PageNumber optional.Int32
+    PageSize optional.Int32
 }
 
-func (a *NumberOrderRegulatoryRequirementsApiService) ListNumberOrderRegulatoryRequirements(ctx context.Context, localVarOptionals *NumberOrderRegulatoryRequirementsApiListNumberOrderRegulatoryRequirementsOpts) (InlineResponse20052, *http.Response, error) {
+func (a *NumberOrderRegulatoryRequirementsApiService) ListNumberOrderRegulatoryRequirements(ctx context.Context, localVarOptionals *NumberOrderRegulatoryRequirementsApiListNumberOrderRegulatoryRequirementsOpts) (ListNumberOrderRegulatoryRequirementsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20052
+		localVarReturnValue ListNumberOrderRegulatoryRequirementsResponse
 	)
 
 	// create path and map variables
@@ -68,6 +72,12 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListNumberOrderRegulatoryR
 	if localVarOptionals != nil && localVarOptionals.FilterRequirementType.IsSet() {
 		localVarQueryParams.Add("filter[requirement_type]", parameterToString(localVarOptionals.FilterRequirementType.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -115,7 +125,7 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListNumberOrderRegulatoryR
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20052
+			var v ListNumberOrderRegulatoryRequirementsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -125,7 +135,7 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListNumberOrderRegulatoryR
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -140,29 +150,33 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListNumberOrderRegulatoryR
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberOrderRegulatoryRequirementsApiService Get Regulatory Requirements Per Number
-Gets a paginated list of Phone Number Regulatory Requirements
+NumberOrderRegulatoryRequirementsApiService List regulatory requirements per number
+Gets a paginated list of phone number regulatory requirements.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *NumberOrderRegulatoryRequirementsApiListPhoneNumberRegulatoryRequirementsOpts - Optional Parameters:
-     * @param "FilterPhoneNumber" (optional.Interface of []string) -  The list of phone numbers to retrieve regulatory requirements for
-@return InlineResponse20039
+     * @param "FilterPhoneNumber" (optional.Interface of []string) -  The list of phone numbers to retrieve regulatory requirements for.
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+@return ListPhoneNumberRegulatoryRequirementsResponse
 */
 
 type NumberOrderRegulatoryRequirementsApiListPhoneNumberRegulatoryRequirementsOpts struct {
     FilterPhoneNumber optional.Interface
+    PageNumber optional.Int32
+    PageSize optional.Int32
 }
 
-func (a *NumberOrderRegulatoryRequirementsApiService) ListPhoneNumberRegulatoryRequirements(ctx context.Context, localVarOptionals *NumberOrderRegulatoryRequirementsApiListPhoneNumberRegulatoryRequirementsOpts) (InlineResponse20039, *http.Response, error) {
+func (a *NumberOrderRegulatoryRequirementsApiService) ListPhoneNumberRegulatoryRequirements(ctx context.Context, localVarOptionals *NumberOrderRegulatoryRequirementsApiListPhoneNumberRegulatoryRequirementsOpts) (ListPhoneNumberRegulatoryRequirementsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20039
+		localVarReturnValue ListPhoneNumberRegulatoryRequirementsResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/phone_number_regulatory_requirements"
+	localVarPath := a.client.cfg.BasePath + "/phone_numbers_regulatory_requirements"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -171,6 +185,12 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListPhoneNumberRegulatoryR
 	if localVarOptionals != nil && localVarOptionals.FilterPhoneNumber.IsSet() {
 		localVarQueryParams.Add("filter[phone_number]", parameterToString(localVarOptionals.FilterPhoneNumber.Value(), "multi"))
 	}
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -218,7 +238,7 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListPhoneNumberRegulatoryR
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20039
+			var v ListPhoneNumberRegulatoryRequirementsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -228,7 +248,7 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListPhoneNumberRegulatoryR
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -243,19 +263,19 @@ func (a *NumberOrderRegulatoryRequirementsApiService) ListPhoneNumberRegulatoryR
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberOrderRegulatoryRequirementsApiService Get Detailed Number Order Regulatory Requirement
-Gets a single Number Order Regulatory Requirement
+NumberOrderRegulatoryRequirementsApiService Retrieve a number order regulatory requirement
+Gets a single number order regulatory requirement.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param requirementId The number order regulatory requirement id
-@return InlineResponse20053
+ * @param requirementId The number order regulatory requirement ID.
+@return NumberOrderRegulatoryRequirementResponse
 */
-func (a *NumberOrderRegulatoryRequirementsApiService) RetrieveNumberOrderRegulatoryRequirement(ctx context.Context, requirementId string) (InlineResponse20053, *http.Response, error) {
+func (a *NumberOrderRegulatoryRequirementsApiService) RetrieveNumberOrderRegulatoryRequirement(ctx context.Context, requirementId string) (NumberOrderRegulatoryRequirementResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20053
+		localVarReturnValue NumberOrderRegulatoryRequirementResponse
 	)
 
 	// create path and map variables
@@ -313,7 +333,7 @@ func (a *NumberOrderRegulatoryRequirementsApiService) RetrieveNumberOrderRegulat
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20053
+			var v NumberOrderRegulatoryRequirementResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -323,7 +343,7 @@ func (a *NumberOrderRegulatoryRequirementsApiService) RetrieveNumberOrderRegulat
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

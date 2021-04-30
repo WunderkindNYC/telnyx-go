@@ -10,8 +10,14 @@
 package telnyx
 
 type AnswerRequest struct {
+	// Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
+	BillingGroupId string `json:"billing_group_id,omitempty"`
 	// Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
 	ClientState string `json:"client_state,omitempty"`
 	// Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
 	CommandId string `json:"command_id,omitempty"`
+	// Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
+	WebhookUrl string `json:"webhook_url,omitempty"`
+	// HTTP request type used for `webhook_url`.
+	WebhookUrlMethod string `json:"webhook_url_method,omitempty"`
 }

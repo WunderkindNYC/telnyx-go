@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse20012 struct {
-	Data *CommandResult `json:"data,omitempty"`
+	Data []ManagedAccount `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

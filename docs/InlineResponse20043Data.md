@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Channels** | **int32** | The number of channels set for the account | [optional] [default to null]
-**RecordType** | **string** | Identifies the type of the response | [optional] [default to null]
+**Amount** | **int32** |  | [optional] [default to null]
+**Tag** | **string** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

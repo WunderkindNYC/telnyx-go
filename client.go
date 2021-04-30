@@ -45,9 +45,17 @@ type APIClient struct {
 
 	// API Services
 
+	AccessTokensApi *AccessTokensApiService
+
 	AddressesApi *AddressesApiService
 
+	BillingApi *BillingApiService
+
 	BillingGroupsApi *BillingGroupsApiService
+
+	BulkCredentialsApi *BulkCredentialsApiService
+
+	CDRUsageReportsApi *CDRUsageReportsApiService
 
 	CSVDownloadsApi *CSVDownloadsApiService
 
@@ -63,7 +71,11 @@ type APIClient struct {
 
 	CredentialConnectionsApi *CredentialConnectionsApiService
 
+	CredentialsApi *CredentialsApiService
+
 	DebuggingApi *DebuggingApiService
+
+	DocumentsApi *DocumentsApiService
 
 	FQDNConnectionsApi *FQDNConnectionsApiService
 
@@ -75,15 +87,29 @@ type APIClient struct {
 
 	InboundChannelsApi *InboundChannelsApiService
 
+	MDRDetailReportsApi *MDRDetailReportsApiService
+
+	MDRUsageReportsApi *MDRUsageReportsApiService
+
+	ManagedAccountsApi *ManagedAccountsApiService
+
 	MessagesApi *MessagesApiService
 
-	MessagingHostedNumbersApi *MessagingHostedNumbersApiService
+	MessagingHostedNumberApi *MessagingHostedNumberApiService
 
 	MessagingProfilesApi *MessagingProfilesApiService
 
 	MessagingURLDomainsApi *MessagingURLDomainsApiService
 
+	MobileOperatorNetworksApi *MobileOperatorNetworksApiService
+
+	NotificationsApi *NotificationsApiService
+
+	NumberBackgroundJobsApi *NumberBackgroundJobsApiService
+
 	NumberConfigurationsApi *NumberConfigurationsApiService
+
+	NumberLookupApi *NumberLookupApiService
 
 	NumberOrderDocumentsApi *NumberOrderDocumentsApiService
 
@@ -97,19 +123,49 @@ type APIClient struct {
 
 	NumberSearchApi *NumberSearchApiService
 
+	OTAUpdatesApi *OTAUpdatesApiService
+
 	OutboundVoiceProfilesApi *OutboundVoiceProfilesApiService
 
-	PhoneNumbersApi *PhoneNumbersApiService
+	PhoneNumberPortingApi *PhoneNumberPortingApiService
+
+	PortingOrderApi *PortingOrderApiService
+
+	PrivateWirelessGatewaysApi *PrivateWirelessGatewaysApiService
+
+	ProgrammableFaxApplicationsApi *ProgrammableFaxApplicationsApiService
+
+	ProgrammableFaxCommandsApi *ProgrammableFaxCommandsApiService
+
+	RecordingsCommandsApi *RecordingsCommandsApiService
 
 	ReportingApi *ReportingApiService
 
 	ReportsApi *ReportsApiService
+
+	RoomsApi *RoomsApiService
+
+	RoomsAccessTokensApi *RoomsAccessTokensApiService
 
 	SIMCardGroupsApi *SIMCardGroupsApiService
 
 	SIMCardsApi *SIMCardsApiService
 
 	ShortCodesApi *ShortCodesApiService
+
+	TeXMLApplicationsApi *TeXMLApplicationsApiService
+
+	VerifyApi *VerifyApiService
+
+	WebhooksApi *WebhooksApiService
+
+	WhatsAppContactsApi *WhatsAppContactsApiService
+
+	WhatsAppMediaApi *WhatsAppMediaApiService
+
+	WhatsAppMessagesApi *WhatsAppMessagesApiService
+
+	WhatsAppUsersApi *WhatsAppUsersApiService
 }
 
 type service struct {
@@ -128,8 +184,12 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AccessTokensApi = (*AccessTokensApiService)(&c.common)
 	c.AddressesApi = (*AddressesApiService)(&c.common)
+	c.BillingApi = (*BillingApiService)(&c.common)
 	c.BillingGroupsApi = (*BillingGroupsApiService)(&c.common)
+	c.BulkCredentialsApi = (*BulkCredentialsApiService)(&c.common)
+	c.CDRUsageReportsApi = (*CDRUsageReportsApiService)(&c.common)
 	c.CSVDownloadsApi = (*CSVDownloadsApiService)(&c.common)
 	c.CallCommandsApi = (*CallCommandsApiService)(&c.common)
 	c.CallControlApplicationsApi = (*CallControlApplicationsApiService)(&c.common)
@@ -137,30 +197,54 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ConferenceCommandsApi = (*ConferenceCommandsApiService)(&c.common)
 	c.ConnectionsApi = (*ConnectionsApiService)(&c.common)
 	c.CredentialConnectionsApi = (*CredentialConnectionsApiService)(&c.common)
+	c.CredentialsApi = (*CredentialsApiService)(&c.common)
 	c.DebuggingApi = (*DebuggingApiService)(&c.common)
+	c.DocumentsApi = (*DocumentsApiService)(&c.common)
 	c.FQDNConnectionsApi = (*FQDNConnectionsApiService)(&c.common)
 	c.FQDNsApi = (*FQDNsApiService)(&c.common)
 	c.IPConnectionsApi = (*IPConnectionsApiService)(&c.common)
 	c.IPsApi = (*IPsApiService)(&c.common)
 	c.InboundChannelsApi = (*InboundChannelsApiService)(&c.common)
+	c.MDRDetailReportsApi = (*MDRDetailReportsApiService)(&c.common)
+	c.MDRUsageReportsApi = (*MDRUsageReportsApiService)(&c.common)
+	c.ManagedAccountsApi = (*ManagedAccountsApiService)(&c.common)
 	c.MessagesApi = (*MessagesApiService)(&c.common)
-	c.MessagingHostedNumbersApi = (*MessagingHostedNumbersApiService)(&c.common)
+	c.MessagingHostedNumberApi = (*MessagingHostedNumberApiService)(&c.common)
 	c.MessagingProfilesApi = (*MessagingProfilesApiService)(&c.common)
 	c.MessagingURLDomainsApi = (*MessagingURLDomainsApiService)(&c.common)
+	c.MobileOperatorNetworksApi = (*MobileOperatorNetworksApiService)(&c.common)
+	c.NotificationsApi = (*NotificationsApiService)(&c.common)
+	c.NumberBackgroundJobsApi = (*NumberBackgroundJobsApiService)(&c.common)
 	c.NumberConfigurationsApi = (*NumberConfigurationsApiService)(&c.common)
+	c.NumberLookupApi = (*NumberLookupApiService)(&c.common)
 	c.NumberOrderDocumentsApi = (*NumberOrderDocumentsApiService)(&c.common)
 	c.NumberOrderRegulatoryRequirementsApi = (*NumberOrderRegulatoryRequirementsApiService)(&c.common)
 	c.NumberOrdersApi = (*NumberOrdersApiService)(&c.common)
 	c.NumberPortoutApi = (*NumberPortoutApiService)(&c.common)
 	c.NumberReservationsApi = (*NumberReservationsApiService)(&c.common)
 	c.NumberSearchApi = (*NumberSearchApiService)(&c.common)
+	c.OTAUpdatesApi = (*OTAUpdatesApiService)(&c.common)
 	c.OutboundVoiceProfilesApi = (*OutboundVoiceProfilesApiService)(&c.common)
-	c.PhoneNumbersApi = (*PhoneNumbersApiService)(&c.common)
+	c.PhoneNumberPortingApi = (*PhoneNumberPortingApiService)(&c.common)
+	c.PortingOrderApi = (*PortingOrderApiService)(&c.common)
+	c.PrivateWirelessGatewaysApi = (*PrivateWirelessGatewaysApiService)(&c.common)
+	c.ProgrammableFaxApplicationsApi = (*ProgrammableFaxApplicationsApiService)(&c.common)
+	c.ProgrammableFaxCommandsApi = (*ProgrammableFaxCommandsApiService)(&c.common)
+	c.RecordingsCommandsApi = (*RecordingsCommandsApiService)(&c.common)
 	c.ReportingApi = (*ReportingApiService)(&c.common)
 	c.ReportsApi = (*ReportsApiService)(&c.common)
+	c.RoomsApi = (*RoomsApiService)(&c.common)
+	c.RoomsAccessTokensApi = (*RoomsAccessTokensApiService)(&c.common)
 	c.SIMCardGroupsApi = (*SIMCardGroupsApiService)(&c.common)
 	c.SIMCardsApi = (*SIMCardsApiService)(&c.common)
 	c.ShortCodesApi = (*ShortCodesApiService)(&c.common)
+	c.TeXMLApplicationsApi = (*TeXMLApplicationsApiService)(&c.common)
+	c.VerifyApi = (*VerifyApiService)(&c.common)
+	c.WebhooksApi = (*WebhooksApiService)(&c.common)
+	c.WhatsAppContactsApi = (*WhatsAppContactsApiService)(&c.common)
+	c.WhatsAppMediaApi = (*WhatsAppMediaApiService)(&c.common)
+	c.WhatsAppMessagesApi = (*WhatsAppMessagesApiService)(&c.common)
+	c.WhatsAppUsersApi = (*WhatsAppUsersApiService)(&c.common)
 
 	return c
 }

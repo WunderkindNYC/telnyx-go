@@ -31,15 +31,15 @@ SIMCardGroupsApiService Delete a SIM card group
 Permanently deletes a SIM card group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return Body34
+@return InlineResponse20037
 */
-func (a *SIMCardGroupsApiService) SimCardGroupDelete(ctx context.Context, id string) (Body34, *http.Response, error) {
+func (a *SIMCardGroupsApiService) SimCardGroupDelete(ctx context.Context, id string) (InlineResponse20037, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue Body34
+		localVarReturnValue InlineResponse20037
 	)
 
 	// create path and map variables
@@ -97,7 +97,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupDelete(ctx context.Context, id str
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Body34
+			var v InlineResponse20037
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -107,7 +107,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupDelete(ctx context.Context, id str
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -127,15 +127,15 @@ Updates a SIM card group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param id Identifies the resource.
-@return Body35
+@return InlineResponse20037
 */
-func (a *SIMCardGroupsApiService) SimCardGroupUpdate(ctx context.Context, body Body35, id string) (Body35, *http.Response, error) {
+func (a *SIMCardGroupsApiService) SimCardGroupUpdate(ctx context.Context, body SimCardGroupPatch, id string) (InlineResponse20037, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue Body35
+		localVarReturnValue InlineResponse20037
 	)
 
 	// create path and map variables
@@ -195,7 +195,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupUpdate(ctx context.Context, body B
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Body35
+			var v InlineResponse20037
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -205,7 +205,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupUpdate(ctx context.Context, body B
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -220,28 +220,19 @@ func (a *SIMCardGroupsApiService) SimCardGroupUpdate(ctx context.Context, body B
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-SIMCardGroupsApiService Get SIM card gruop
+SIMCardGroupsApiService Get SIM card group
 Returns the details regarding a specific SIM card group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
- * @param optional nil or *SIMCardGroupsApiSimCardGroupsGetOpts - Optional Parameters:
-     * @param "IncludeSimCards" (optional.Bool) -  It includes the associated SIM card objects in the response when present.
-     * @param "IncludeDataPlans" (optional.Bool) -  It includes the associated data plan objects in the response when present.
-@return Body34
+@return InlineResponse20037
 */
-
-type SIMCardGroupsApiSimCardGroupsGetOpts struct {
-    IncludeSimCards optional.Bool
-    IncludeDataPlans optional.Bool
-}
-
-func (a *SIMCardGroupsApiService) SimCardGroupsGet(ctx context.Context, id string, localVarOptionals *SIMCardGroupsApiSimCardGroupsGetOpts) (Body34, *http.Response, error) {
+func (a *SIMCardGroupsApiService) SimCardGroupsGet(ctx context.Context, id string) (InlineResponse20037, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue Body34
+		localVarReturnValue InlineResponse20037
 	)
 
 	// create path and map variables
@@ -252,12 +243,6 @@ func (a *SIMCardGroupsApiService) SimCardGroupsGet(ctx context.Context, id strin
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.IncludeSimCards.IsSet() {
-		localVarQueryParams.Add("include_sim_cards", parameterToString(localVarOptionals.IncludeSimCards.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.IncludeDataPlans.IsSet() {
-		localVarQueryParams.Add("include_data_plans", parameterToString(localVarOptionals.IncludeDataPlans.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -305,7 +290,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupsGet(ctx context.Context, id strin
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Body34
+			var v InlineResponse20037
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -315,7 +300,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupsGet(ctx context.Context, id strin
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -336,27 +321,23 @@ Get all SIM card groups belonging to the user that match the given filters.
  * @param optional nil or *SIMCardGroupsApiSimCardGroupsGetAllOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-     * @param "IncludeSimCards" (optional.Bool) -  It includes the associated SIM card objects in the response when present.
-     * @param "IncludeDataPlans" (optional.Bool) -  It includes the associated data plan objects in the response when present.
      * @param "FilterName" (optional.Interface of string) -  A valid SIM card group name.
-@return InlineResponse20055
+@return InlineResponse20036
 */
 
 type SIMCardGroupsApiSimCardGroupsGetAllOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
-    IncludeSimCards optional.Bool
-    IncludeDataPlans optional.Bool
     FilterName optional.Interface
 }
 
-func (a *SIMCardGroupsApiService) SimCardGroupsGetAll(ctx context.Context, localVarOptionals *SIMCardGroupsApiSimCardGroupsGetAllOpts) (InlineResponse20055, *http.Response, error) {
+func (a *SIMCardGroupsApiService) SimCardGroupsGetAll(ctx context.Context, localVarOptionals *SIMCardGroupsApiSimCardGroupsGetAllOpts) (InlineResponse20036, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20055
+		localVarReturnValue InlineResponse20036
 	)
 
 	// create path and map variables
@@ -371,12 +352,6 @@ func (a *SIMCardGroupsApiService) SimCardGroupsGetAll(ctx context.Context, local
 	}
 	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
 		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.IncludeSimCards.IsSet() {
-		localVarQueryParams.Add("include_sim_cards", parameterToString(localVarOptionals.IncludeSimCards.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.IncludeDataPlans.IsSet() {
-		localVarQueryParams.Add("include_data_plans", parameterToString(localVarOptionals.IncludeDataPlans.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.FilterName.IsSet() {
 		localVarQueryParams.Add("filter[name]", parameterToString(localVarOptionals.FilterName.Value(), ""))
@@ -428,7 +403,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupsGetAll(ctx context.Context, local
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20055
+			var v InlineResponse20036
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -438,7 +413,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupsGetAll(ctx context.Context, local
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -457,15 +432,15 @@ SIMCardGroupsApiService Create a SIM card group
 Creates a new SIM card group object
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return Body34
+@return InlineResponse20037
 */
-func (a *SIMCardGroupsApiService) SimCardGroupsPost(ctx context.Context, body Body34) (Body34, *http.Response, error) {
+func (a *SIMCardGroupsApiService) SimCardGroupsPost(ctx context.Context, body SimCardGroupCreate) (InlineResponse20037, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue Body34
+		localVarReturnValue InlineResponse20037
 	)
 
 	// create path and map variables
@@ -524,7 +499,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupsPost(ctx context.Context, body Bo
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Body34
+			var v InlineResponse20037
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -534,7 +509,7 @@ func (a *SIMCardGroupsApiService) SimCardGroupsPost(ctx context.Context, body Bo
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

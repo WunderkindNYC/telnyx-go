@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2007 struct {
-	Data []InlineResponse2007Data `json:"data,omitempty"`
+	Data *DocServiceDocument `json:"data,omitempty"`
 }

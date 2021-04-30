@@ -4,22 +4,33 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAllMessagingUrlDomains**](MessagingURLDomainsApi.md#GetAllMessagingUrlDomains) | **Get** /messaging_url_domains | List all available messaging URL domains
+[**ListMessagingUrlDomains**](MessagingURLDomainsApi.md#ListMessagingUrlDomains) | **Get** /messaging_url_domains | List messaging URL domains
 
-# **GetAllMessagingUrlDomains**
-> InlineResponse20030 GetAllMessagingUrlDomains(ctx, )
-List all available messaging URL domains
+# **ListMessagingUrlDomains**
+> ListMessagingProfileUrlDomainsResponse ListMessagingUrlDomains(ctx, optional)
+List messaging URL domains
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***MessagingURLDomainsApiListMessagingUrlDomainsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a MessagingURLDomainsApiListMessagingUrlDomainsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pageNumber** | **optional.Int32**| The page number to load | [default to 1]
+ **pageSize** | **optional.Int32**| The size of the page | [default to 20]
 
 ### Return type
 
-[**InlineResponse20030**](inline_response_200_30.md)
+[**ListMessagingProfileUrlDomainsResponse**](List Messaging Profile Url Domains Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -16,6 +16,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -25,17 +26,26 @@ var (
 
 type MessagingURLDomainsApiService service
 /*
-MessagingURLDomainsApiService List all available messaging URL domains
+MessagingURLDomainsApiService List messaging URL domains
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return InlineResponse20030
+ * @param optional nil or *MessagingURLDomainsApiListMessagingUrlDomainsOpts - Optional Parameters:
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+@return ListMessagingProfileUrlDomainsResponse
 */
-func (a *MessagingURLDomainsApiService) GetAllMessagingUrlDomains(ctx context.Context) (InlineResponse20030, *http.Response, error) {
+
+type MessagingURLDomainsApiListMessagingUrlDomainsOpts struct {
+    PageNumber optional.Int32
+    PageSize optional.Int32
+}
+
+func (a *MessagingURLDomainsApiService) ListMessagingUrlDomains(ctx context.Context, localVarOptionals *MessagingURLDomainsApiListMessagingUrlDomainsOpts) (ListMessagingProfileUrlDomainsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20030
+		localVarReturnValue ListMessagingProfileUrlDomainsResponse
 	)
 
 	// create path and map variables
@@ -45,6 +55,12 @@ func (a *MessagingURLDomainsApiService) GetAllMessagingUrlDomains(ctx context.Co
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -92,7 +108,7 @@ func (a *MessagingURLDomainsApiService) GetAllMessagingUrlDomains(ctx context.Co
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20030
+			var v ListMessagingProfileUrlDomainsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -102,7 +118,7 @@ func (a *MessagingURLDomainsApiService) GetAllMessagingUrlDomains(ctx context.Co
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

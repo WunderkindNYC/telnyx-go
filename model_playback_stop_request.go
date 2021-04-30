@@ -10,10 +10,10 @@
 package telnyx
 
 type PlaybackStopRequest struct {
-	// Use `current` to stop only the current audio or `all` to stop all audios in the queue.
-	Stop string `json:"stop,omitempty"`
 	// Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
 	ClientState string `json:"client_state,omitempty"`
 	// Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
 	CommandId string `json:"command_id,omitempty"`
+	// Use `current` to stop only the current audio or `all` to stop all audios in the queue.
+	Stop string `json:"stop,omitempty"`
 }

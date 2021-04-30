@@ -10,5 +10,6 @@
 package telnyx
 
 type Body struct {
-	RegistrationCodes []string `json:"registration_codes,omitempty"`
+	MobileOperatorNetworksPreferences *[]MobileOperatorNetworkPreferencesRequest `json:"mobile_operator_networks_preferences,omitempty"`
+	SimCardIds []string `json:"sim_card_ids,omitempty"`
 }

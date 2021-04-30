@@ -10,6 +10,5 @@
 package telnyx
 
 type InlineResponse20013 struct {
-	Data []Connection `json:"data,omitempty"`
-	Meta *InlineResponse20033Meta `json:"meta,omitempty"`
+	Data *ManagedAccount `json:"data,omitempty"`
 }

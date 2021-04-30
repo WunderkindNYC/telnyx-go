@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2015 struct {
-	Data *Ip `json:"data,omitempty"`
+	Data *Room `json:"data,omitempty"`
 }

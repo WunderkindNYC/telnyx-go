@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2002 struct {
-	Data *Address `json:"data,omitempty"`
+	Data *UserBalance `json:"data,omitempty"`
 }

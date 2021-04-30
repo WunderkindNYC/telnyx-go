@@ -29,7 +29,7 @@ type DebuggingApiService service
 DebuggingApiService List call events
 Filters call events by given filter parameters. Events are ordered by &#x60;event_timestamp&#x60;. If filter for &#x60;call_leg_id&#x60; or &#x60;call_session_id&#x60; is not present, it only filters events from the last 24 hours.  **Note**: Only one &#x60;filter[event_timestamp]&#x60; can be passed. 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *DebuggingApiCallControlDebuggingEventListOpts - Optional Parameters:
+ * @param optional nil or *DebuggingApiListCallEventsOpts - Optional Parameters:
      * @param "FilterCallLegId" (optional.Interface of string) -  The unique identifier of an individual call leg.
      * @param "FilterCallSessionId" (optional.Interface of string) -  The unique identifier of the call control session. A session may include multiple call leg events.
      * @param "FilterStatus" (optional.String) -  Event status
@@ -39,10 +39,12 @@ Filters call events by given filter parameters. Events are ordered by &#x60;even
      * @param "FilterEventTimestampLt" (optional.String) -  Event timestamp: lower than
      * @param "FilterEventTimestampLte" (optional.String) -  Event timestamp: lower than or equal
      * @param "FilterEventTimestampEq" (optional.String) -  Event timestamp: equal
-@return InlineResponse2007
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+@return ListCallEventsResponse
 */
 
-type DebuggingApiCallControlDebuggingEventListOpts struct {
+type DebuggingApiListCallEventsOpts struct {
     FilterCallLegId optional.Interface
     FilterCallSessionId optional.Interface
     FilterStatus optional.String
@@ -52,15 +54,17 @@ type DebuggingApiCallControlDebuggingEventListOpts struct {
     FilterEventTimestampLt optional.String
     FilterEventTimestampLte optional.String
     FilterEventTimestampEq optional.String
+    PageNumber optional.Int32
+    PageSize optional.Int32
 }
 
-func (a *DebuggingApiService) CallControlDebuggingEventList(ctx context.Context, localVarOptionals *DebuggingApiCallControlDebuggingEventListOpts) (InlineResponse2007, *http.Response, error) {
+func (a *DebuggingApiService) ListCallEvents(ctx context.Context, localVarOptionals *DebuggingApiListCallEventsOpts) (ListCallEventsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2007
+		localVarReturnValue ListCallEventsResponse
 	)
 
 	// create path and map variables
@@ -96,6 +100,12 @@ func (a *DebuggingApiService) CallControlDebuggingEventList(ctx context.Context,
 	}
 	if localVarOptionals != nil && localVarOptionals.FilterEventTimestampEq.IsSet() {
 		localVarQueryParams.Add("filter[event_timestamp][eq]", parameterToString(localVarOptionals.FilterEventTimestampEq.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -144,7 +154,7 @@ func (a *DebuggingApiService) CallControlDebuggingEventList(ctx context.Context,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2007
+			var v ListCallEventsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -154,7 +164,7 @@ func (a *DebuggingApiService) CallControlDebuggingEventList(ctx context.Context,
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

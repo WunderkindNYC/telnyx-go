@@ -27,17 +27,17 @@ var (
 
 type CSVDownloadsApiService service
 /*
-CSVDownloadsApiService create a new CSV download request
+CSVDownloadsApiService Create a CSV download
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return InlineResponse20041
+@return CsvDownloadResponse
 */
-func (a *CSVDownloadsApiService) CreateCsvDownload(ctx context.Context) (InlineResponse20041, *http.Response, error) {
+func (a *CSVDownloadsApiService) CreateCsvDownload(ctx context.Context) (CsvDownloadResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20041
+		localVarReturnValue CsvDownloadResponse
 	)
 
 	// create path and map variables
@@ -94,7 +94,7 @@ func (a *CSVDownloadsApiService) CreateCsvDownload(ctx context.Context) (InlineR
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20041
+			var v CsvDownloadResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -104,7 +104,7 @@ func (a *CSVDownloadsApiService) CreateCsvDownload(ctx context.Context) (InlineR
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -119,26 +119,26 @@ func (a *CSVDownloadsApiService) CreateCsvDownload(ctx context.Context) (InlineR
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CSVDownloadsApiService List your submitted CSV download requests
+CSVDownloadsApiService List CSV downloads
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CSVDownloadsApiFindCsvDownloadsOpts - Optional Parameters:
+ * @param optional nil or *CSVDownloadsApiListCsvDownloadsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-@return InlineResponse20041
+@return ListCsvDownloadsResponse
 */
 
-type CSVDownloadsApiFindCsvDownloadsOpts struct {
+type CSVDownloadsApiListCsvDownloadsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
 }
 
-func (a *CSVDownloadsApiService) FindCsvDownloads(ctx context.Context, localVarOptionals *CSVDownloadsApiFindCsvDownloadsOpts) (InlineResponse20041, *http.Response, error) {
+func (a *CSVDownloadsApiService) ListCsvDownloads(ctx context.Context, localVarOptionals *CSVDownloadsApiListCsvDownloadsOpts) (ListCsvDownloadsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20041
+		localVarReturnValue ListCsvDownloadsResponse
 	)
 
 	// create path and map variables
@@ -201,7 +201,7 @@ func (a *CSVDownloadsApiService) FindCsvDownloads(ctx context.Context, localVarO
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20041
+			var v ListCsvDownloadsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -211,7 +211,7 @@ func (a *CSVDownloadsApiService) FindCsvDownloads(ctx context.Context, localVarO
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -226,18 +226,18 @@ func (a *CSVDownloadsApiService) FindCsvDownloads(ctx context.Context, localVarO
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CSVDownloadsApiService Get a single submitted CSV download request.
+CSVDownloadsApiService Retrieve a CSV download
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the CSV download.
-@return InlineResponse20041
+@return CsvDownloadResponse
 */
-func (a *CSVDownloadsApiService) RetrieveCsvDownload(ctx context.Context, id string) (InlineResponse20041, *http.Response, error) {
+func (a *CSVDownloadsApiService) RetrieveCsvDownload(ctx context.Context, id string) (CsvDownloadResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20041
+		localVarReturnValue CsvDownloadResponse
 	)
 
 	// create path and map variables
@@ -295,7 +295,7 @@ func (a *CSVDownloadsApiService) RetrieveCsvDownload(ctx context.Context, id str
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20041
+			var v CsvDownloadResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -305,7 +305,7 @@ func (a *CSVDownloadsApiService) RetrieveCsvDownload(ctx context.Context, id str
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

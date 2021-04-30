@@ -10,6 +10,6 @@
 package telnyx
 
 type InlineResponse2006 struct {
-	Data []CallControlApplication `json:"data,omitempty"`
-	Meta *InlineResponse20033Meta `json:"meta,omitempty"`
+	Data []DocServiceDocument `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

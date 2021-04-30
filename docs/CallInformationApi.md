@@ -4,13 +4,13 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**RetrieveCallStatus**](CallInformationApi.md#RetrieveCallStatus) | **Get** /calls/{call_control_id} | Retrieve call status
+[**RetrieveCallStatus**](CallInformationApi.md#RetrieveCallStatus) | **Get** /calls/{call_control_id} | Retrieve a call status
 
 # **RetrieveCallStatus**
-> InlineResponse2008 RetrieveCallStatus(ctx, callControlId)
-Retrieve call status
+> RetrieveCallStatusResponse RetrieveCallStatus(ctx, callControlId)
+Retrieve a call status
 
-Returns the status of a call.
+Returns the status of a call (data is available 10 minutes after call ended).
 
 ### Required Parameters
 
@@ -21,11 +21,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](inline_response_200_8.md)
+[**RetrieveCallStatusResponse**](Retrieve Call Status Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -4,15 +4,15 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateLongCodeMessage**](MessagesApi.md#CreateLongCodeMessage) | **Post** /messages/long_code | Send a Long Code message
+[**CreateLongCodeMessage**](MessagesApi.md#CreateLongCodeMessage) | **Post** /messages/long_code | Send a long code message
 [**CreateMessage**](MessagesApi.md#CreateMessage) | **Post** /messages | Send a message
-[**CreateNumberPoolMessage**](MessagesApi.md#CreateNumberPoolMessage) | **Post** /messages/number_pool | Send a message using Number Pool
-[**CreateShortCodeMessage**](MessagesApi.md#CreateShortCodeMessage) | **Post** /messages/short_code | Send a Short Code message
+[**CreateNumberPoolMessage**](MessagesApi.md#CreateNumberPoolMessage) | **Post** /messages/number_pool | Send a message using number pool
+[**CreateShortCodeMessage**](MessagesApi.md#CreateShortCodeMessage) | **Post** /messages/short_code | Send a short code message
 [**RetrieveMessage**](MessagesApi.md#RetrieveMessage) | **Get** /messages/{id} | Retrieve a message
 
 # **CreateLongCodeMessage**
-> InlineResponse20021 CreateLongCodeMessage(ctx, optional)
-Send a Long Code message
+> MessageResponse CreateLongCodeMessage(ctx, optional)
+Send a long code message
 
 ### Required Parameters
 
@@ -25,15 +25,15 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a MessagesApiCreateLongCodeMessageOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of Body14**](Body14.md)| Message payload | 
+ **body** | [**optional.Interface of CreateLongCodeMessageRequest**](CreateLongCodeMessageRequest.md)| Message payload | 
 
 ### Return type
 
-[**InlineResponse20021**](inline_response_200_21.md)
+[**MessageResponse**](Message Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -43,7 +43,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateMessage**
-> InlineResponse20021 CreateMessage(ctx, optional)
+> MessageResponse CreateMessage(ctx, optional)
 Send a message
 
 Send a message with a Phone Number, Alphanumeric Sender ID, Short Code or Number Pool.  This endpoint allows you to send a message with any messaging resource. Current messaging resources include: long-code, short-code, number-pool, and alphanumeric-sender-id. 
@@ -59,15 +59,15 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a MessagesApiCreateMessageOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of Body13**](Body13.md)| Message payload | 
+ **body** | [**optional.Interface of CreateMessageRequest**](CreateMessageRequest.md)| Message payload | 
 
 ### Return type
 
-[**InlineResponse20021**](inline_response_200_21.md)
+[**MessageResponse**](Message Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -77,8 +77,8 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateNumberPoolMessage**
-> InlineResponse20021 CreateNumberPoolMessage(ctx, optional)
-Send a message using Number Pool
+> MessageResponse CreateNumberPoolMessage(ctx, optional)
+Send a message using number pool
 
 ### Required Parameters
 
@@ -91,15 +91,15 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a MessagesApiCreateNumberPoolMessageOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of Body15**](Body15.md)| Message payload | 
+ **body** | [**optional.Interface of CreateNumberPoolMessageRequest**](CreateNumberPoolMessageRequest.md)| Message payload | 
 
 ### Return type
 
-[**InlineResponse20021**](inline_response_200_21.md)
+[**MessageResponse**](Message Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -109,8 +109,8 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateShortCodeMessage**
-> InlineResponse20021 CreateShortCodeMessage(ctx, optional)
-Send a Short Code message
+> MessageResponse CreateShortCodeMessage(ctx, optional)
+Send a short code message
 
 ### Required Parameters
 
@@ -123,15 +123,15 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a MessagesApiCreateShortCodeMessageOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of Body16**](Body16.md)| Message payload | 
+ **body** | [**optional.Interface of CreateShortCodeMessageRequest**](CreateShortCodeMessageRequest.md)| Message payload | 
 
 ### Return type
 
-[**InlineResponse20021**](inline_response_200_21.md)
+[**MessageResponse**](Message Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -141,8 +141,10 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RetrieveMessage**
-> InlineResponse20021 RetrieveMessage(ctx, id)
+> MessageResponse RetrieveMessage(ctx, id)
 Retrieve a message
+
+Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/docs/api/v1/reports/MDR-Reports)
 
 ### Required Parameters
 
@@ -153,11 +155,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20021**](inline_response_200_21.md)
+[**MessageResponse**](Message Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -10,7 +10,6 @@
 package telnyx
 
 type InlineResponse200 struct {
-	// Successfully registered SIM cards.
-	Data []AllOfinlineResponse200DataItems `json:"data,omitempty"`
-	Errors []InlineResponse20021DataErrors `json:"errors,omitempty"`
+	Data []Address `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

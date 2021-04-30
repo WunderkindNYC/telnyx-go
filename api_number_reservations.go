@@ -27,19 +27,19 @@ var (
 
 type NumberReservationsApiService service
 /*
-NumberReservationsApiService Create a Phone Number Reservation
-Creates a Phone Number Reservation for multiple numbers
+NumberReservationsApiService Create a number reservation
+Creates a Phone Number Reservation for multiple numbers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return InlineResponse20036
+@return NumberReservationResponse
 */
-func (a *NumberReservationsApiService) CreateNumberReservations(ctx context.Context, body Body26) (InlineResponse20036, *http.Response, error) {
+func (a *NumberReservationsApiService) CreateNumberReservation(ctx context.Context, body CreateNumberReservationRequest) (NumberReservationResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20036
+		localVarReturnValue NumberReservationResponse
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *NumberReservationsApiService) CreateNumberReservations(ctx context.Cont
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20036
+			var v NumberReservationResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -108,7 +108,7 @@ func (a *NumberReservationsApiService) CreateNumberReservations(ctx context.Cont
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -123,19 +123,19 @@ func (a *NumberReservationsApiService) CreateNumberReservations(ctx context.Cont
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberReservationsApiService Extend a Phone Number Reservation
-Extends reservation expiry time on all phone numbers
+NumberReservationsApiService Extend a number reservation
+Extends reservation expiry time on all phone numbers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param numberReservationId The number reservation id
-@return InlineResponse20036
+ * @param numberReservationId The number reservation ID.
+@return NumberReservationResponse
 */
-func (a *NumberReservationsApiService) ExtendNumberReservationExpiryTime(ctx context.Context, numberReservationId string) (InlineResponse20036, *http.Response, error) {
+func (a *NumberReservationsApiService) ExtendNumberReservationExpiryTime(ctx context.Context, numberReservationId string) (NumberReservationResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20036
+		localVarReturnValue NumberReservationResponse
 	)
 
 	// create path and map variables
@@ -193,7 +193,7 @@ func (a *NumberReservationsApiService) ExtendNumberReservationExpiryTime(ctx con
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20036
+			var v NumberReservationResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -203,7 +203,7 @@ func (a *NumberReservationsApiService) ExtendNumberReservationExpiryTime(ctx con
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -218,16 +218,18 @@ func (a *NumberReservationsApiService) ExtendNumberReservationExpiryTime(ctx con
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberReservationsApiService Retrieve multiple Number Reservations
-Gets a paginated list of Phone Number Reservations
+NumberReservationsApiService List number reservations
+Gets a paginated list of phone number reservations.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *NumberReservationsApiListNumberReservationsOpts - Optional Parameters:
-     * @param "FilterStatus" (optional.String) -  Filter number reservations by status
-     * @param "FilterCreatedAtGt" (optional.String) -  Filter number reservations later than this value
-     * @param "FilterCreatedAtLt" (optional.String) -  Filter number reservations earlier than this value
-     * @param "FilterPhoneNumbersPhoneNumber" (optional.String) -  Filter number reservations having these phone numbers
-     * @param "FilterCustomerReference" (optional.String) -  Filter number reservations via the customer reference set
-@return InlineResponse20035
+     * @param "FilterStatus" (optional.String) -  Filter number reservations by status.
+     * @param "FilterCreatedAtGt" (optional.String) -  Filter number reservations later than this value.
+     * @param "FilterCreatedAtLt" (optional.String) -  Filter number reservations earlier than this value.
+     * @param "FilterPhoneNumbersPhoneNumber" (optional.String) -  Filter number reservations having these phone numbers.
+     * @param "FilterCustomerReference" (optional.String) -  Filter number reservations via the customer reference set.
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+@return ListNumberReservationsResponse
 */
 
 type NumberReservationsApiListNumberReservationsOpts struct {
@@ -236,15 +238,17 @@ type NumberReservationsApiListNumberReservationsOpts struct {
     FilterCreatedAtLt optional.String
     FilterPhoneNumbersPhoneNumber optional.String
     FilterCustomerReference optional.String
+    PageNumber optional.Int32
+    PageSize optional.Int32
 }
 
-func (a *NumberReservationsApiService) ListNumberReservations(ctx context.Context, localVarOptionals *NumberReservationsApiListNumberReservationsOpts) (InlineResponse20035, *http.Response, error) {
+func (a *NumberReservationsApiService) ListNumberReservations(ctx context.Context, localVarOptionals *NumberReservationsApiListNumberReservationsOpts) (ListNumberReservationsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20035
+		localVarReturnValue ListNumberReservationsResponse
 	)
 
 	// create path and map variables
@@ -268,6 +272,12 @@ func (a *NumberReservationsApiService) ListNumberReservations(ctx context.Contex
 	}
 	if localVarOptionals != nil && localVarOptionals.FilterCustomerReference.IsSet() {
 		localVarQueryParams.Add("filter[customer_reference]", parameterToString(localVarOptionals.FilterCustomerReference.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -316,7 +326,7 @@ func (a *NumberReservationsApiService) ListNumberReservations(ctx context.Contex
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20035
+			var v ListNumberReservationsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -326,7 +336,7 @@ func (a *NumberReservationsApiService) ListNumberReservations(ctx context.Contex
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -341,19 +351,19 @@ func (a *NumberReservationsApiService) ListNumberReservations(ctx context.Contex
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberReservationsApiService Retrieve a Single Phone Number Reservation
-Gets a single Phone Number Reservation
+NumberReservationsApiService Retrieve a number reservation
+Gets a single phone number reservation.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param numberReservationId The number reservation id
-@return InlineResponse20036
+ * @param numberReservationId The number reservation ID.
+@return NumberReservationResponse
 */
-func (a *NumberReservationsApiService) RetrieveNumberReservation(ctx context.Context, numberReservationId string) (InlineResponse20036, *http.Response, error) {
+func (a *NumberReservationsApiService) RetrieveNumberReservation(ctx context.Context, numberReservationId string) (NumberReservationResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20036
+		localVarReturnValue NumberReservationResponse
 	)
 
 	// create path and map variables
@@ -411,7 +421,7 @@ func (a *NumberReservationsApiService) RetrieveNumberReservation(ctx context.Con
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20036
+			var v NumberReservationResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -421,7 +431,7 @@ func (a *NumberReservationsApiService) RetrieveNumberReservation(ctx context.Con
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

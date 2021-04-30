@@ -10,10 +10,10 @@
 package telnyx
 
 type RejectRequest struct {
+	// Cause for call rejection.
+	Cause string `json:"cause"`
 	// Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
 	ClientState string `json:"client_state,omitempty"`
 	// Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
 	CommandId string `json:"command_id,omitempty"`
-	// Cause for call rejection.
-	Cause string `json:"cause,omitempty"`
 }

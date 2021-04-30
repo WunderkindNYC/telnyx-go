@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse201 struct {
-	Data *CallControlApplication `json:"data,omitempty"`
+	Data *InlineResponse201Data `json:"data,omitempty"`
 }

@@ -30,15 +30,15 @@ type BillingGroupsApiService service
 BillingGroupsApiService Create a billing group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body New billing group object
-@return InlineResponse2005
+@return InlineResponse2004
 */
-func (a *BillingGroupsApiService) CreateBillingGroup(ctx context.Context, body Body2) (InlineResponse2005, *http.Response, error) {
+func (a *BillingGroupsApiService) CreateBillingGroup(ctx context.Context, body NewBillingGroup) (InlineResponse2004, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2005
+		localVarReturnValue InlineResponse2004
 	)
 
 	// create path and map variables
@@ -97,7 +97,7 @@ func (a *BillingGroupsApiService) CreateBillingGroup(ctx context.Context, body B
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2005
+			var v InlineResponse2004
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -107,7 +107,7 @@ func (a *BillingGroupsApiService) CreateBillingGroup(ctx context.Context, body B
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -125,15 +125,15 @@ func (a *BillingGroupsApiService) CreateBillingGroup(ctx context.Context, body B
 BillingGroupsApiService Delete a billing group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the billing group
-@return InlineResponse2005
+@return InlineResponse2004
 */
-func (a *BillingGroupsApiService) DeleteBillingGroup(ctx context.Context, id string) (InlineResponse2005, *http.Response, error) {
+func (a *BillingGroupsApiService) DeleteBillingGroup(ctx context.Context, id string) (InlineResponse2004, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2005
+		localVarReturnValue InlineResponse2004
 	)
 
 	// create path and map variables
@@ -191,7 +191,7 @@ func (a *BillingGroupsApiService) DeleteBillingGroup(ctx context.Context, id str
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2005
+			var v InlineResponse2004
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -201,7 +201,7 @@ func (a *BillingGroupsApiService) DeleteBillingGroup(ctx context.Context, id str
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -221,7 +221,7 @@ BillingGroupsApiService List all billing groups
  * @param optional nil or *BillingGroupsApiListBillingGroupsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-@return InlineResponse2004
+@return InlineResponse2003
 */
 
 type BillingGroupsApiListBillingGroupsOpts struct {
@@ -229,13 +229,13 @@ type BillingGroupsApiListBillingGroupsOpts struct {
     PageSize optional.Int32
 }
 
-func (a *BillingGroupsApiService) ListBillingGroups(ctx context.Context, localVarOptionals *BillingGroupsApiListBillingGroupsOpts) (InlineResponse2004, *http.Response, error) {
+func (a *BillingGroupsApiService) ListBillingGroups(ctx context.Context, localVarOptionals *BillingGroupsApiListBillingGroupsOpts) (InlineResponse2003, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2004
+		localVarReturnValue InlineResponse2003
 	)
 
 	// create path and map variables
@@ -298,7 +298,7 @@ func (a *BillingGroupsApiService) ListBillingGroups(ctx context.Context, localVa
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2004
+			var v InlineResponse2003
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -308,7 +308,7 @@ func (a *BillingGroupsApiService) ListBillingGroups(ctx context.Context, localVa
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -326,15 +326,15 @@ func (a *BillingGroupsApiService) ListBillingGroups(ctx context.Context, localVa
 BillingGroupsApiService Retrieve a billing group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the billing group
-@return InlineResponse2005
+@return InlineResponse2004
 */
-func (a *BillingGroupsApiService) RetrieveBillingGroup(ctx context.Context, id string) (InlineResponse2005, *http.Response, error) {
+func (a *BillingGroupsApiService) RetrieveBillingGroup(ctx context.Context, id string) (InlineResponse2004, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2005
+		localVarReturnValue InlineResponse2004
 	)
 
 	// create path and map variables
@@ -392,7 +392,7 @@ func (a *BillingGroupsApiService) RetrieveBillingGroup(ctx context.Context, id s
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2005
+			var v InlineResponse2004
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -402,7 +402,7 @@ func (a *BillingGroupsApiService) RetrieveBillingGroup(ctx context.Context, id s
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -421,15 +421,15 @@ BillingGroupsApiService Update a billing group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Update billing group object
  * @param id The id of the billing group
-@return InlineResponse2005
+@return InlineResponse2004
 */
-func (a *BillingGroupsApiService) UpdateBillingGroup(ctx context.Context, body Body3, id string) (InlineResponse2005, *http.Response, error) {
+func (a *BillingGroupsApiService) UpdateBillingGroup(ctx context.Context, body UpdateBillingGroup, id string) (InlineResponse2004, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2005
+		localVarReturnValue InlineResponse2004
 	)
 
 	// create path and map variables
@@ -489,7 +489,7 @@ func (a *BillingGroupsApiService) UpdateBillingGroup(ctx context.Context, body B
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2005
+			var v InlineResponse2004
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -499,7 +499,7 @@ func (a *BillingGroupsApiService) UpdateBillingGroup(ctx context.Context, body B
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

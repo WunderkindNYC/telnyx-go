@@ -27,25 +27,25 @@ var (
 
 type FQDNsApiService service
 /*
-FQDNsApiService Create an FQDN
+FQDNsApiService Create an Fqdn
 Create a new FQDN object.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *FQDNsApiAddFQDNOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body6) - 
-@return InlineResponse2013
+ * @param optional nil or *FQDNsApiCreateFqdnOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of CreateFqdnRequest) - 
+@return FqdnResponse
 */
 
-type FQDNsApiAddFQDNOpts struct {
+type FQDNsApiCreateFqdnOpts struct {
     Body optional.Interface
 }
 
-func (a *FQDNsApiService) AddFQDN(ctx context.Context, localVarOptionals *FQDNsApiAddFQDNOpts) (InlineResponse2013, *http.Response, error) {
+func (a *FQDNsApiService) CreateFqdn(ctx context.Context, localVarOptionals *FQDNsApiCreateFqdnOpts) (FqdnResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2013
+		localVarReturnValue FqdnResponse
 	)
 
 	// create path and map variables
@@ -108,7 +108,7 @@ func (a *FQDNsApiService) AddFQDN(ctx context.Context, localVarOptionals *FQDNsA
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse2013
+			var v FqdnResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -123,19 +123,19 @@ func (a *FQDNsApiService) AddFQDN(ctx context.Context, localVarOptionals *FQDNsA
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNsApiService Delete an FQDN
+FQDNsApiService Delete an Fqdn
 Delete an FQDN.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse2013
+@return FqdnResponse
 */
-func (a *FQDNsApiService) DeleteFQDN(ctx context.Context, id string) (InlineResponse2013, *http.Response, error) {
+func (a *FQDNsApiService) DeleteFqdn(ctx context.Context, id string) (FqdnResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2013
+		localVarReturnValue FqdnResponse
 	)
 
 	// create path and map variables
@@ -193,7 +193,7 @@ func (a *FQDNsApiService) DeleteFQDN(ctx context.Context, id string) (InlineResp
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2013
+			var v FqdnResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -208,20 +208,20 @@ func (a *FQDNsApiService) DeleteFQDN(ctx context.Context, id string) (InlineResp
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNsApiService Get all FQDNs
+FQDNsApiService List Fqdns
 Get all FQDNs belonging to the user that match the given filters.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *FQDNsApiFQDNsGetOpts - Optional Parameters:
+ * @param optional nil or *FQDNsApiListFqdnsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
      * @param "FilterConnectionId" (optional.String) -  ID of the FQDN connection to which the FQDN belongs.
      * @param "FilterFqdn" (optional.String) -  FQDN represented by the resource.
      * @param "FilterPort" (optional.Int32) -  Port to use when connecting to the FQDN.
      * @param "FilterDnsRecordType" (optional.String) -  DNS record type used by the FQDN.
-@return InlineResponse20017
+@return ListFqdnsResponse
 */
 
-type FQDNsApiFQDNsGetOpts struct {
+type FQDNsApiListFqdnsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
     FilterConnectionId optional.String
@@ -230,13 +230,13 @@ type FQDNsApiFQDNsGetOpts struct {
     FilterDnsRecordType optional.String
 }
 
-func (a *FQDNsApiService) FQDNsGet(ctx context.Context, localVarOptionals *FQDNsApiFQDNsGetOpts) (InlineResponse20017, *http.Response, error) {
+func (a *FQDNsApiService) ListFqdns(ctx context.Context, localVarOptionals *FQDNsApiListFqdnsOpts) (ListFqdnsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20017
+		localVarReturnValue ListFqdnsResponse
 	)
 
 	// create path and map variables
@@ -311,7 +311,7 @@ func (a *FQDNsApiService) FQDNsGet(ctx context.Context, localVarOptionals *FQDNs
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20017
+			var v ListFqdnsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -326,19 +326,19 @@ func (a *FQDNsApiService) FQDNsGet(ctx context.Context, localVarOptionals *FQDNs
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNsApiService Get FQDN
+FQDNsApiService Retrieve an Fqdn
 Return the details regarding a specific FQDN.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse2013
+@return FqdnResponse
 */
-func (a *FQDNsApiService) GetFQDNDetails(ctx context.Context, id string) (InlineResponse2013, *http.Response, error) {
+func (a *FQDNsApiService) RetrieveFqdn(ctx context.Context, id string) (FqdnResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2013
+		localVarReturnValue FqdnResponse
 	)
 
 	// create path and map variables
@@ -396,7 +396,7 @@ func (a *FQDNsApiService) GetFQDNDetails(ctx context.Context, id string) (Inline
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2013
+			var v FqdnResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -411,26 +411,26 @@ func (a *FQDNsApiService) GetFQDNDetails(ctx context.Context, id string) (Inline
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-FQDNsApiService Update FQDN
+FQDNsApiService Update an Fqdn
 Update the details of a specific FQDN.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
- * @param optional nil or *FQDNsApiUpdateFQDNOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Body7) - 
-@return InlineResponse2013
+ * @param optional nil or *FQDNsApiUpdateFqdnOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of UpdateFqdnRequest) - 
+@return FqdnResponse
 */
 
-type FQDNsApiUpdateFQDNOpts struct {
+type FQDNsApiUpdateFqdnOpts struct {
     Body optional.Interface
 }
 
-func (a *FQDNsApiService) UpdateFQDN(ctx context.Context, id string, localVarOptionals *FQDNsApiUpdateFQDNOpts) (InlineResponse2013, *http.Response, error) {
+func (a *FQDNsApiService) UpdateFqdn(ctx context.Context, id string, localVarOptionals *FQDNsApiUpdateFqdnOpts) (FqdnResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2013
+		localVarReturnValue FqdnResponse
 	)
 
 	// create path and map variables
@@ -494,7 +494,7 @@ func (a *FQDNsApiService) UpdateFQDN(ctx context.Context, id string, localVarOpt
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2013
+			var v FqdnResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

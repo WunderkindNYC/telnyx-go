@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse20041 struct {
-	Data []InlineResponse20041Data `json:"data,omitempty"`
+	Data *SimCardPublicIp `json:"data,omitempty"`
 }

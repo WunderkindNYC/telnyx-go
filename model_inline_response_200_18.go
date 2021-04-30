@@ -10,6 +10,6 @@
 package telnyx
 
 type InlineResponse20018 struct {
-	Data []IpConnection `json:"data,omitempty"`
-	Meta *InlineResponse20033Meta `json:"meta,omitempty"`
+	Data []NotificationEvent `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

@@ -10,6 +10,5 @@
 package telnyx
 
 type InlineResponse2004 struct {
-	Data []InlineResponse2005Data `json:"data,omitempty"`
-	Meta *InlineResponse20033Meta `json:"meta,omitempty"`
+	Data *BillingGroup `json:"data,omitempty"`
 }

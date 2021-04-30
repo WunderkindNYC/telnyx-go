@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse2009 struct {
-	Data *InlineResponse2009Data `json:"data,omitempty"`
+	Data []Fax `json:"data,omitempty"`
+	Meta *interface{} `json:"meta,omitempty"`
 }

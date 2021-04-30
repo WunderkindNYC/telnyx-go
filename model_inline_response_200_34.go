@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse20034 struct {
-	Data *InlineResponse20034Data `json:"data,omitempty"`
+	Data []PrivateWirelessGateway `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

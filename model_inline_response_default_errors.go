@@ -11,8 +11,8 @@ package telnyx
 
 type InlineResponseDefaultErrors struct {
 	Code string `json:"code"`
-	Title string `json:"title"`
 	Detail string `json:"detail,omitempty"`
-	Source *InlineResponseDefaultSource `json:"source,omitempty"`
-	Meta *InlineResponseDefaultMeta `json:"meta,omitempty"`
+	Meta *interface{} `json:"meta,omitempty"`
+	Source *ErrorSource `json:"source,omitempty"`
+	Title string `json:"title"`
 }

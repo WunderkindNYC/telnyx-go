@@ -30,15 +30,15 @@ type MessagingProfilesApiService service
 MessagingProfilesApiService Create a messaging profile
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body New Messaging Profile object
-@return InlineResponse20028
+@return MessagingProfileResponse
 */
-func (a *MessagingProfilesApiService) CreateMessagingProfile(ctx context.Context, body Body20) (InlineResponse20028, *http.Response, error) {
+func (a *MessagingProfilesApiService) CreateMessagingProfile(ctx context.Context, body CreateMessagingProfileRequest) (MessagingProfileResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20028
+		localVarReturnValue MessagingProfileResponse
 	)
 
 	// create path and map variables
@@ -97,7 +97,7 @@ func (a *MessagingProfilesApiService) CreateMessagingProfile(ctx context.Context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20028
+			var v MessagingProfileResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -107,7 +107,7 @@ func (a *MessagingProfilesApiService) CreateMessagingProfile(ctx context.Context
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -125,15 +125,15 @@ func (a *MessagingProfilesApiService) CreateMessagingProfile(ctx context.Context
 MessagingProfilesApiService Delete a messaging profile
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the messaging profile to retrieve
-@return InlineResponse20028
+@return MessagingProfileResponse
 */
-func (a *MessagingProfilesApiService) DeleteMessagingProfile(ctx context.Context, id string) (InlineResponse20028, *http.Response, error) {
+func (a *MessagingProfilesApiService) DeleteMessagingProfile(ctx context.Context, id string) (MessagingProfileResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20028
+		localVarReturnValue MessagingProfileResponse
 	)
 
 	// create path and map variables
@@ -191,7 +191,7 @@ func (a *MessagingProfilesApiService) DeleteMessagingProfile(ctx context.Context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20028
+			var v MessagingProfileResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -201,7 +201,7 @@ func (a *MessagingProfilesApiService) DeleteMessagingProfile(ctx context.Context
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -216,13 +216,130 @@ func (a *MessagingProfilesApiService) DeleteMessagingProfile(ctx context.Context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-MessagingProfilesApiService List all phone numbers associated with a messaging profile
+MessagingProfilesApiService List messaging profile metrics
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *MessagingProfilesApiListMessagingProfileMetricsOpts - Optional Parameters:
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+     * @param "Id" (optional.Interface of string) -  The id of the messaging profile(s) to retrieve
+     * @param "TimeFrame" (optional.String) -  The timeframe for which you&#x27;d like to retrieve metrics.
+@return ListMessagingProfileMetricsResponse
+*/
+
+type MessagingProfilesApiListMessagingProfileMetricsOpts struct {
+    PageNumber optional.Int32
+    PageSize optional.Int32
+    Id optional.Interface
+    TimeFrame optional.String
+}
+
+func (a *MessagingProfilesApiService) ListMessagingProfileMetrics(ctx context.Context, localVarOptionals *MessagingProfilesApiListMessagingProfileMetricsOpts) (ListMessagingProfileMetricsResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue ListMessagingProfileMetricsResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/messaging_profile_metrics"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Id.IsSet() {
+		localVarQueryParams.Add("id", parameterToString(localVarOptionals.Id.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeFrame.IsSet() {
+		localVarQueryParams.Add("time_frame", parameterToString(localVarOptionals.TimeFrame.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ListMessagingProfileMetricsResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+MessagingProfilesApiService List phone numbers associated with a messaging profile
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the messaging profile to retrieve
  * @param optional nil or *MessagingProfilesApiListMessagingProfilePhoneNumbersOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-@return InlineResponse20025
+@return ListMessagingProfilePhoneNumbersResponse
 */
 
 type MessagingProfilesApiListMessagingProfilePhoneNumbersOpts struct {
@@ -230,13 +347,13 @@ type MessagingProfilesApiListMessagingProfilePhoneNumbersOpts struct {
     PageSize optional.Int32
 }
 
-func (a *MessagingProfilesApiService) ListMessagingProfilePhoneNumbers(ctx context.Context, id string, localVarOptionals *MessagingProfilesApiListMessagingProfilePhoneNumbersOpts) (InlineResponse20025, *http.Response, error) {
+func (a *MessagingProfilesApiService) ListMessagingProfilePhoneNumbers(ctx context.Context, id string, localVarOptionals *MessagingProfilesApiListMessagingProfilePhoneNumbersOpts) (ListMessagingProfilePhoneNumbersResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20025
+		localVarReturnValue ListMessagingProfilePhoneNumbersResponse
 	)
 
 	// create path and map variables
@@ -300,7 +417,7 @@ func (a *MessagingProfilesApiService) ListMessagingProfilePhoneNumbers(ctx conte
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20025
+			var v ListMessagingProfilePhoneNumbersResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -310,7 +427,7 @@ func (a *MessagingProfilesApiService) ListMessagingProfilePhoneNumbers(ctx conte
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -325,13 +442,13 @@ func (a *MessagingProfilesApiService) ListMessagingProfilePhoneNumbers(ctx conte
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-MessagingProfilesApiService List all short codes associated with a messaging profile
+MessagingProfilesApiService List short codes associated with a messaging profile
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the messaging profile to retrieve
  * @param optional nil or *MessagingProfilesApiListMessagingProfileShortCodesOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-@return InlineResponse20029
+@return ListMessagingProfileShortCodesResponse
 */
 
 type MessagingProfilesApiListMessagingProfileShortCodesOpts struct {
@@ -339,13 +456,13 @@ type MessagingProfilesApiListMessagingProfileShortCodesOpts struct {
     PageSize optional.Int32
 }
 
-func (a *MessagingProfilesApiService) ListMessagingProfileShortCodes(ctx context.Context, id string, localVarOptionals *MessagingProfilesApiListMessagingProfileShortCodesOpts) (InlineResponse20029, *http.Response, error) {
+func (a *MessagingProfilesApiService) ListMessagingProfileShortCodes(ctx context.Context, id string, localVarOptionals *MessagingProfilesApiListMessagingProfileShortCodesOpts) (ListMessagingProfileShortCodesResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20029
+		localVarReturnValue ListMessagingProfileShortCodesResponse
 	)
 
 	// create path and map variables
@@ -409,7 +526,7 @@ func (a *MessagingProfilesApiService) ListMessagingProfileShortCodes(ctx context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20029
+			var v ListMessagingProfileShortCodesResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -419,7 +536,7 @@ func (a *MessagingProfilesApiService) ListMessagingProfileShortCodes(ctx context
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -434,12 +551,12 @@ func (a *MessagingProfilesApiService) ListMessagingProfileShortCodes(ctx context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-MessagingProfilesApiService List all messaging profiles
+MessagingProfilesApiService List messaging profiles
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *MessagingProfilesApiListMessagingProfilesOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-@return InlineResponse20027
+@return ListMessagingProfilesResponse
 */
 
 type MessagingProfilesApiListMessagingProfilesOpts struct {
@@ -447,13 +564,13 @@ type MessagingProfilesApiListMessagingProfilesOpts struct {
     PageSize optional.Int32
 }
 
-func (a *MessagingProfilesApiService) ListMessagingProfiles(ctx context.Context, localVarOptionals *MessagingProfilesApiListMessagingProfilesOpts) (InlineResponse20027, *http.Response, error) {
+func (a *MessagingProfilesApiService) ListMessagingProfiles(ctx context.Context, localVarOptionals *MessagingProfilesApiListMessagingProfilesOpts) (ListMessagingProfilesResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20027
+		localVarReturnValue ListMessagingProfilesResponse
 	)
 
 	// create path and map variables
@@ -516,7 +633,7 @@ func (a *MessagingProfilesApiService) ListMessagingProfiles(ctx context.Context,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20027
+			var v ListMessagingProfilesResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -526,7 +643,7 @@ func (a *MessagingProfilesApiService) ListMessagingProfiles(ctx context.Context,
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -544,15 +661,15 @@ func (a *MessagingProfilesApiService) ListMessagingProfiles(ctx context.Context,
 MessagingProfilesApiService Retrieve a messaging profile
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the messaging profile to retrieve
-@return InlineResponse20028
+@return MessagingProfileResponse
 */
-func (a *MessagingProfilesApiService) RetrieveMessagingProfile(ctx context.Context, id string) (InlineResponse20028, *http.Response, error) {
+func (a *MessagingProfilesApiService) RetrieveMessagingProfile(ctx context.Context, id string) (MessagingProfileResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20028
+		localVarReturnValue MessagingProfileResponse
 	)
 
 	// create path and map variables
@@ -610,7 +727,7 @@ func (a *MessagingProfilesApiService) RetrieveMessagingProfile(ctx context.Conte
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20028
+			var v MessagingProfileResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -620,7 +737,111 @@ func (a *MessagingProfilesApiService) RetrieveMessagingProfile(ctx context.Conte
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+MessagingProfilesApiService Retrieve messaging profile metrics
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param id The id of the messaging profile to retrieve
+ * @param optional nil or *MessagingProfilesApiRetrieveMessagingProfileDetailedMetricsOpts - Optional Parameters:
+     * @param "TimeFrame" (optional.String) -  The timeframe for which you&#x27;d like to retrieve metrics.
+@return RetrieveMessagingProfileMetricsResponse
+*/
+
+type MessagingProfilesApiRetrieveMessagingProfileDetailedMetricsOpts struct {
+    TimeFrame optional.String
+}
+
+func (a *MessagingProfilesApiService) RetrieveMessagingProfileDetailedMetrics(ctx context.Context, id string, localVarOptionals *MessagingProfilesApiRetrieveMessagingProfileDetailedMetricsOpts) (RetrieveMessagingProfileMetricsResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue RetrieveMessagingProfileMetricsResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/messaging_profiles/{id}/metrics"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.TimeFrame.IsSet() {
+		localVarQueryParams.Add("time_frame", parameterToString(localVarOptionals.TimeFrame.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v RetrieveMessagingProfileMetricsResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -639,15 +860,15 @@ MessagingProfilesApiService Update a messaging profile
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body New Messaging Profile object
  * @param id The id of the messaging profile to retrieve
-@return InlineResponse20028
+@return MessagingProfileResponse
 */
-func (a *MessagingProfilesApiService) UpdateMessagingProfile(ctx context.Context, body Body21, id string) (InlineResponse20028, *http.Response, error) {
+func (a *MessagingProfilesApiService) UpdateMessagingProfile(ctx context.Context, body UpdateMessagingProfileRequest, id string) (MessagingProfileResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20028
+		localVarReturnValue MessagingProfileResponse
 	)
 
 	// create path and map variables
@@ -707,7 +928,7 @@ func (a *MessagingProfilesApiService) UpdateMessagingProfile(ctx context.Context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20028
+			var v MessagingProfileResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -717,7 +938,7 @@ func (a *MessagingProfilesApiService) UpdateMessagingProfile(ctx context.Context
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

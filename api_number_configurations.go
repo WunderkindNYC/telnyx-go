@@ -30,15 +30,15 @@ type NumberConfigurationsApiService service
 NumberConfigurationsApiService Delete a phone number
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse20046
+@return PhoneNumberResponse1
 */
-func (a *NumberConfigurationsApiService) DeletePhoneNumber(ctx context.Context, id string) (InlineResponse20046, *http.Response, error) {
+func (a *NumberConfigurationsApiService) DeletePhoneNumber(ctx context.Context, id string) (PhoneNumberResponse1, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20046
+		localVarReturnValue PhoneNumberResponse1
 	)
 
 	// create path and map variables
@@ -96,7 +96,7 @@ func (a *NumberConfigurationsApiService) DeletePhoneNumber(ctx context.Context, 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20046
+			var v PhoneNumberResponse1
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -106,7 +106,7 @@ func (a *NumberConfigurationsApiService) DeletePhoneNumber(ctx context.Context, 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -125,15 +125,15 @@ NumberConfigurationsApiService Enable emergency for a phone number
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param id Identifies the resource.
-@return InlineResponse20047
+@return PhoneNumberEnableEmergency
 */
-func (a *NumberConfigurationsApiService) EnableEmergencyPhoneNumber(ctx context.Context, body Body29, id string) (InlineResponse20047, *http.Response, error) {
+func (a *NumberConfigurationsApiService) EnableEmergencyPhoneNumber(ctx context.Context, body PhoneNumberEnableEmergencyRequest, id string) (PhoneNumberEnableEmergency, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20047
+		localVarReturnValue PhoneNumberEnableEmergency
 	)
 
 	// create path and map variables
@@ -193,7 +193,7 @@ func (a *NumberConfigurationsApiService) EnableEmergencyPhoneNumber(ctx context.
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20047
+			var v PhoneNumberEnableEmergency
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -203,7 +203,7 @@ func (a *NumberConfigurationsApiService) EnableEmergencyPhoneNumber(ctx context.
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 202 {
-			var v InlineResponse20047
+			var v PhoneNumberEnableEmergency
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -213,7 +213,7 @@ func (a *NumberConfigurationsApiService) EnableEmergencyPhoneNumber(ctx context.
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -228,155 +228,27 @@ func (a *NumberConfigurationsApiService) EnableEmergencyPhoneNumber(ctx context.
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberConfigurationsApiService List voice settings for multiple phone numbers
+NumberConfigurationsApiService List phone numbers
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *NumberConfigurationsApiFindPhoneNumberVoicesOpts - Optional Parameters:
+ * @param optional nil or *NumberConfigurationsApiListPhoneNumbersOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
+     * @param "FilterTag" (optional.String) -  Filter by phone number tags.
      * @param "FilterPhoneNumber" (optional.String) -  Filter by phone number. Requires at least three digits.              Non-numerical characters will result in no values being returned.
-     * @param "FilterConnectionNameContains" (optional.String) -  Filter contains connection name. Requires at least three characters
+     * @param "FilterStatus" (optional.String) -  Filter by phone number status.
+     * @param "FilterVoiceConnectionNameContains" (optional.String) -  Filter contains connection name. Requires at least three characters.
+     * @param "FilterVoiceConnectionNameStartsWith" (optional.String) -  Filter starts with connection name. Requires at least three characters.
+     * @param "FilterVoiceConnectionNameEndsWith" (optional.String) -  Filter ends with connection name. Requires at least three characters.
+     * @param "FilterVoiceConnectionNameEq" (optional.String) -  Filter by connection name.
      * @param "FilterUsagePaymentMethod" (optional.String) -  Filter by usage_payment_method.
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. If not given, results are sorted by created_at in descending order
-@return InlineResponse20045
+     * @param "FilterBillingGroupId" (optional.String) -  Filter by the billing_group_id associated with phone numbers. To filter to only phone numbers that have no billing group associated them, set the value of this filter to the string &#x27;null&#x27;.
+     * @param "FilterEmergencyAddressId" (optional.String) -  Filter by the emergency_address_id associated with phone numbers. To filter only phone numbers that have no emergency address associated with them, set the value of this filter to the string &#x27;null&#x27;.
+     * @param "FilterCustomerReference" (optional.String) -  Filter numbers via the customer_reference set.
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+@return ListPhoneNumbersResponse
 */
 
-type NumberConfigurationsApiFindPhoneNumberVoicesOpts struct {
-    PageNumber optional.Int32
-    PageSize optional.Int32
-    FilterPhoneNumber optional.String
-    FilterConnectionNameContains optional.String
-    FilterUsagePaymentMethod optional.String
-    Sort optional.String
-}
-
-func (a *NumberConfigurationsApiService) FindPhoneNumberVoices(ctx context.Context, localVarOptionals *NumberConfigurationsApiFindPhoneNumberVoicesOpts) (InlineResponse20045, *http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20045
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/phone_numbers/voice"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
-		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
-		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.FilterPhoneNumber.IsSet() {
-		localVarQueryParams.Add("filter[phone_number]", parameterToString(localVarOptionals.FilterPhoneNumber.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.FilterConnectionNameContains.IsSet() {
-		localVarQueryParams.Add("filter[connection_name][contains]", parameterToString(localVarOptionals.FilterConnectionNameContains.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.FilterUsagePaymentMethod.IsSet() {
-		localVarQueryParams.Add("filter[usage_payment_method]", parameterToString(localVarOptionals.FilterUsagePaymentMethod.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
-		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20045
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-/*
-NumberConfigurationsApiService List all phone numbers
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *NumberConfigurationsApiFindPhoneNumbersOpts - Optional Parameters:
-     * @param "PageNumber" (optional.Int32) -  The page number to load
-     * @param "PageSize" (optional.Int32) -  The size of the page
-     * @param "FilterTag" (optional.String) -  Filter by phone number tags
-     * @param "FilterPhoneNumber" (optional.String) -  Filter by phone number. Requires at least three digits.              Non-numerical characters will result in no values being returned.
-     * @param "FilterStatus" (optional.String) -  Filter by phone number status
-     * @param "FilterVoiceConnectionNameContains" (optional.String) -  Filter contains connection name. Requires at least three characters
-     * @param "FilterVoiceConnectionNameStartsWith" (optional.String) -  Filter starts with connection name. Requires at least three characters
-     * @param "FilterVoiceConnectionNameEndsWith" (optional.String) -  Filter ends with connection name. Requires at least three characters
-     * @param "FilterVoiceConnectionNameEq" (optional.String) -  Filter by connection name
-     * @param "FilterUsagePaymentMethod" (optional.String) -  Filter by usage_payment_method.
-     * @param "FilterMessagingMessagingProfileNameContains" (optional.String) -  Filter contains messaging profile name. Requires at least three characters
-     * @param "FilterMessagingMessagingProfileNameStartsWith" (optional.String) -  Filter starts with messaging profile name. Requires at least three characters
-     * @param "FilterMessagingMessagingProfileNameEndsWith" (optional.String) -  Filter ends with messaging profile name. Requires at least three characters
-     * @param "FilterMessagingMessagingProfileNameEq" (optional.String) -  Filter by messaging profile name
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. If not given, results are sorted by created_at in descending order
-@return InlineResponse20040
-*/
-
-type NumberConfigurationsApiFindPhoneNumbersOpts struct {
+type NumberConfigurationsApiListPhoneNumbersOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
     FilterTag optional.String
@@ -387,20 +259,19 @@ type NumberConfigurationsApiFindPhoneNumbersOpts struct {
     FilterVoiceConnectionNameEndsWith optional.String
     FilterVoiceConnectionNameEq optional.String
     FilterUsagePaymentMethod optional.String
-    FilterMessagingMessagingProfileNameContains optional.String
-    FilterMessagingMessagingProfileNameStartsWith optional.String
-    FilterMessagingMessagingProfileNameEndsWith optional.String
-    FilterMessagingMessagingProfileNameEq optional.String
+    FilterBillingGroupId optional.String
+    FilterEmergencyAddressId optional.String
+    FilterCustomerReference optional.String
     Sort optional.String
 }
 
-func (a *NumberConfigurationsApiService) FindPhoneNumbers(ctx context.Context, localVarOptionals *NumberConfigurationsApiFindPhoneNumbersOpts) (InlineResponse20040, *http.Response, error) {
+func (a *NumberConfigurationsApiService) ListPhoneNumbers(ctx context.Context, localVarOptionals *NumberConfigurationsApiListPhoneNumbersOpts) (ListPhoneNumbersResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20040
+		localVarReturnValue ListPhoneNumbersResponse
 	)
 
 	// create path and map variables
@@ -440,17 +311,14 @@ func (a *NumberConfigurationsApiService) FindPhoneNumbers(ctx context.Context, l
 	if localVarOptionals != nil && localVarOptionals.FilterUsagePaymentMethod.IsSet() {
 		localVarQueryParams.Add("filter[usage_payment_method]", parameterToString(localVarOptionals.FilterUsagePaymentMethod.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.FilterMessagingMessagingProfileNameContains.IsSet() {
-		localVarQueryParams.Add("filter[messaging.messaging_profile_name][contains]", parameterToString(localVarOptionals.FilterMessagingMessagingProfileNameContains.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.FilterBillingGroupId.IsSet() {
+		localVarQueryParams.Add("filter[billing_group_id]", parameterToString(localVarOptionals.FilterBillingGroupId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.FilterMessagingMessagingProfileNameStartsWith.IsSet() {
-		localVarQueryParams.Add("filter[messaging.messaging_profile_name][starts_with]", parameterToString(localVarOptionals.FilterMessagingMessagingProfileNameStartsWith.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.FilterEmergencyAddressId.IsSet() {
+		localVarQueryParams.Add("filter[emergency_address_id]", parameterToString(localVarOptionals.FilterEmergencyAddressId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.FilterMessagingMessagingProfileNameEndsWith.IsSet() {
-		localVarQueryParams.Add("filter[messaging.messaging_profile_name][ends_with]", parameterToString(localVarOptionals.FilterMessagingMessagingProfileNameEndsWith.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.FilterMessagingMessagingProfileNameEq.IsSet() {
-		localVarQueryParams.Add("filter[messaging.messaging_profile_name][eq]", parameterToString(localVarOptionals.FilterMessagingMessagingProfileNameEq.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.FilterCustomerReference.IsSet() {
+		localVarQueryParams.Add("filter[customer_reference]", parameterToString(localVarOptionals.FilterCustomerReference.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
@@ -502,7 +370,7 @@ func (a *NumberConfigurationsApiService) FindPhoneNumbers(ctx context.Context, l
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20040
+			var v ListPhoneNumbersResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -512,7 +380,7 @@ func (a *NumberConfigurationsApiService) FindPhoneNumbers(ctx context.Context, l
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -527,111 +395,26 @@ func (a *NumberConfigurationsApiService) FindPhoneNumbers(ctx context.Context, l
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberConfigurationsApiService Retrieve the settings for a phone number
+NumberConfigurationsApiService List phone numbers with messaging settings
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id Identifies the resource.
-@return InlineResponse20046
+ * @param optional nil or *NumberConfigurationsApiListPhoneNumbersWithMessagingSettingsOpts - Optional Parameters:
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+@return ListMessagingSettingsResponse
 */
-func (a *NumberConfigurationsApiService) GetPhoneNumber(ctx context.Context, id string) (InlineResponse20046, *http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20046
-	)
 
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/phone_numbers/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20046
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
+type NumberConfigurationsApiListPhoneNumbersWithMessagingSettingsOpts struct {
+    PageNumber optional.Int32
+    PageSize optional.Int32
 }
-/*
-NumberConfigurationsApiService List all phone numbers&#x27; messaging settings
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return InlineResponse20044
-*/
-func (a *NumberConfigurationsApiService) ListPhoneNumberMessagingSettings(ctx context.Context) (InlineResponse20044, *http.Response, error) {
+
+func (a *NumberConfigurationsApiService) ListPhoneNumbersWithMessagingSettings(ctx context.Context, localVarOptionals *NumberConfigurationsApiListPhoneNumbersWithMessagingSettingsOpts) (ListMessagingSettingsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20044
+		localVarReturnValue ListMessagingSettingsResponse
 	)
 
 	// create path and map variables
@@ -641,6 +424,12 @@ func (a *NumberConfigurationsApiService) ListPhoneNumberMessagingSettings(ctx co
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -688,7 +477,7 @@ func (a *NumberConfigurationsApiService) ListPhoneNumberMessagingSettings(ctx co
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20044
+			var v ListMessagingSettingsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -698,7 +487,7 @@ func (a *NumberConfigurationsApiService) ListPhoneNumberMessagingSettings(ctx co
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -713,18 +502,244 @@ func (a *NumberConfigurationsApiService) ListPhoneNumberMessagingSettings(ctx co
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberConfigurationsApiService Retrieve the messaging settings for a phone number
+NumberConfigurationsApiService List phone numbers with voice settings
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id Identifies the type of resource.
-@return InlineResponse20048
+ * @param optional nil or *NumberConfigurationsApiListPhoneNumbersWithVoiceSettingsOpts - Optional Parameters:
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+     * @param "FilterPhoneNumber" (optional.String) -  Filter by phone number. Requires at least three digits.              Non-numerical characters will result in no values being returned.
+     * @param "FilterConnectionNameContains" (optional.String) -  Filter contains connection name. Requires at least three characters.
+     * @param "FilterCustomerReference" (optional.String) -  Filter numbers via the customer_reference set.
+     * @param "FilterUsagePaymentMethod" (optional.String) -  Filter by usage_payment_method.
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+@return ListPhoneNumbersWithVoiceSettingsResponse
 */
-func (a *NumberConfigurationsApiService) RetrievePhoneNumberMessagingSettings(ctx context.Context, id string) (InlineResponse20048, *http.Response, error) {
+
+type NumberConfigurationsApiListPhoneNumbersWithVoiceSettingsOpts struct {
+    PageNumber optional.Int32
+    PageSize optional.Int32
+    FilterPhoneNumber optional.String
+    FilterConnectionNameContains optional.String
+    FilterCustomerReference optional.String
+    FilterUsagePaymentMethod optional.String
+    Sort optional.String
+}
+
+func (a *NumberConfigurationsApiService) ListPhoneNumbersWithVoiceSettings(ctx context.Context, localVarOptionals *NumberConfigurationsApiListPhoneNumbersWithVoiceSettingsOpts) (ListPhoneNumbersWithVoiceSettingsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20048
+		localVarReturnValue ListPhoneNumbersWithVoiceSettingsResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/phone_numbers/voice"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterPhoneNumber.IsSet() {
+		localVarQueryParams.Add("filter[phone_number]", parameterToString(localVarOptionals.FilterPhoneNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterConnectionNameContains.IsSet() {
+		localVarQueryParams.Add("filter[connection_name][contains]", parameterToString(localVarOptionals.FilterConnectionNameContains.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterCustomerReference.IsSet() {
+		localVarQueryParams.Add("filter[customer_reference]", parameterToString(localVarOptionals.FilterCustomerReference.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterUsagePaymentMethod.IsSet() {
+		localVarQueryParams.Add("filter[usage_payment_method]", parameterToString(localVarOptionals.FilterUsagePaymentMethod.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
+		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ListPhoneNumbersWithVoiceSettingsResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+NumberConfigurationsApiService Retrieve a phone number
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param id Identifies the resource.
+@return PhoneNumberResponse
+*/
+func (a *NumberConfigurationsApiService) RetrievePhoneNumber(ctx context.Context, id string) (PhoneNumberResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue PhoneNumberResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/phone_numbers/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PhoneNumberResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+NumberConfigurationsApiService Retrieve a phone number with messaging settings
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param id Identifies the type of resource.
+@return RetrieveMessagingSettingsResponse
+*/
+func (a *NumberConfigurationsApiService) RetrievePhoneNumberWithMessagingSettings(ctx context.Context, id string) (RetrieveMessagingSettingsResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue RetrieveMessagingSettingsResponse
 	)
 
 	// create path and map variables
@@ -782,7 +797,7 @@ func (a *NumberConfigurationsApiService) RetrievePhoneNumberMessagingSettings(ct
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20048
+			var v RetrieveMessagingSettingsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -792,7 +807,7 @@ func (a *NumberConfigurationsApiService) RetrievePhoneNumberMessagingSettings(ct
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -807,18 +822,18 @@ func (a *NumberConfigurationsApiService) RetrievePhoneNumberMessagingSettings(ct
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberConfigurationsApiService Retrieve the voice settings for a phone number
+NumberConfigurationsApiService Retrieve a phone number with voice settings
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse20047
+@return RetrievePhoneNumberVoiceResponse
 */
-func (a *NumberConfigurationsApiService) RetrievePhoneNumberVoice(ctx context.Context, id string) (InlineResponse20047, *http.Response, error) {
+func (a *NumberConfigurationsApiService) RetrievePhoneNumberWithVoiceSettings(ctx context.Context, id string) (RetrievePhoneNumberVoiceResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20047
+		localVarReturnValue RetrievePhoneNumberVoiceResponse
 	)
 
 	// create path and map variables
@@ -876,7 +891,7 @@ func (a *NumberConfigurationsApiService) RetrievePhoneNumberVoice(ctx context.Co
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20047
+			var v RetrievePhoneNumberVoiceResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -886,7 +901,7 @@ func (a *NumberConfigurationsApiService) RetrievePhoneNumberVoice(ctx context.Co
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -901,19 +916,19 @@ func (a *NumberConfigurationsApiService) RetrievePhoneNumberVoice(ctx context.Co
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberConfigurationsApiService Update the settings for a phone number
+NumberConfigurationsApiService Update a phone number
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Updated settings for the phone number
+ * @param body Updated settings for the phone number.
  * @param id Identifies the resource.
-@return InlineResponse20046
+@return PhoneNumberResponse
 */
-func (a *NumberConfigurationsApiService) UpdatePhoneNumber(ctx context.Context, body Body28, id string) (InlineResponse20046, *http.Response, error) {
+func (a *NumberConfigurationsApiService) UpdatePhoneNumber(ctx context.Context, body UpdatePhoneNumberRequest, id string) (PhoneNumberResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20046
+		localVarReturnValue PhoneNumberResponse
 	)
 
 	// create path and map variables
@@ -973,7 +988,7 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumber(ctx context.Context, 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20046
+			var v PhoneNumberResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -983,7 +998,7 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumber(ctx context.Context, 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -998,19 +1013,19 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumber(ctx context.Context, 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberConfigurationsApiService Update the messaging settings for a phone number
+NumberConfigurationsApiService Update a phone number with messaging settings
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Updated messaging settings for the phone number
  * @param id Identifies the type of resource.
-@return InlineResponse20048
+@return RetrieveMessagingSettingsResponse
 */
-func (a *NumberConfigurationsApiService) UpdatePhoneNumberMessagingSettings(ctx context.Context, body Body30, id string) (InlineResponse20048, *http.Response, error) {
+func (a *NumberConfigurationsApiService) UpdatePhoneNumberWithMessagingSettings(ctx context.Context, body UpdatePhoneNumberMessagingSettingsRequest, id string) (RetrieveMessagingSettingsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20048
+		localVarReturnValue RetrieveMessagingSettingsResponse
 	)
 
 	// create path and map variables
@@ -1070,7 +1085,7 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumberMessagingSettings(ctx 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20048
+			var v RetrieveMessagingSettingsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1080,7 +1095,7 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumberMessagingSettings(ctx 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1095,19 +1110,19 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumberMessagingSettings(ctx 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberConfigurationsApiService Update the voice settings for a phone number
+NumberConfigurationsApiService Update a phone number with voice settings
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Updated voice settings for the phone number
+ * @param body Updated voice settings for the phone number.
  * @param id Identifies the resource.
-@return InlineResponse20047
+@return RetrievePhoneNumberVoiceResponse
 */
-func (a *NumberConfigurationsApiService) UpdatePhoneNumberVoice(ctx context.Context, body Body31, id string) (InlineResponse20047, *http.Response, error) {
+func (a *NumberConfigurationsApiService) UpdatePhoneNumberWithVoiceSettings(ctx context.Context, body UpdatePhoneNumberVoiceSettingsRequest, id string) (RetrievePhoneNumberVoiceResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20047
+		localVarReturnValue RetrievePhoneNumberVoiceResponse
 	)
 
 	// create path and map variables
@@ -1167,7 +1182,7 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumberVoice(ctx context.Cont
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20047
+			var v RetrievePhoneNumberVoiceResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -1177,7 +1192,7 @@ func (a *NumberConfigurationsApiService) UpdatePhoneNumberVoice(ctx context.Cont
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

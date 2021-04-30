@@ -10,6 +10,6 @@
 package telnyx
 
 type Body2 struct {
-	// A name for the billing group
-	Name string `json:"name,omitempty"`
+	// The list of +E.164 formatted phone numbers to check for portability
+	PhoneNumbers []string `json:"phone_numbers,omitempty"`
 }

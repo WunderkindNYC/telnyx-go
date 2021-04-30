@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse20046 struct {
-	Data *InlineResponse20046Data `json:"data,omitempty"`
+	Data *WebhookDelivery `json:"data,omitempty"`
 }

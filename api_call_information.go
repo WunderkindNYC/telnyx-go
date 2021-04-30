@@ -26,19 +26,19 @@ var (
 
 type CallInformationApiService service
 /*
-CallInformationApiService Retrieve call status
-Returns the status of a call.
+CallInformationApiService Retrieve a call status
+Returns the status of a call (data is available 10 minutes after call ended).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param callControlId Unique identifier and token for controlling the call
-@return InlineResponse2008
+@return RetrieveCallStatusResponse
 */
-func (a *CallInformationApiService) RetrieveCallStatus(ctx context.Context, callControlId string) (InlineResponse2008, *http.Response, error) {
+func (a *CallInformationApiService) RetrieveCallStatus(ctx context.Context, callControlId string) (RetrieveCallStatusResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2008
+		localVarReturnValue RetrieveCallStatusResponse
 	)
 
 	// create path and map variables
@@ -96,7 +96,7 @@ func (a *CallInformationApiService) RetrieveCallStatus(ctx context.Context, call
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2008
+			var v RetrieveCallStatusResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -106,7 +106,7 @@ func (a *CallInformationApiService) RetrieveCallStatus(ctx context.Context, call
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

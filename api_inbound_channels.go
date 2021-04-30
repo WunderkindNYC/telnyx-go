@@ -28,15 +28,15 @@ type InboundChannelsApiService service
 InboundChannelsApiService Retrieve your inbound channels
 Returns the inbound channels for your account. Inbound channels allows you to use Channel Billing for calls to your Telnyx phone numbers. Please check the Telnyx Support Articles section for full information and examples of how to utilize Channel Billing.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return InlineResponse20042
+@return InlineResponse20026
 */
-func (a *InboundChannelsApiService) ListOutboundChannels(ctx context.Context) (InlineResponse20042, *http.Response, error) {
+func (a *InboundChannelsApiService) ListOutboundChannels(ctx context.Context) (InlineResponse20026, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20042
+		localVarReturnValue InlineResponse20026
 	)
 
 	// create path and map variables
@@ -93,7 +93,7 @@ func (a *InboundChannelsApiService) ListOutboundChannels(ctx context.Context) (I
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20042
+			var v InlineResponse20026
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -112,15 +112,15 @@ InboundChannelsApiService Update inbound channels
 Update the inbound channels for the account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Inbound channels update
-@return InlineResponse20043
+@return InlineResponse20027
 */
-func (a *InboundChannelsApiService) UpdateOutboundChannels(ctx context.Context, body Body27) (InlineResponse20043, *http.Response, error) {
+func (a *InboundChannelsApiService) UpdateOutboundChannels(ctx context.Context, body Body1) (InlineResponse20027, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20043
+		localVarReturnValue InlineResponse20027
 	)
 
 	// create path and map variables
@@ -179,7 +179,7 @@ func (a *InboundChannelsApiService) UpdateOutboundChannels(ctx context.Context, 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20043
+			var v InlineResponse20027
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -189,7 +189,7 @@ func (a *InboundChannelsApiService) UpdateOutboundChannels(ctx context.Context, 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v InlineResponseDefault
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

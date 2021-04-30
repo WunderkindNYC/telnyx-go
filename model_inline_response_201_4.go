@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2014 struct {
-	Data *IpConnection `json:"data,omitempty"`
+	Data *PortoutComment `json:"data,omitempty"`
 }

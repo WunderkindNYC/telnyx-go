@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2011 struct {
-	Data *CredentialConnection `json:"data,omitempty"`
+	Data *FaxApplication `json:"data,omitempty"`
 }

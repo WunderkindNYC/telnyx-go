@@ -27,19 +27,19 @@ var (
 
 type NumberOrdersApiService service
 /*
-NumberOrdersApiService Create Phone Number Order
-Creates a Phone Number Order
+NumberOrdersApiService Create a number order
+Creates a phone number order.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return InlineResponse20034
+@return NumberOrderResponse
 */
-func (a *NumberOrdersApiService) CreateNumberOrder(ctx context.Context, body Body24) (InlineResponse20034, *http.Response, error) {
+func (a *NumberOrdersApiService) CreateNumberOrder(ctx context.Context, body CreateNumberOrderRequest) (NumberOrderResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20034
+		localVarReturnValue NumberOrderResponse
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *NumberOrdersApiService) CreateNumberOrder(ctx context.Context, body Bod
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20034
+			var v NumberOrderResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -108,7 +108,7 @@ func (a *NumberOrdersApiService) CreateNumberOrder(ctx context.Context, body Bod
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -123,17 +123,19 @@ func (a *NumberOrdersApiService) CreateNumberOrder(ctx context.Context, body Bod
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberOrdersApiService Retrieve multiple Number Orders
-Retrieve a paginated list of Number Orders
+NumberOrdersApiService List number orders
+Get a paginated list of number orders.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *NumberOrdersApiListNumberOrdersOpts - Optional Parameters:
-     * @param "FilterStatus" (optional.String) -  Filter number orders by status
-     * @param "FilterCreatedAtGt" (optional.String) -  Filter number orders later than this value
-     * @param "FilterCreatedAtLt" (optional.String) -  Filter number orders earlier than this value
-     * @param "FilterPhoneNumbersPhoneNumber" (optional.String) -  Filter number orders having these phone numbers
-     * @param "FilterCustomerReference" (optional.String) -  Filter number orders via the customer reference set
-     * @param "FilterRequirementsMet" (optional.Bool) -  Filter number orders by requirements met
-@return InlineResponse20033
+     * @param "FilterStatus" (optional.String) -  Filter number orders by status.
+     * @param "FilterCreatedAtGt" (optional.String) -  Filter number orders later than this value.
+     * @param "FilterCreatedAtLt" (optional.String) -  Filter number orders earlier than this value.
+     * @param "FilterPhoneNumbersPhoneNumber" (optional.String) -  Filter number orders having these phone numbers.
+     * @param "FilterCustomerReference" (optional.String) -  Filter number orders via the customer reference set.
+     * @param "FilterRequirementsMet" (optional.Bool) -  Filter number orders by requirements met.
+     * @param "PageNumber" (optional.Int32) -  The page number to load
+     * @param "PageSize" (optional.Int32) -  The size of the page
+@return ListNumberOrdersResponse
 */
 
 type NumberOrdersApiListNumberOrdersOpts struct {
@@ -143,15 +145,17 @@ type NumberOrdersApiListNumberOrdersOpts struct {
     FilterPhoneNumbersPhoneNumber optional.String
     FilterCustomerReference optional.String
     FilterRequirementsMet optional.Bool
+    PageNumber optional.Int32
+    PageSize optional.Int32
 }
 
-func (a *NumberOrdersApiService) ListNumberOrders(ctx context.Context, localVarOptionals *NumberOrdersApiListNumberOrdersOpts) (InlineResponse20033, *http.Response, error) {
+func (a *NumberOrdersApiService) ListNumberOrders(ctx context.Context, localVarOptionals *NumberOrdersApiListNumberOrdersOpts) (ListNumberOrdersResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20033
+		localVarReturnValue ListNumberOrdersResponse
 	)
 
 	// create path and map variables
@@ -179,6 +183,12 @@ func (a *NumberOrdersApiService) ListNumberOrders(ctx context.Context, localVarO
 	if localVarOptionals != nil && localVarOptionals.FilterRequirementsMet.IsSet() {
 		localVarQueryParams.Add("filter[requirements_met]", parameterToString(localVarOptionals.FilterRequirementsMet.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -226,7 +236,7 @@ func (a *NumberOrdersApiService) ListNumberOrders(ctx context.Context, localVarO
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20033
+			var v ListNumberOrdersResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -236,7 +246,7 @@ func (a *NumberOrdersApiService) ListNumberOrders(ctx context.Context, localVarO
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -251,19 +261,19 @@ func (a *NumberOrdersApiService) ListNumberOrders(ctx context.Context, localVarO
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberOrdersApiService Retrieve a single phone number order
-Retrieve an existing single phone number order
+NumberOrdersApiService Retrieve a number order
+Get an existing phone number order.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param numberOrderId The number order id
-@return InlineResponse20034
+ * @param numberOrderId The number order ID.
+@return NumberOrderResponse
 */
-func (a *NumberOrdersApiService) RetrieveNumberOrder(ctx context.Context, numberOrderId string) (InlineResponse20034, *http.Response, error) {
+func (a *NumberOrdersApiService) RetrieveNumberOrder(ctx context.Context, numberOrderId string) (NumberOrderResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20034
+		localVarReturnValue NumberOrderResponse
 	)
 
 	// create path and map variables
@@ -321,7 +331,7 @@ func (a *NumberOrdersApiService) RetrieveNumberOrder(ctx context.Context, number
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20034
+			var v NumberOrderResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -331,7 +341,7 @@ func (a *NumberOrdersApiService) RetrieveNumberOrder(ctx context.Context, number
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -346,20 +356,20 @@ func (a *NumberOrdersApiService) RetrieveNumberOrder(ctx context.Context, number
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-NumberOrdersApiService Update phone number order
-Updates a Phone Number Order
+NumberOrdersApiService Update a number order
+Updates a phone number order.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
- * @param numberOrderId The number order id
-@return InlineResponse20034
+ * @param numberOrderId The number order ID.
+@return NumberOrderResponse
 */
-func (a *NumberOrdersApiService) UpdateNumberOrder(ctx context.Context, body Body25, numberOrderId string) (InlineResponse20034, *http.Response, error) {
+func (a *NumberOrdersApiService) UpdateNumberOrder(ctx context.Context, body UpdateNumberOrderRequest, numberOrderId string) (NumberOrderResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20034
+		localVarReturnValue NumberOrderResponse
 	)
 
 	// create path and map variables
@@ -419,7 +429,7 @@ func (a *NumberOrdersApiService) UpdateNumberOrder(ctx context.Context, body Bod
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20034
+			var v NumberOrderResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -429,7 +439,7 @@ func (a *NumberOrdersApiService) UpdateNumberOrder(ctx context.Context, body Bod
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

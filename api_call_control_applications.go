@@ -27,19 +27,19 @@ var (
 
 type CallControlApplicationsApiService service
 /*
-CallControlApplicationsApiService Creates a Call Control application
-Creates a Call Control application.
+CallControlApplicationsApiService Create a call control application
+Create a call control application.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Parameters that can be set when creating a Call Control application
-@return InlineResponse201
+ * @param body Create call control application request.
+@return CallControlApplicationResponse
 */
-func (a *CallControlApplicationsApiService) CreateCallControlApplication(ctx context.Context, body UpdatableAttributesForCallControlApplications) (InlineResponse201, *http.Response, error) {
+func (a *CallControlApplicationsApiService) CreateCallControlApplication(ctx context.Context, body CreateCallControlApplicationRequest) (CallControlApplicationResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse201
+		localVarReturnValue CallControlApplicationResponse
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *CallControlApplicationsApiService) CreateCallControlApplication(ctx con
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse201
+			var v CallControlApplicationResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -113,19 +113,19 @@ func (a *CallControlApplicationsApiService) CreateCallControlApplication(ctx con
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CallControlApplicationsApiService Deletes a Call Control application
-Deletes a Call Control application.
+CallControlApplicationsApiService Delete a call control application
+Deletes a call control application.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse201
+@return CallControlApplicationResponse
 */
-func (a *CallControlApplicationsApiService) DeleteCallControlApplication(ctx context.Context, id string) (InlineResponse201, *http.Response, error) {
+func (a *CallControlApplicationsApiService) DeleteCallControlApplication(ctx context.Context, id string) (CallControlApplicationResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse201
+		localVarReturnValue CallControlApplicationResponse
 	)
 
 	// create path and map variables
@@ -183,7 +183,7 @@ func (a *CallControlApplicationsApiService) DeleteCallControlApplication(ctx con
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse201
+			var v CallControlApplicationResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -198,33 +198,33 @@ func (a *CallControlApplicationsApiService) DeleteCallControlApplication(ctx con
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CallControlApplicationsApiService List all Call Control applications
-Returns a list of your Call Control applications.
+CallControlApplicationsApiService List call control applications
+Return a list of call control applications.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CallControlApplicationsApiFindCallControlApplicationsOpts - Optional Parameters:
+ * @param optional nil or *CallControlApplicationsApiListCallControlApplicationsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-     * @param "FilterConnectionNameContains" (optional.String) -  If present, connections with &lt;code&gt;connection_name&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
+     * @param "FilterApplicationNameContains" (optional.String) -  If present, applications with &lt;code&gt;application_name&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      * @param "FilterOutboundVoiceProfileId" (optional.String) -  Identifies the associated outbound voice profile.
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorterd in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
-@return InlineResponse2006
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
+@return ListCallControlApplicationsResponse
 */
 
-type CallControlApplicationsApiFindCallControlApplicationsOpts struct {
+type CallControlApplicationsApiListCallControlApplicationsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
-    FilterConnectionNameContains optional.String
+    FilterApplicationNameContains optional.String
     FilterOutboundVoiceProfileId optional.String
     Sort optional.String
 }
 
-func (a *CallControlApplicationsApiService) FindCallControlApplications(ctx context.Context, localVarOptionals *CallControlApplicationsApiFindCallControlApplicationsOpts) (InlineResponse2006, *http.Response, error) {
+func (a *CallControlApplicationsApiService) ListCallControlApplications(ctx context.Context, localVarOptionals *CallControlApplicationsApiListCallControlApplicationsOpts) (ListCallControlApplicationsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2006
+		localVarReturnValue ListCallControlApplicationsResponse
 	)
 
 	// create path and map variables
@@ -240,8 +240,8 @@ func (a *CallControlApplicationsApiService) FindCallControlApplications(ctx cont
 	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
 		localVarQueryParams.Add("page[size]", parameterToString(localVarOptionals.PageSize.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.FilterConnectionNameContains.IsSet() {
-		localVarQueryParams.Add("filter[connection_name][contains]", parameterToString(localVarOptionals.FilterConnectionNameContains.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.FilterApplicationNameContains.IsSet() {
+		localVarQueryParams.Add("filter[application_name][contains]", parameterToString(localVarOptionals.FilterApplicationNameContains.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.FilterOutboundVoiceProfileId.IsSet() {
 		localVarQueryParams.Add("filter[outbound_voice_profile_id]", parameterToString(localVarOptionals.FilterOutboundVoiceProfileId.Value(), ""))
@@ -296,7 +296,7 @@ func (a *CallControlApplicationsApiService) FindCallControlApplications(ctx cont
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2006
+			var v ListCallControlApplicationsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -311,19 +311,19 @@ func (a *CallControlApplicationsApiService) FindCallControlApplications(ctx cont
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CallControlApplicationsApiService Retrieve a Call Control application
-Retrieves the details of an existing Call Control application.
+CallControlApplicationsApiService Retrieve a call control application
+Retrieves the details of an existing call control application.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse201
+@return CallControlApplicationResponse
 */
-func (a *CallControlApplicationsApiService) GetCallControlApplication(ctx context.Context, id string) (InlineResponse201, *http.Response, error) {
+func (a *CallControlApplicationsApiService) RetrieveCallControlApplication(ctx context.Context, id string) (CallControlApplicationResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse201
+		localVarReturnValue CallControlApplicationResponse
 	)
 
 	// create path and map variables
@@ -381,7 +381,7 @@ func (a *CallControlApplicationsApiService) GetCallControlApplication(ctx contex
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse201
+			var v CallControlApplicationResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -396,20 +396,20 @@ func (a *CallControlApplicationsApiService) GetCallControlApplication(ctx contex
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CallControlApplicationsApiService Update a Call Control application
-Updates settings of an existing Call Control application.
+CallControlApplicationsApiService Update a call control application
+Updates settings of an existing call control application.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Parameters that can be updated in a Call Control application
+ * @param body Update call control application request.
  * @param id Identifies the resource.
-@return InlineResponse201
+@return CallControlApplicationResponse
 */
-func (a *CallControlApplicationsApiService) UpdateCallControlApplication(ctx context.Context, body UpdatableAttributesForCallControlApplications1, id string) (InlineResponse201, *http.Response, error) {
+func (a *CallControlApplicationsApiService) UpdateCallControlApplication(ctx context.Context, body UpdateCallControlApplicationRequest, id string) (CallControlApplicationResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse201
+		localVarReturnValue CallControlApplicationResponse
 	)
 
 	// create path and map variables
@@ -469,7 +469,7 @@ func (a *CallControlApplicationsApiService) UpdateCallControlApplication(ctx con
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse201
+			var v CallControlApplicationResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

@@ -31,15 +31,15 @@ ReportingApiService Create a Wireless Detail Records (WDRs) Report
 Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period. 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return InlineResponse2017
+@return InlineResponse20110
 */
-func (a *ReportingApiService) CreateWdrReport(ctx context.Context, body Body37) (InlineResponse2017, *http.Response, error) {
+func (a *ReportingApiService) CreateWdrReport(ctx context.Context, body WdrReportRequest) (InlineResponse20110, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2017
+		localVarReturnValue InlineResponse20110
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *ReportingApiService) CreateWdrReport(ctx context.Context, body Body37) 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse2017
+			var v InlineResponse20110
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -108,7 +108,7 @@ func (a *ReportingApiService) CreateWdrReport(ctx context.Context, body Body37) 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 422 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -118,7 +118,7 @@ func (a *ReportingApiService) CreateWdrReport(ctx context.Context, body Body37) 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -137,15 +137,15 @@ ReportingApiService Delete a Wireless Detail Record (WDR) Report
 Deletes one specific WDR report
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse2017
+@return InlineResponse20110
 */
-func (a *ReportingApiService) DeleteWdrReport(ctx context.Context, id string) (InlineResponse2017, *http.Response, error) {
+func (a *ReportingApiService) DeleteWdrReport(ctx context.Context, id string) (InlineResponse20110, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2017
+		localVarReturnValue InlineResponse20110
 	)
 
 	// create path and map variables
@@ -203,7 +203,7 @@ func (a *ReportingApiService) DeleteWdrReport(ctx context.Context, id string) (I
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2017
+			var v InlineResponse20110
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -213,7 +213,7 @@ func (a *ReportingApiService) DeleteWdrReport(ctx context.Context, id string) (I
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse404
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -223,7 +223,7 @@ func (a *ReportingApiService) DeleteWdrReport(ctx context.Context, id string) (I
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -242,15 +242,15 @@ ReportingApiService Get a Wireless Detail Record (WDR) Report
 Returns one specific WDR report
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the resource.
-@return InlineResponse2017
+@return InlineResponse20110
 */
-func (a *ReportingApiService) GetWdrReport(ctx context.Context, id string) (InlineResponse2017, *http.Response, error) {
+func (a *ReportingApiService) GetWdrReport(ctx context.Context, id string) (InlineResponse20110, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2017
+		localVarReturnValue InlineResponse20110
 	)
 
 	// create path and map variables
@@ -308,7 +308,7 @@ func (a *ReportingApiService) GetWdrReport(ctx context.Context, id string) (Inli
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2017
+			var v InlineResponse20110
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -318,7 +318,7 @@ func (a *ReportingApiService) GetWdrReport(ctx context.Context, id string) (Inli
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
-			var v InlineResponse404
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -328,7 +328,7 @@ func (a *ReportingApiService) GetWdrReport(ctx context.Context, id string) (Inli
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -349,7 +349,7 @@ Returns the WDR Reports that match the given parameters.
  * @param optional nil or *ReportingApiGetWdrReportsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-@return InlineResponse20058
+@return InlineResponse20047
 */
 
 type ReportingApiGetWdrReportsOpts struct {
@@ -357,13 +357,13 @@ type ReportingApiGetWdrReportsOpts struct {
     PageSize optional.Int32
 }
 
-func (a *ReportingApiService) GetWdrReports(ctx context.Context, localVarOptionals *ReportingApiGetWdrReportsOpts) (InlineResponse20058, *http.Response, error) {
+func (a *ReportingApiService) GetWdrReports(ctx context.Context, localVarOptionals *ReportingApiGetWdrReportsOpts) (InlineResponse20047, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20058
+		localVarReturnValue InlineResponse20047
 	)
 
 	// create path and map variables
@@ -426,7 +426,7 @@ func (a *ReportingApiService) GetWdrReports(ctx context.Context, localVarOptiona
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20058
+			var v InlineResponse20047
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -436,7 +436,7 @@ func (a *ReportingApiService) GetWdrReports(ctx context.Context, localVarOptiona
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

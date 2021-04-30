@@ -4,15 +4,15 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddFQDN**](FQDNsApi.md#AddFQDN) | **Post** /fqdns | Create an FQDN
-[**DeleteFQDN**](FQDNsApi.md#DeleteFQDN) | **Delete** /fqdns/{id} | Delete an FQDN
-[**FQDNsGet**](FQDNsApi.md#FQDNsGet) | **Get** /fqdns | Get all FQDNs
-[**GetFQDNDetails**](FQDNsApi.md#GetFQDNDetails) | **Get** /fqdns/{id} | Get FQDN
-[**UpdateFQDN**](FQDNsApi.md#UpdateFQDN) | **Patch** /fqdns/{id} | Update FQDN
+[**CreateFqdn**](FQDNsApi.md#CreateFqdn) | **Post** /fqdns | Create an Fqdn
+[**DeleteFqdn**](FQDNsApi.md#DeleteFqdn) | **Delete** /fqdns/{id} | Delete an Fqdn
+[**ListFqdns**](FQDNsApi.md#ListFqdns) | **Get** /fqdns | List Fqdns
+[**RetrieveFqdn**](FQDNsApi.md#RetrieveFqdn) | **Get** /fqdns/{id} | Retrieve an Fqdn
+[**UpdateFqdn**](FQDNsApi.md#UpdateFqdn) | **Patch** /fqdns/{id} | Update an Fqdn
 
-# **AddFQDN**
-> InlineResponse2013 AddFQDN(ctx, optional)
-Create an FQDN
+# **CreateFqdn**
+> FqdnResponse CreateFqdn(ctx, optional)
+Create an Fqdn
 
 Create a new FQDN object.
 
@@ -21,21 +21,21 @@ Create a new FQDN object.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***FQDNsApiAddFQDNOpts** | optional parameters | nil if no parameters
+ **optional** | ***FQDNsApiCreateFqdnOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a FQDNsApiAddFQDNOpts struct
+Optional parameters are passed through a pointer to a FQDNsApiCreateFqdnOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of Body6**](Body6.md)|  | 
+ **body** | [**optional.Interface of CreateFqdnRequest**](CreateFqdnRequest.md)|  | 
 
 ### Return type
 
-[**InlineResponse2013**](inline_response_201_3.md)
+[**FqdnResponse**](Fqdn Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -44,9 +44,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **DeleteFQDN**
-> InlineResponse2013 DeleteFQDN(ctx, id)
-Delete an FQDN
+# **DeleteFqdn**
+> FqdnResponse DeleteFqdn(ctx, id)
+Delete an Fqdn
 
 Delete an FQDN.
 
@@ -55,15 +55,15 @@ Delete an FQDN.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **id** | [**string**](.md)| Identifies the resource. | 
+  **id** | **string**| Identifies the resource. | 
 
 ### Return type
 
-[**InlineResponse2013**](inline_response_201_3.md)
+[**FqdnResponse**](Fqdn Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -72,9 +72,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **FQDNsGet**
-> InlineResponse20017 FQDNsGet(ctx, optional)
-Get all FQDNs
+# **ListFqdns**
+> ListFqdnsResponse ListFqdns(ctx, optional)
+List Fqdns
 
 Get all FQDNs belonging to the user that match the given filters.
 
@@ -83,10 +83,10 @@ Get all FQDNs belonging to the user that match the given filters.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***FQDNsApiFQDNsGetOpts** | optional parameters | nil if no parameters
+ **optional** | ***FQDNsApiListFqdnsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a FQDNsApiFQDNsGetOpts struct
+Optional parameters are passed through a pointer to a FQDNsApiListFqdnsOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageNumber** | **optional.Int32**| The page number to load | [default to 1]
@@ -98,11 +98,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](inline_response_200_17.md)
+[**ListFqdnsResponse**](List Fqdns Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -111,9 +111,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetFQDNDetails**
-> InlineResponse2013 GetFQDNDetails(ctx, id)
-Get FQDN
+# **RetrieveFqdn**
+> FqdnResponse RetrieveFqdn(ctx, id)
+Retrieve an Fqdn
 
 Return the details regarding a specific FQDN.
 
@@ -122,15 +122,15 @@ Return the details regarding a specific FQDN.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **id** | [**string**](.md)| Identifies the resource. | 
+  **id** | **string**| Identifies the resource. | 
 
 ### Return type
 
-[**InlineResponse2013**](inline_response_201_3.md)
+[**FqdnResponse**](Fqdn Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -139,9 +139,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **UpdateFQDN**
-> InlineResponse2013 UpdateFQDN(ctx, id, optional)
-Update FQDN
+# **UpdateFqdn**
+> FqdnResponse UpdateFqdn(ctx, id, optional)
+Update an Fqdn
 
 Update the details of a specific FQDN.
 
@@ -150,23 +150,23 @@ Update the details of a specific FQDN.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **id** | [**string**](.md)| Identifies the resource. | 
- **optional** | ***FQDNsApiUpdateFQDNOpts** | optional parameters | nil if no parameters
+  **id** | **string**| Identifies the resource. | 
+ **optional** | ***FQDNsApiUpdateFqdnOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a FQDNsApiUpdateFQDNOpts struct
+Optional parameters are passed through a pointer to a FQDNsApiUpdateFqdnOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**optional.Interface of Body7**](Body7.md)|  | 
+ **body** | [**optional.Interface of UpdateFqdnRequest**](UpdateFqdnRequest.md)|  | 
 
 ### Return type
 
-[**InlineResponse2013**](inline_response_201_3.md)
+[**FqdnResponse**](Fqdn Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

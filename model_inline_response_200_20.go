@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse20020 struct {
-	Data *InlineResponse20020Data `json:"data,omitempty"`
+	Data *NotificationProfile `json:"data,omitempty"`
 }

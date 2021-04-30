@@ -27,19 +27,19 @@ var (
 
 type ConnectionsApiService service
 /*
-ConnectionsApiService List all connections
+ConnectionsApiService List connections
 Returns a list of your connections irrespective of type.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ConnectionsApiFindAllConnectionsOpts - Optional Parameters:
+ * @param optional nil or *ConnectionsApiListConnectionsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
      * @param "FilterConnectionNameContains" (optional.String) -  If present, connections with &lt;code&gt;connection_name&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      * @param "FilterOutboundVoiceProfileId" (optional.String) -  Identifies the associated outbound voice profile.
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorterd in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
-@return InlineResponse20013
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
+@return ListConnectionsResponse
 */
 
-type ConnectionsApiFindAllConnectionsOpts struct {
+type ConnectionsApiListConnectionsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
     FilterConnectionNameContains optional.String
@@ -47,13 +47,13 @@ type ConnectionsApiFindAllConnectionsOpts struct {
     Sort optional.String
 }
 
-func (a *ConnectionsApiService) FindAllConnections(ctx context.Context, localVarOptionals *ConnectionsApiFindAllConnectionsOpts) (InlineResponse20013, *http.Response, error) {
+func (a *ConnectionsApiService) ListConnections(ctx context.Context, localVarOptionals *ConnectionsApiListConnectionsOpts) (ListConnectionsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20013
+		localVarReturnValue ListConnectionsResponse
 	)
 
 	// create path and map variables
@@ -125,7 +125,7 @@ func (a *ConnectionsApiService) FindAllConnections(ctx context.Context, localVar
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20013
+			var v ListConnectionsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -144,15 +144,15 @@ ConnectionsApiService Retrieve a connection
 Retrieves the high-level details of an existing connection. To retrieve specific authentication information, use the endpoint for the specific connection type.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id IP Connection ID
-@return InlineResponse20014
+@return ConnectionResponse
 */
-func (a *ConnectionsApiService) GetConnection(ctx context.Context, id string) (InlineResponse20014, *http.Response, error) {
+func (a *ConnectionsApiService) RetrieveConnection(ctx context.Context, id string) (ConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20014
+		localVarReturnValue ConnectionResponse
 	)
 
 	// create path and map variables
@@ -210,7 +210,7 @@ func (a *ConnectionsApiService) GetConnection(ctx context.Context, id string) (I
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20014
+			var v ConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

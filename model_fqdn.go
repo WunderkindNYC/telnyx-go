@@ -10,20 +10,20 @@
 package telnyx
 
 type Fqdn struct {
-	// Identifies the resource.
-	Id string `json:"id,omitempty"`
-	// Identifies the type of the resource.
-	RecordType string `json:"record_type,omitempty"`
 	// ID of the FQDN connection to which this FQDN is attached.
 	ConnectionId string `json:"connection_id,omitempty"`
-	// FQDN represented by this resource.
-	Fqdn string `json:"fqdn,omitempty"`
-	// Port to use when connecting to this FQDN.
-	Port int32 `json:"port,omitempty"`
-	// The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
-	DnsRecordType string `json:"dns_record_type,omitempty"`
 	// ISO 8601 formatted date indicating when the resource was created.
 	CreatedAt string `json:"created_at,omitempty"`
+	// The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
+	DnsRecordType string `json:"dns_record_type,omitempty"`
+	// FQDN represented by this resource.
+	Fqdn string `json:"fqdn,omitempty"`
+	// Identifies the resource.
+	Id string `json:"id,omitempty"`
+	// Port to use when connecting to this FQDN.
+	Port int32 `json:"port,omitempty"`
+	// Identifies the type of the resource.
+	RecordType string `json:"record_type,omitempty"`
 	// ISO 8601 formatted date indicating when the resource was updated.
 	UpdatedAt string `json:"updated_at,omitempty"`
 }

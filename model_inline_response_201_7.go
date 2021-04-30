@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2017 struct {
-	Data *AllOfinlineResponse2017Data `json:"data,omitempty"`
+	Data *InlineResponse2017Data `json:"data,omitempty"`
 }

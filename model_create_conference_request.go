@@ -10,20 +10,22 @@
 package telnyx
 
 type CreateConferenceRequest struct {
-	// Unique identifier and token for controlling the call
-	CallControlId string `json:"call_control_id"`
-	// Name of the conference
-	Name string `json:"name"`
 	// Whether a beep sound should be played when participants join and/or leave the conference.
 	BeepEnabled string `json:"beep_enabled,omitempty"`
+	// Unique identifier and token for controlling the call
+	CallControlId string `json:"call_control_id"`
 	// Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
 	ClientState string `json:"client_state,omitempty"`
+	// Toggle background comfort noise.
+	ComfortNoise bool `json:"comfort_noise,omitempty"`
 	// Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
 	CommandId string `json:"command_id,omitempty"`
 	// Time length (minutes) after which the conference will end.
 	DurationMinutes int32 `json:"duration_minutes,omitempty"`
 	// The URL to an audio file to be played to participants joining the conference. Takes effect only when \"start_conference_on_create\" is set to \"false\".
 	HoldAudioUrl string `json:"hold_audio_url,omitempty"`
+	// Name of the conference
+	Name string `json:"name"`
 	// Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to \"true\".
 	StartConferenceOnCreate bool `json:"start_conference_on_create,omitempty"`
 }

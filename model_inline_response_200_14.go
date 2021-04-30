@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse20014 struct {
-	Data *Connection `json:"data,omitempty"`
+	Data []MobileOperatorNetwork `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

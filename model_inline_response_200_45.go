@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse20045 struct {
-	Data []InlineResponse20045Data `json:"data,omitempty"`
+	Data []WebhookDelivery `json:"data,omitempty"`
+	Meta *PaginationMetaSimple `json:"meta,omitempty"`
 }

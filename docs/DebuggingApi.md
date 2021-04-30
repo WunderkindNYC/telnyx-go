@@ -4,10 +4,10 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CallControlDebuggingEventList**](DebuggingApi.md#CallControlDebuggingEventList) | **Get** /call_events | List call events
+[**ListCallEvents**](DebuggingApi.md#ListCallEvents) | **Get** /call_events | List call events
 
-# **CallControlDebuggingEventList**
-> InlineResponse2007 CallControlDebuggingEventList(ctx, optional)
+# **ListCallEvents**
+> ListCallEventsResponse ListCallEvents(ctx, optional)
 List call events
 
 Filters call events by given filter parameters. Events are ordered by `event_timestamp`. If filter for `call_leg_id` or `call_session_id` is not present, it only filters events from the last 24 hours.  **Note**: Only one `filter[event_timestamp]` can be passed. 
@@ -17,10 +17,10 @@ Filters call events by given filter parameters. Events are ordered by `event_tim
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***DebuggingApiCallControlDebuggingEventListOpts** | optional parameters | nil if no parameters
+ **optional** | ***DebuggingApiListCallEventsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a DebuggingApiCallControlDebuggingEventListOpts struct
+Optional parameters are passed through a pointer to a DebuggingApiListCallEventsOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filterCallLegId** | [**optional.Interface of string**](.md)| The unique identifier of an individual call leg. | 
@@ -32,14 +32,16 @@ Name | Type | Description  | Notes
  **filterEventTimestampLt** | **optional.String**| Event timestamp: lower than | 
  **filterEventTimestampLte** | **optional.String**| Event timestamp: lower than or equal | 
  **filterEventTimestampEq** | **optional.String**| Event timestamp: equal | 
+ **pageNumber** | **optional.Int32**| The page number to load | [default to 1]
+ **pageSize** | **optional.Int32**| The size of the page | [default to 20]
 
 ### Return type
 
-[**InlineResponse2007**](inline_response_200_7.md)
+[**ListCallEventsResponse**](List Call Events Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

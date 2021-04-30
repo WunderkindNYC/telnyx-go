@@ -10,5 +10,5 @@
 package telnyx
 
 type InlineResponse2013 struct {
-	Data *Fqdn `json:"data,omitempty"`
+	Data []PortingOrder `json:"data,omitempty"`
 }

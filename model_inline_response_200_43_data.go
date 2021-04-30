@@ -10,8 +10,6 @@
 package telnyx
 
 type InlineResponse20043Data struct {
-	// The number of channels set for the account
-	Channels int32 `json:"channels,omitempty"`
-	// Identifies the type of the response
-	RecordType string `json:"record_type,omitempty"`
+	Amount int32 `json:"amount,omitempty"`
+	Tag string `json:"tag,omitempty"`
 }

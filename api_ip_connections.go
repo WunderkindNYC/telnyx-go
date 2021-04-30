@@ -27,19 +27,19 @@ var (
 
 type IPConnectionsApiService service
 /*
-IPConnectionsApiService Creates an IP connection
+IPConnectionsApiService Create an Ip connection
 Creates an IP connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Parameters that can be defined during IP connection creation
-@return InlineResponse2014
+@return IpConnectionResponse
 */
-func (a *IPConnectionsApiService) CreateIPConnection(ctx context.Context, body Body8) (InlineResponse2014, *http.Response, error) {
+func (a *IPConnectionsApiService) CreateIpConnection(ctx context.Context, body CreateIpConnectionRequest) (IpConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2014
+		localVarReturnValue IpConnectionResponse
 	)
 
 	// create path and map variables
@@ -98,7 +98,7 @@ func (a *IPConnectionsApiService) CreateIPConnection(ctx context.Context, body B
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse2014
+			var v IpConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -113,19 +113,19 @@ func (a *IPConnectionsApiService) CreateIPConnection(ctx context.Context, body B
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-IPConnectionsApiService Deletes an IP connection
+IPConnectionsApiService Delete an Ip connection
 Deletes an existing IP connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Identifies the type of resource.
-@return InlineResponse2014
+@return IpConnectionResponse
 */
-func (a *IPConnectionsApiService) DeleteIPConnection(ctx context.Context, id string) (InlineResponse2014, *http.Response, error) {
+func (a *IPConnectionsApiService) DeleteIpConnection(ctx context.Context, id string) (IpConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2014
+		localVarReturnValue IpConnectionResponse
 	)
 
 	// create path and map variables
@@ -183,7 +183,7 @@ func (a *IPConnectionsApiService) DeleteIPConnection(ctx context.Context, id str
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2014
+			var v IpConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -198,33 +198,33 @@ func (a *IPConnectionsApiService) DeleteIPConnection(ctx context.Context, id str
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-IPConnectionsApiService List all connections
+IPConnectionsApiService List Ip connections
 Returns a list of your IP connections.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *IPConnectionsApiFindConnectionsOpts - Optional Parameters:
+ * @param optional nil or *IPConnectionsApiListIpConnectionsOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
      * @param "FilterConnectionNameContains" (optional.String) -  If present, connections with &lt;code&gt;connection_name&lt;/code&gt; containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
-     * @param "FilterOutboundVoiceProfileId" (optional.String) -  Identifies the associated outbound voice profile.
-     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorterd in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
-@return InlineResponse20018
+     * @param "FilterOutboundOutboundVoiceProfileId" (optional.String) -  Identifies the associated outbound voice profile.
+     * @param "Sort" (optional.String) -  Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the &lt;code&gt; -&lt;/code&gt; prefix.&lt;br/&gt;&lt;br/&gt; That is: &lt;ul&gt;   &lt;li&gt;     &lt;code&gt;connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in ascending order.   &lt;/li&gt;    &lt;li&gt;     &lt;code&gt;-connection_name&lt;/code&gt;: sorts the result by the     &lt;code&gt;connection_name&lt;/code&gt; field in descending order.   &lt;/li&gt; &lt;/ul&gt; &lt;br/&gt; If not given, results are sorted by &lt;code&gt;created_at&lt;/code&gt; in descending order.
+@return ListIpConnectionsResponse
 */
 
-type IPConnectionsApiFindConnectionsOpts struct {
+type IPConnectionsApiListIpConnectionsOpts struct {
     PageNumber optional.Int32
     PageSize optional.Int32
     FilterConnectionNameContains optional.String
-    FilterOutboundVoiceProfileId optional.String
+    FilterOutboundOutboundVoiceProfileId optional.String
     Sort optional.String
 }
 
-func (a *IPConnectionsApiService) FindConnections(ctx context.Context, localVarOptionals *IPConnectionsApiFindConnectionsOpts) (InlineResponse20018, *http.Response, error) {
+func (a *IPConnectionsApiService) ListIpConnections(ctx context.Context, localVarOptionals *IPConnectionsApiListIpConnectionsOpts) (ListIpConnectionsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20018
+		localVarReturnValue ListIpConnectionsResponse
 	)
 
 	// create path and map variables
@@ -243,8 +243,8 @@ func (a *IPConnectionsApiService) FindConnections(ctx context.Context, localVarO
 	if localVarOptionals != nil && localVarOptionals.FilterConnectionNameContains.IsSet() {
 		localVarQueryParams.Add("filter[connection_name][contains]", parameterToString(localVarOptionals.FilterConnectionNameContains.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.FilterOutboundVoiceProfileId.IsSet() {
-		localVarQueryParams.Add("filter[outbound_voice_profile_id]", parameterToString(localVarOptionals.FilterOutboundVoiceProfileId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.FilterOutboundOutboundVoiceProfileId.IsSet() {
+		localVarQueryParams.Add("filter[outbound.outbound_voice_profile_id]", parameterToString(localVarOptionals.FilterOutboundOutboundVoiceProfileId.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
@@ -296,7 +296,7 @@ func (a *IPConnectionsApiService) FindConnections(ctx context.Context, localVarO
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20018
+			var v ListIpConnectionsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -311,19 +311,19 @@ func (a *IPConnectionsApiService) FindConnections(ctx context.Context, localVarO
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-IPConnectionsApiService Retrieve a connection
+IPConnectionsApiService Retrieve an Ip connection
 Retrieves the details of an existing ip connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id IP Connection ID
-@return InlineResponse2014
+@return IpConnectionResponse
 */
-func (a *IPConnectionsApiService) GetIPConnection(ctx context.Context, id string) (InlineResponse2014, *http.Response, error) {
+func (a *IPConnectionsApiService) RetrieveIpConnection(ctx context.Context, id string) (IpConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2014
+		localVarReturnValue IpConnectionResponse
 	)
 
 	// create path and map variables
@@ -381,7 +381,7 @@ func (a *IPConnectionsApiService) GetIPConnection(ctx context.Context, id string
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2014
+			var v IpConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -396,20 +396,20 @@ func (a *IPConnectionsApiService) GetIPConnection(ctx context.Context, id string
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-IPConnectionsApiService Updates an IP connection
+IPConnectionsApiService Update an Ip connection
 Updates settings of an existing IP connection.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Parameters that can be updated in a IP connection
  * @param id Identifies the type of resource.
-@return InlineResponse2014
+@return IpConnectionResponse
 */
-func (a *IPConnectionsApiService) UpdateIPConnection(ctx context.Context, body Body9, id string) (InlineResponse2014, *http.Response, error) {
+func (a *IPConnectionsApiService) UpdateIpConnection(ctx context.Context, body UpdateIpConnectionRequest, id string) (IpConnectionResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2014
+		localVarReturnValue IpConnectionResponse
 	)
 
 	// create path and map variables
@@ -469,7 +469,7 @@ func (a *IPConnectionsApiService) UpdateIPConnection(ctx context.Context, body B
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2014
+			var v IpConnectionResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

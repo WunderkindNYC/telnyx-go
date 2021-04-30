@@ -29,15 +29,15 @@ type ReportsApiService service
 ReportsApiService Create a ledger billing group report
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body New ledger billing group report parameters
-@return InlineResponse20020
+@return InlineResponse20011
 */
-func (a *ReportsApiService) CreateLedgerBillingGroupReport(ctx context.Context, body Body12) (InlineResponse20020, *http.Response, error) {
+func (a *ReportsApiService) CreateLedgerBillingGroupReport(ctx context.Context, body NewLedgerBillingGroupReport) (InlineResponse20011, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20020
+		localVarReturnValue InlineResponse20011
 	)
 
 	// create path and map variables
@@ -96,7 +96,7 @@ func (a *ReportsApiService) CreateLedgerBillingGroupReport(ctx context.Context, 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20020
+			var v InlineResponse20011
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -106,7 +106,7 @@ func (a *ReportsApiService) CreateLedgerBillingGroupReport(ctx context.Context, 
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -124,15 +124,15 @@ func (a *ReportsApiService) CreateLedgerBillingGroupReport(ctx context.Context, 
 ReportsApiService Retrieve a ledger billing group report
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the ledger billing group report
-@return InlineResponse20020
+@return InlineResponse20011
 */
-func (a *ReportsApiService) RetrieveLedgerBillingGroupReport(ctx context.Context, id string) (InlineResponse20020, *http.Response, error) {
+func (a *ReportsApiService) RetrieveLedgerBillingGroupReport(ctx context.Context, id string) (InlineResponse20011, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20020
+		localVarReturnValue InlineResponse20011
 	)
 
 	// create path and map variables
@@ -190,7 +190,7 @@ func (a *ReportsApiService) RetrieveLedgerBillingGroupReport(ctx context.Context
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20020
+			var v InlineResponse20011
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -200,7 +200,7 @@ func (a *ReportsApiService) RetrieveLedgerBillingGroupReport(ctx context.Context
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

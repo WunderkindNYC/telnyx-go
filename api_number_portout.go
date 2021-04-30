@@ -31,15 +31,15 @@ NumberPortoutApiService List all comments for a portout request
 Returns a list of comments for a portout request.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Portout id
-@return InlineResponse20051
+@return InlineResponse20033
 */
-func (a *NumberPortoutApiService) FindPortoutComments(ctx context.Context, id string) (InlineResponse20051, *http.Response, error) {
+func (a *NumberPortoutApiService) FindPortoutComments(ctx context.Context, id string) (InlineResponse20033, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20051
+		localVarReturnValue InlineResponse20033
 	)
 
 	// create path and map variables
@@ -97,7 +97,7 @@ func (a *NumberPortoutApiService) FindPortoutComments(ctx context.Context, id st
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20051
+			var v InlineResponse20033
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -116,15 +116,15 @@ NumberPortoutApiService Retrieve a portout request
 Returns the portout request based on the ID provided
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Portout id
-@return InlineResponse20050
+@return InlineResponse20032
 */
-func (a *NumberPortoutApiService) FindPortoutRequest(ctx context.Context, id string) (InlineResponse20050, *http.Response, error) {
+func (a *NumberPortoutApiService) FindPortoutRequest(ctx context.Context, id string) (InlineResponse20032, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20050
+		localVarReturnValue InlineResponse20032
 	)
 
 	// create path and map variables
@@ -182,7 +182,7 @@ func (a *NumberPortoutApiService) FindPortoutRequest(ctx context.Context, id str
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20050
+			var v InlineResponse20032
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -200,39 +200,48 @@ func (a *NumberPortoutApiService) FindPortoutRequest(ctx context.Context, id str
 NumberPortoutApiService Retrieve a list of portout requests
 Returns the portout requests according to filters
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param filterCarrierName Filter by new carrier name.
- * @param filterSpid Filter by new carrier spid.
- * @param filterStatus Filter by portout status.
  * @param optional nil or *NumberPortoutApiListPortoutRequestOpts - Optional Parameters:
+     * @param "FilterCarrierName" (optional.String) -  Filter by new carrier name.
+     * @param "FilterSpid" (optional.String) -  Filter by new carrier spid.
+     * @param "FilterStatus" (optional.String) -  Filter by portout status.
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
-@return InlineResponse20049
+@return InlineResponse20031
 */
 
 type NumberPortoutApiListPortoutRequestOpts struct {
+    FilterCarrierName optional.String
+    FilterSpid optional.String
+    FilterStatus optional.String
     PageNumber optional.Int32
     PageSize optional.Int32
 }
 
-func (a *NumberPortoutApiService) ListPortoutRequest(ctx context.Context, filterCarrierName string, filterSpid string, filterStatus string, localVarOptionals *NumberPortoutApiListPortoutRequestOpts) (InlineResponse20049, *http.Response, error) {
+func (a *NumberPortoutApiService) ListPortoutRequest(ctx context.Context, localVarOptionals *NumberPortoutApiListPortoutRequestOpts) (InlineResponse20031, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20049
+		localVarReturnValue InlineResponse20031
 	)
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/portouts"
-	localVarPath = strings.Replace(localVarPath, "{"+"filter[carrier_name]"+"}", fmt.Sprintf("%v", filterCarrierName), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"filter[spid]"+"}", fmt.Sprintf("%v", filterSpid), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"filter[status]"+"}", fmt.Sprintf("%v", filterStatus), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.FilterCarrierName.IsSet() {
+		localVarQueryParams.Add("filter[carrier_name]", parameterToString(localVarOptionals.FilterCarrierName.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterSpid.IsSet() {
+		localVarQueryParams.Add("filter[spid]", parameterToString(localVarOptionals.FilterSpid.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterStatus.IsSet() {
+		localVarQueryParams.Add("filter[status]", parameterToString(localVarOptionals.FilterStatus.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
 		localVarQueryParams.Add("page[number]", parameterToString(localVarOptionals.PageNumber.Value(), ""))
 	}
@@ -286,7 +295,7 @@ func (a *NumberPortoutApiService) ListPortoutRequest(ctx context.Context, filter
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20049
+			var v InlineResponse20031
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -306,15 +315,15 @@ Creates a comment on a portout request.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param id Portout id
-@return InlineResponse2016
+@return InlineResponse2014
 */
-func (a *NumberPortoutApiService) PostPortRequestComment(ctx context.Context, body Body32, id string) (InlineResponse2016, *http.Response, error) {
+func (a *NumberPortoutApiService) PostPortRequestComment(ctx context.Context, body Body3, id string) (InlineResponse2014, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2016
+		localVarReturnValue InlineResponse2014
 	)
 
 	// create path and map variables
@@ -374,7 +383,7 @@ func (a *NumberPortoutApiService) PostPortRequestComment(ctx context.Context, bo
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v InlineResponse2016
+			var v InlineResponse2014
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -394,15 +403,15 @@ Authorize or reject portout request
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Portout id
  * @param status Updated portout status
-@return InlineResponse20050
+@return InlineResponse20032
 */
-func (a *NumberPortoutApiService) UpdatePortoutRequest(ctx context.Context, id string, status string) (InlineResponse20050, *http.Response, error) {
+func (a *NumberPortoutApiService) UpdatePortoutRequest(ctx context.Context, id string, status string) (InlineResponse20032, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20050
+		localVarReturnValue InlineResponse20032
 	)
 
 	// create path and map variables
@@ -461,7 +470,7 @@ func (a *NumberPortoutApiService) UpdatePortoutRequest(ctx context.Context, id s
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20050
+			var v InlineResponse20032
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

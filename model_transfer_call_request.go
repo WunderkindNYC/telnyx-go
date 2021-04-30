@@ -10,27 +10,35 @@
 package telnyx
 
 type TransferCallRequest struct {
-	// The DID or SIP URI to dial out and bridge to the given call.
-	To string `json:"to"`
-	// The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `from` number of the original call if omitted.
-	From string `json:"from,omitempty"`
-	// The URL of a file to be played back to the callee before bridging the call. The URL can point to either a WAV or MP3 file.
-	AudioUrl string `json:"audio_url,omitempty"`
-	// The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 120 seconds.
-	TimeoutSecs int32 `json:"timeout_secs,omitempty"`
-	// Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
-	TimeLimitSecs int32 `json:"time_limit_secs,omitempty"`
 	// Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected.
 	AnsweringMachineDetection string `json:"answering_machine_detection,omitempty"`
-	AnsweringMachineDetectionConfig *CallsAnsweringMachineDetectionConfig `json:"answering_machine_detection_config,omitempty"`
-	// Custom headers to be added to the SIP INVITE.
-	CustomHeaders []CustomSipHeader `json:"custom_headers,omitempty"`
+	AnsweringMachineDetectionConfig *CallRequestAnsweringMachineDetectionConfig `json:"answering_machine_detection_config,omitempty"`
+	// Audio URL to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file.
+	AudioUrl string `json:"audio_url,omitempty"`
 	// Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
 	ClientState string `json:"client_state,omitempty"`
 	// Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
 	CommandId string `json:"command_id,omitempty"`
-	// SIP Authentication username used for SIP challenges.
-	SipAuthUsername string `json:"sip_auth_username,omitempty"`
+	// Custom headers to be added to the SIP INVITE.
+	CustomHeaders []CustomSipHeader `json:"custom_headers,omitempty"`
+	// The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `from` number of the original call if omitted.
+	From string `json:"from,omitempty"`
+	// The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
+	FromDisplayName string `json:"from_display_name,omitempty"`
 	// SIP Authentication password used for SIP challenges.
 	SipAuthPassword string `json:"sip_auth_password,omitempty"`
+	// SIP Authentication username used for SIP challenges.
+	SipAuthUsername string `json:"sip_auth_username,omitempty"`
+	// Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
+	TargetLegClientState string `json:"target_leg_client_state,omitempty"`
+	// Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
+	TimeLimitSecs int32 `json:"time_limit_secs,omitempty"`
+	// The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 120 seconds.
+	TimeoutSecs int32 `json:"timeout_secs,omitempty"`
+	// The DID or SIP URI to dial out and bridge to the given call.
+	To string `json:"to"`
+	// Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
+	WebhookUrl string `json:"webhook_url,omitempty"`
+	// HTTP request type used for `webhook_url`.
+	WebhookUrlMethod string `json:"webhook_url_method,omitempty"`
 }

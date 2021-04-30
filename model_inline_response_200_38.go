@@ -10,5 +10,6 @@
 package telnyx
 
 type InlineResponse20038 struct {
-	Data *OutboundVoiceProfile2 `json:"data,omitempty"`
+	Data []SimpleSimCard `json:"data,omitempty"`
+	Meta *PaginationMeta `json:"meta,omitempty"`
 }

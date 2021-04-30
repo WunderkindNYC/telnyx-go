@@ -4,15 +4,15 @@ All URIs are relative to *https://api.telnyx.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListNumberOrderRegulatoryRequirements**](NumberOrderRegulatoryRequirementsApi.md#ListNumberOrderRegulatoryRequirements) | **Get** /regulatory_requirements | Get list of Number Order Regulatory Requirements
-[**ListPhoneNumberRegulatoryRequirements**](NumberOrderRegulatoryRequirementsApi.md#ListPhoneNumberRegulatoryRequirements) | **Get** /phone_number_regulatory_requirements | Get Regulatory Requirements Per Number
-[**RetrieveNumberOrderRegulatoryRequirement**](NumberOrderRegulatoryRequirementsApi.md#RetrieveNumberOrderRegulatoryRequirement) | **Get** /regulatory_requirements/{requirement_id} | Get Detailed Number Order Regulatory Requirement
+[**ListNumberOrderRegulatoryRequirements**](NumberOrderRegulatoryRequirementsApi.md#ListNumberOrderRegulatoryRequirements) | **Get** /regulatory_requirements | List number order regulatory requirements
+[**ListPhoneNumberRegulatoryRequirements**](NumberOrderRegulatoryRequirementsApi.md#ListPhoneNumberRegulatoryRequirements) | **Get** /phone_numbers_regulatory_requirements | List regulatory requirements per number
+[**RetrieveNumberOrderRegulatoryRequirement**](NumberOrderRegulatoryRequirementsApi.md#RetrieveNumberOrderRegulatoryRequirement) | **Get** /regulatory_requirements/{requirement_id} | Retrieve a number order regulatory requirement
 
 # **ListNumberOrderRegulatoryRequirements**
-> InlineResponse20052 ListNumberOrderRegulatoryRequirements(ctx, optional)
-Get list of Number Order Regulatory Requirements
+> ListNumberOrderRegulatoryRequirementsResponse ListNumberOrderRegulatoryRequirements(ctx, optional)
+List number order regulatory requirements
 
-Gets a paginated list of Number Order Regulatory Requirements
+Gets a paginated list of number order regulatory requirements.
 
 ### Required Parameters
 
@@ -25,17 +25,19 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a NumberOrderRegulatoryRequirementsApiListNumberOrderRegulatoryRequirementsOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filterRequirementId** | **optional.String**| Filter number order regulatory requirements by requirement_id | 
- **filterFieldType** | **optional.String**| Filter number order regulatory requirements by field_type | 
- **filterRequirementType** | **optional.String**| Filter number order regulatory requirements by requirement_type | 
+ **filterRequirementId** | **optional.String**| Filter number order regulatory requirements by &#x60;requirement_id&#x60;. | 
+ **filterFieldType** | **optional.String**| Filter number order regulatory requirements by &#x60;field_type&#x60;. | 
+ **filterRequirementType** | **optional.String**| Filter number order regulatory requirements by &#x60;requirement_type&#x60;. | 
+ **pageNumber** | **optional.Int32**| The page number to load | [default to 1]
+ **pageSize** | **optional.Int32**| The size of the page | [default to 20]
 
 ### Return type
 
-[**InlineResponse20052**](inline_response_200_52.md)
+[**ListNumberOrderRegulatoryRequirementsResponse**](List Number Order Regulatory Requirements Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -45,10 +47,10 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListPhoneNumberRegulatoryRequirements**
-> InlineResponse20039 ListPhoneNumberRegulatoryRequirements(ctx, optional)
-Get Regulatory Requirements Per Number
+> ListPhoneNumberRegulatoryRequirementsResponse ListPhoneNumberRegulatoryRequirements(ctx, optional)
+List regulatory requirements per number
 
-Gets a paginated list of Phone Number Regulatory Requirements
+Gets a paginated list of phone number regulatory requirements.
 
 ### Required Parameters
 
@@ -61,15 +63,17 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a NumberOrderRegulatoryRequirementsApiListPhoneNumberRegulatoryRequirementsOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filterPhoneNumber** | [**optional.Interface of []string**](string.md)| The list of phone numbers to retrieve regulatory requirements for | 
+ **filterPhoneNumber** | [**optional.Interface of []string**](string.md)| The list of phone numbers to retrieve regulatory requirements for. | 
+ **pageNumber** | **optional.Int32**| The page number to load | [default to 1]
+ **pageSize** | **optional.Int32**| The size of the page | [default to 20]
 
 ### Return type
 
-[**InlineResponse20039**](inline_response_200_39.md)
+[**ListPhoneNumberRegulatoryRequirementsResponse**](List Phone Number Regulatory Requirements Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -79,25 +83,25 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RetrieveNumberOrderRegulatoryRequirement**
-> InlineResponse20053 RetrieveNumberOrderRegulatoryRequirement(ctx, requirementId)
-Get Detailed Number Order Regulatory Requirement
+> NumberOrderRegulatoryRequirementResponse RetrieveNumberOrderRegulatoryRequirement(ctx, requirementId)
+Retrieve a number order regulatory requirement
 
-Gets a single Number Order Regulatory Requirement
+Gets a single number order regulatory requirement.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **requirementId** | **string**| The number order regulatory requirement id | 
+  **requirementId** | **string**| The number order regulatory requirement ID. | 
 
 ### Return type
 
-[**InlineResponse20053**](inline_response_200_53.md)
+[**NumberOrderRegulatoryRequirementResponse**](Number Order Regulatory Requirement Response.md)
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

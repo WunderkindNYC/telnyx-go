@@ -27,13 +27,13 @@ var (
 
 type ShortCodesApiService service
 /*
-ShortCodesApiService List all short codes
+ShortCodesApiService List short codes
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ShortCodesApiListShortCodesOpts - Optional Parameters:
      * @param "PageNumber" (optional.Int32) -  The page number to load
      * @param "PageSize" (optional.Int32) -  The size of the page
      * @param "FilterMessagingProfileId" (optional.String) -  Filter by Messaging Profile ID. Use the string &#x60;null&#x60; for phone numbers without assigned profiles. A synonym for the &#x60;/messaging_profiles/{id}/short_codes&#x60; endpoint when querying about an extant profile.
-@return InlineResponse20029
+@return ListShortCodesResponse
 */
 
 type ShortCodesApiListShortCodesOpts struct {
@@ -42,13 +42,13 @@ type ShortCodesApiListShortCodesOpts struct {
     FilterMessagingProfileId optional.String
 }
 
-func (a *ShortCodesApiService) ListShortCodes(ctx context.Context, localVarOptionals *ShortCodesApiListShortCodesOpts) (InlineResponse20029, *http.Response, error) {
+func (a *ShortCodesApiService) ListShortCodes(ctx context.Context, localVarOptionals *ShortCodesApiListShortCodesOpts) (ListShortCodesResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20029
+		localVarReturnValue ListShortCodesResponse
 	)
 
 	// create path and map variables
@@ -114,7 +114,7 @@ func (a *ShortCodesApiService) ListShortCodes(ctx context.Context, localVarOptio
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20029
+			var v ListShortCodesResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -124,7 +124,7 @@ func (a *ShortCodesApiService) ListShortCodes(ctx context.Context, localVarOptio
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -142,15 +142,15 @@ func (a *ShortCodesApiService) ListShortCodes(ctx context.Context, localVarOptio
 ShortCodesApiService Retrieve a short code
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The id of the short code
-@return InlineResponse20054
+@return ShortCodeResponse
 */
-func (a *ShortCodesApiService) RetrieveShortCode(ctx context.Context, id string) (InlineResponse20054, *http.Response, error) {
+func (a *ShortCodesApiService) RetrieveShortCode(ctx context.Context, id string) (ShortCodeResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20054
+		localVarReturnValue ShortCodeResponse
 	)
 
 	// create path and map variables
@@ -208,7 +208,7 @@ func (a *ShortCodesApiService) RetrieveShortCode(ctx context.Context, id string)
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20054
+			var v ShortCodeResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -218,7 +218,7 @@ func (a *ShortCodesApiService) RetrieveShortCode(ctx context.Context, id string)
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -238,15 +238,15 @@ Update the settings for a specific short code. To unbind a short code from a pro
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body Short code update
  * @param id The id of the short code
-@return InlineResponse20054
+@return ShortCodeResponse
 */
-func (a *ShortCodesApiService) UpdateShortCode(ctx context.Context, body Body33, id string) (InlineResponse20054, *http.Response, error) {
+func (a *ShortCodesApiService) UpdateShortCode(ctx context.Context, body UpdateShortCodeRequest, id string) (ShortCodeResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse20054
+		localVarReturnValue ShortCodeResponse
 	)
 
 	// create path and map variables
@@ -306,7 +306,7 @@ func (a *ShortCodesApiService) UpdateShortCode(ctx context.Context, body Body33,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse20054
+			var v ShortCodeResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -316,7 +316,7 @@ func (a *ShortCodesApiService) UpdateShortCode(ctx context.Context, body Body33,
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 0 {
-			var v InlineResponseDefault1
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
