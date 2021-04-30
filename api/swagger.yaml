@@ -158,13 +158,13 @@ paths:
         schema:
           type: string
           example: street_address
-          default: created_at
           enum:
           - created_at
           - first_name
           - last_name
           - business_name
           - street_address
+          default: created_at
       responses:
         "200":
           description: Successful response
@@ -677,11 +677,11 @@ paths:
         schema:
           type: string
           example: connection_name
-          default: created_at
           enum:
           - created_at
           - connection_name
           - active
+          default: created_at
       responses:
         "200":
           description: Successful response
@@ -5304,11 +5304,11 @@ paths:
         schema:
           type: string
           example: connection_name
-          default: created_at
           enum:
           - created_at
           - connection_name
           - active
+          default: created_at
       responses:
         "200":
           description: Successful response
@@ -5419,11 +5419,11 @@ paths:
         schema:
           type: string
           example: connection_name
-          default: created_at
           enum:
           - created_at
           - connection_name
           - active
+          default: created_at
       responses:
         "200":
           description: Successful response with multiple credential connections
@@ -5618,11 +5618,11 @@ paths:
         schema:
           type: string
           example: connection_name
-          default: created_at
           enum:
           - created_at
           - connection_name
           - active
+          default: created_at
       responses:
         "200":
           description: Successful response
@@ -6004,11 +6004,11 @@ paths:
         schema:
           type: string
           example: connection_name
-          default: created_at
           enum:
           - created_at
           - connection_name
           - active
+          default: created_at
       responses:
         "200":
           description: Successful response
@@ -9256,7 +9256,6 @@ paths:
         schema:
           type: string
           example: name
-          default: -created_at
           enum:
           - enabled
           - -enabled
@@ -9270,6 +9269,7 @@ paths:
           - -traffic_type
           - usage_payment_method
           - -usage_payment_method
+          default: -created_at
       responses:
         "200":
           description: Successful response
@@ -11291,11 +11291,11 @@ components:
           type: string
           description: Specifies when we apply your ani_override setting. Only applies
             when ani_override is not blank.
-          default: always
           enum:
           - always
           - normal
           - emergency
+          default: always
         channel_limit:
           type: integer
           description: "When set, this will limit the total number of outbound calls\
@@ -11309,10 +11309,10 @@ components:
           type: boolean
           description: Generate ringback tone through 183 session progress message
             with early media.
-          default: false
           enum:
           - true
           - false
+          default: false
         localization:
           type: string
           description: "A 2-character country code specifying the country whose national\
@@ -11327,7 +11327,6 @@ components:
             \ Voice Profiles. The setting dictates whether or not Telnyx sends a t.38\
             \ reinvite.<br/><br/> By default, Telnyx will send the re-invite. If set\
             \ to `customer`, the caller is expected to send the t.38 reinvite."
-          default: telnyx
           enum:
           - telnyx
           - customer
@@ -11335,6 +11334,7 @@ components:
           - passthru
           - caller-passthru
           - callee-passthru
+          default: telnyx
       example: "{\"call_parking_enabled\":true,\"ani_override\":\"always\",\"channel_limit\"\
         :10,\"instant_ringback_enabled\":true,\"generate_ringback_tone\":true,\"localization\"\
         :\"US\",\"t38_reinvite_source\":\"telnyx\"}"
@@ -11635,11 +11635,11 @@ components:
             the SIP URI <your-username>@telnyx.com will be connected to your Connection.
             You can also choose to allow only calls that are originated on any Connections
             under your account (internal).
-          default: disabled
           enum:
           - disabled
           - unrestricted
           - internal
+          default: disabled
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -11650,19 +11650,19 @@ components:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -12094,11 +12094,11 @@ components:
         transport_protocol:
           type: string
           description: "One of UDP, TLS, or TCP."
-          default: UDP
           enum:
           - UDP
           - TCP
           - TLS
+          default: UDP
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -12109,19 +12109,19 @@ components:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -12414,18 +12414,18 @@ components:
             \ stereo recording with the first leg on channel A, and the rest on channel\
             \ B."
           example: dual
-          default: single
           enum:
           - single
           - dual
+          default: single
         call_recording_format:
           type: string
           description: The audio file format for calls being recorded.
           example: mp3
-          default: wav
           enum:
           - wav
           - mp3
+          default: wav
     inline_response_200_54:
       type: object
       properties:
@@ -12857,10 +12857,10 @@ components:
           type: string
           description: Cause for call rejection.
           example: USER_BUSY
-          default: none
           enum:
           - CALL_REJECTED
           - USER_BUSY
+          default: none
       example:
         client_state: aGF2ZSBhIG5pY2UgZGF5ID1d
         command_id: 891510ac-f3e4-11e8-af5b-de00688a4901
@@ -12939,10 +12939,10 @@ components:
         port:
           type: string
           description: "RTCP port by default is rtp+1, it can also be set to rtcp-mux"
-          default: rtp+1
           enum:
           - rtcp-mux
           - rtp+1
+          default: rtp+1
         report_enabled:
           type: boolean
           description: "DEPRECATED - RTCP reports are always sent to customers/vendors.\
@@ -13027,18 +13027,18 @@ components:
             \ stereo recording with the first leg on channel A, and the rest on channel\
             \ B."
           example: dual
-          default: single
           enum:
           - single
           - dual
+          default: single
         call_recording_format:
           type: string
           description: The audio file format for calls being recorded.
           example: mp3
-          default: wav
           enum:
           - wav
           - mp3
+          default: wav
     inline_response_200_33_meta:
       type: object
       properties:
@@ -13249,10 +13249,10 @@ components:
           description: "Controls how media is handled for the phone number. default:\
             \ media routed through Telnyx with transcode support. proxy: media routed\
             \ through Telnyx with no transcode support."
-          default: default
           enum:
           - default
           - proxy
+          default: default
         accept_any_rtp_packets_enabled:
           type: boolean
           description: "When enabled, Telnyx will accept RTP packets from any customer-side\
@@ -13336,10 +13336,10 @@ components:
           description: "Determines which webhook format will be used, Telnyx API v1\
             \ or v2."
           example: "1"
-          default: "1"
           enum:
           - "1"
           - "2"
+          default: "1"
       example: "{\"id\":\"6a09cdc3-8948-47f0-aa62-74ac943d6c58\",\"record_type\":\"\
         ip_connection\",\"active\":true,\"anchorsite_override\":\"Latency\",\"connection_name\"\
         :\"string\",\"created_at\":\"2018-02-02T22:25:27.521Z\",\"updated_at\":\"\
@@ -13470,11 +13470,11 @@ components:
             the SIP URI <your-username>@telnyx.com will be connected to your Connection.
             You can also choose to allow only calls that are originated on any Connections
             under your account (internal).
-          default: disabled
           enum:
           - disabled
           - unrestricted
           - internal
+          default: disabled
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -13485,19 +13485,19 @@ components:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -13553,20 +13553,20 @@ components:
           description: "The type of the provided payload. The payload can either be\
             \ plain text, or Speech Synthesis Markup Language (SSML)."
           example: ssml
-          default: text
           enum:
           - text
           - ssml
+          default: text
         service_level:
           type: string
           description: "This parameter impacts speech quality, language options and\
             \ payload types. When using `basic`, only the `en-US` language and payload\
             \ type `text` are allowed."
           example: premium
-          default: premium
           enum:
           - basic
           - premium
+          default: premium
         stop:
           type: string
           description: "When specified, it stops the current audio being played. \
@@ -13767,12 +13767,12 @@ components:
           description: Indicates the completion level of the CSV report. Only complete
             CSV download requests will be able to be retrieved.
           example: pending
-          default: pending
           enum:
           - pending
           - complete
           - failed
           - expired
+          default: pending
       example: "{\"id\":\"42587e44-3a3e-46de-9255-0c9a7a1d1ec7\",\"record_type\":\"\
         csv_download\",\"url\":\"https://www.telnyx.com/sample/42587e44-3a3e-46de-9255-0c9a7a1d1ec7\"\
         ,\"status\":\"pending\"}"
@@ -13801,20 +13801,20 @@ components:
           type: string
           description: Specifies the type of traffic allowed in this profile.
           example: conversational
-          default: conversational
           enum:
           - conversational
           - short_duration
           - fax
           - conversational_direct
+          default: conversational
         service_plan:
           type: string
           example: international
-          default: us
           enum:
           - us
           - international
           - eea_originated_international
+          default: us
         concurrent_call_limit:
           type: integer
           description: Must be no more than your global concurrent call limit. Null
@@ -13928,20 +13928,20 @@ components:
           type: string
           description: Specifies the type of traffic allowed in this profile.
           example: conversational
-          default: conversational
           enum:
           - conversational
           - short_duration
           - fax
           - conversational_direct
+          default: conversational
         service_plan:
           type: string
           example: international
-          default: us
           enum:
           - us
           - international
           - eea_originated_international
+          default: us
         concurrent_call_limit:
           type: integer
           description: Must be no more than your global concurrent call limit. Null
@@ -15075,11 +15075,11 @@ components:
           type: string
           description: "Determines which webhook format will be used, Telnyx API v1,\
             \ v2, or a legacy 2010-04-01 format."
-          default: "2"
           enum:
           - "1"
           - "2"
           - 2010-04-01
+          default: "2"
         number_pool_settings:
           $ref: '#/components/schemas/messaging_profiles_number_pool_settings'
         url_shortener_settings:
@@ -15161,7 +15161,6 @@ components:
             this time using ICMP ping messages. This can be disabled by specifying
             a site to handle all media.'
           example: "Amsterdam, Netherlands"
-          default: Latency
           enum:
           - Latency
           - "Chicago, IL"
@@ -15172,16 +15171,17 @@ components:
           - "London, UK"
           - "Toronto, Canada"
           - "Vancouver, Canada"
+          default: Latency
         dtmf_type:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
           example: Inband
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         webhook_event_url:
           type: string
           description: "The URL where webhooks related to this connection will be\
@@ -15204,10 +15204,10 @@ components:
           description: "Determines which webhook format will be used, Telnyx API v1\
             \ or v2."
           example: "1"
-          default: "1"
           enum:
           - "1"
           - "2"
+          default: "1"
         hangup_on_timeout:
           type: boolean
           description: Specifies whether calls to phone numbers associated with this
@@ -15348,13 +15348,13 @@ components:
             \ webhook when the answering machine greeting ends with a beep or silence.\
             \ If `detect_beep` is used, you will only receive 'call.machine.greeting.ended'\
             \ if a beep is detected."
-          default: disabled
           enum:
           - detect
           - detect_beep
           - detect_words
           - greeting_end
           - disabled
+          default: disabled
         answering_machine_detection_config:
           $ref: '#/components/schemas/calls_answering_machine_detection_config'
         custom_headers:
@@ -15500,19 +15500,19 @@ components:
           type: string
           description: This setting allows you to set the format with which the caller's
             number (ANI) is sent for inbound phone calls.
-          default: E.164-national
           enum:
           - +E.164
           - E.164
           - +E.164-national
           - E.164-national
+          default: E.164-national
         dnis_number_format:
           type: string
-          default: e164
           enum:
           - +e164
           - e164
           - national
+          default: e164
         codecs:
           type: array
           description: "Defines the list of codecs that Telnyx will send for inbound\
@@ -15537,19 +15537,19 @@ components:
           type: boolean
           description: Generate ringback tone through 183 session progress message
             with early media.
-          default: false
           enum:
           - true
           - false
+          default: false
         isup_headers_enabled:
           type: boolean
           description: "When set, inbound phone calls will receive ISUP parameters\
             \ via SIP headers. (Only when available and only when using TCP or TLS\
             \ transport.)"
-          default: false
           enum:
           - true
           - false
+          default: false
         prack_enabled:
           type: boolean
           description: Enable PRACK messages as defined in RFC3262.
@@ -15733,7 +15733,6 @@ components:
             this time using ICMP ping messages. This can be disabled by specifying
             a site to handle all media.'
           example: "Amsterdam, Netherlands"
-          default: Latency
           enum:
           - Latency
           - "Chicago, IL"
@@ -15744,16 +15743,17 @@ components:
           - "London, UK"
           - "Toronto, Canada"
           - "Vancouver, Canada"
+          default: Latency
         dtmf_type:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
           example: Inband
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         webhook_event_url:
           type: string
           description: "The URL where webhooks related to this connection will be\
@@ -15776,10 +15776,10 @@ components:
           description: "Determines which webhook format will be used, Telnyx API v1\
             \ or v2."
           example: "1"
-          default: "1"
           enum:
           - "1"
           - "2"
+          default: "1"
         hangup_on_timeout:
           type: boolean
           description: Specifies whether calls to phone numbers associated with this
@@ -16196,18 +16196,18 @@ components:
         inbound_call_recording_format:
           type: string
           description: The audio file format for calls being recorded.
-          default: wav
           enum:
           - wav
           - mp3
+          default: wav
         inbound_call_recording_channels:
           type: string
           description: "When using 'dual' channels, final audio file will be stereo\
             \ recorded with the first leg on channel A, and the rest on channel B."
-          default: single
           enum:
           - single
           - dual
+          default: single
       description: The call recording settings for a phone number.
       example: "{\"inbound_call_recording_enabled\":true,\"inbound_call_recording_format\"\
         :\"wav\",\"inbound_call_recording_channels\":\"single\"}"
@@ -16254,11 +16254,11 @@ components:
             the SIP URI <your-username>@telnyx.com will be connected to your Connection.
             You can also choose to allow only calls that are originated on any Connections
             under your account (internal).
-          default: disabled
           enum:
           - disabled
           - unrestricted
           - internal
+          default: disabled
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -16269,19 +16269,19 @@ components:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -16710,20 +16710,20 @@ components:
           description: "The type of the provided payload. The payload can either be\
             \ plain text, or Speech Synthesis Markup Language (SSML)."
           example: ssml
-          default: text
           enum:
           - text
           - ssml
+          default: text
         service_level:
           type: string
           description: "This parameter impacts speech quality, language options and\
             \ payload types. When using `basic`, only the `en-US` language and payload\
             \ type `text` are allowed."
           example: premium
-          default: premium
           enum:
           - basic
           - premium
+          default: premium
         voice:
           type: string
           description: The gender of the voice used to speak back the text.
@@ -16934,11 +16934,11 @@ components:
           type: string
           description: "One of UDP, TLS, or TCP. Applies only to connections with\
             \ IP authentication or FQDN authentication."
-          default: UDP
           enum:
           - UDP
           - TCP
           - TLS
+          default: UDP
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -16949,19 +16949,19 @@ components:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -17157,10 +17157,10 @@ components:
             \ (any SIP endpoint in the public Internet) or \"Only my connections\"\
             \ (any connection assigned to the same Telnyx user)."
           example: only_my_connections
-          default: from_anyone
           enum:
           - only_my_connections
           - from_anyone
+          default: from_anyone
     body_35:
       allOf:
       - type: object
@@ -17241,11 +17241,11 @@ components:
           type: string
           description: "One of UDP, TLS, or TCP. Applies only to connections with\
             \ IP authentication or FQDN authentication."
-          default: UDP
           enum:
           - UDP
           - TCP
           - TLS
+          default: UDP
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -17256,19 +17256,19 @@ components:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -17438,11 +17438,11 @@ components:
           description: "One of UDP, TLS, or TCP. Applies only to connections with\
             \ IP authentication or FQDN authentication."
           example: UDP
-          default: UDP
           enum:
           - UDP
           - TCP
           - TLS
+          default: UDP
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -17455,20 +17455,20 @@ components:
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
           example: RFC 2833
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
           example: true
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -17559,10 +17559,10 @@ components:
           type: string
           description: Controls whether a number is billed per minute or uses your
             concurrent channels.
-          default: pay-per-minute
           enum:
           - pay-per-minute
           - channel
+          default: pay-per-minute
         media_features:
           $ref: '#/components/schemas/phone_numbersidvoice_media_features'
         call_recording:
@@ -17618,11 +17618,11 @@ components:
         transport_protocol:
           type: string
           description: "One of UDP, TLS, or TCP."
-          default: UDP
           enum:
           - UDP
           - TCP
           - TLS
+          default: UDP
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -17633,19 +17633,19 @@ components:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -17791,10 +17791,10 @@ components:
         port:
           type: string
           description: "RTCP port by default is rtp+1, it can also be set to rtcp-mux"
-          default: rtp+1
           enum:
           - rtcp-mux
           - rtp+1
+          default: rtp+1
         report_enabled:
           type: boolean
           description: "DEPRECATED - RTCP reports are always sent to customers/vendors.\
@@ -18276,20 +18276,20 @@ components:
           type: string
           description: Specifies the type of traffic allowed in this profile.
           example: conversational
-          default: conversational
           enum:
           - conversational
           - short_duration
           - fax
           - conversational_direct
+          default: conversational
         service_plan:
           type: string
           example: international
-          default: us
           enum:
           - us
           - international
           - eea_originated_international
+          default: us
         concurrent_call_limit:
           type: integer
           description: Must be no more than your global concurrent call limit. Null
@@ -18418,13 +18418,13 @@ components:
             \ webhook when the answering machine greeting ends with a beep or silence.\
             \ If `detect_beep` is used, you will only receive 'call.machine.greeting.ended'\
             \ if a beep is detected."
-          default: disabled
           enum:
           - detect
           - detect_beep
           - detect_words
           - greeting_end
           - disabled
+          default: disabled
         answering_machine_detection_config:
           $ref: '#/components/schemas/calls_answering_machine_detection_config'
         custom_headers:
@@ -18632,11 +18632,11 @@ components:
           description: "One of UDP, TLS, or TCP. Applies only to connections with\
             \ IP authentication or FQDN authentication."
           example: UDP
-          default: UDP
           enum:
           - UDP
           - TCP
           - TLS
+          default: UDP
         default_on_hold_comfort_noise_enabled:
           type: boolean
           description: "When enabled, Telnyx will generate comfort noise when you\
@@ -18649,20 +18649,20 @@ components:
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
           example: RFC 2833
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         encode_contact_header_enabled:
           type: boolean
           description: Encode the SIP contact header sent by Telnyx to avoid issues
             for NAT or ALG scenarios.
           example: true
-          default: false
           enum:
           - true
           - false
+          default: false
         encrypted_media:
           type: string
           description: Enable use of SRTP or ZRTP for encryption. Valid values are
@@ -18821,7 +18821,6 @@ components:
             this time using ICMP ping messages. This can be disabled by specifying
             a site to handle all media.'
           example: "Amsterdam, Netherlands"
-          default: Latency
           enum:
           - Latency
           - "Chicago, IL"
@@ -18832,16 +18831,17 @@ components:
           - "London, UK"
           - "Toronto, Canada"
           - "Vancouver, Canada"
+          default: Latency
         dtmf_type:
           type: string
           description: Sets the type of DTMF digits sent from Telnyx to this Connection.
             Note that DTMF digits sent to Telnyx will be accepted in all formats.
           example: Inband
-          default: RFC 2833
           enum:
           - RFC 2833
           - Inband
           - SIP INFO
+          default: RFC 2833
         webhook_event_url:
           type: string
           description: "The URL where webhooks related to this connection will be\
@@ -18864,10 +18864,10 @@ components:
           description: "Determines which webhook format will be used, Telnyx API v1\
             \ or v2."
           example: "1"
-          default: "1"
           enum:
           - "1"
           - "2"
+          default: "1"
         hangup_on_timeout:
           type: boolean
           description: Specifies whether calls to phone numbers associated with this
@@ -19091,12 +19091,12 @@ components:
         emergency_status:
           type: string
           description: Represents the state of the number regarding emergency activation.
-          default: disabled
           enum:
           - disabled
           - active
           - provisioning
           - deprovisioning
+          default: disabled
       description: The emergency services settings for a phone number.
       example: "{\"emergency_enabled\":true,\"emergency_address_id\":\"1315261609962112019\"\
         }"
@@ -19116,19 +19116,19 @@ components:
           type: string
           description: This setting allows you to set the format with which the caller's
             number (ANI) is sent for inbound phone calls.
-          default: E.164-national
           enum:
           - +E.164
           - E.164
           - +E.164-national
           - E.164-national
+          default: E.164-national
         dnis_number_format:
           type: string
-          default: e164
           enum:
           - +e164
           - e164
           - national
+          default: e164
         codecs:
           type: array
           description: "Defines the list of codecs that Telnyx will send for inbound\
@@ -19180,19 +19180,19 @@ components:
           type: boolean
           description: Generate ringback tone through 183 session progress message
             with early media.
-          default: false
           enum:
           - true
           - false
+          default: false
         isup_headers_enabled:
           type: boolean
           description: "When set, inbound phone calls will receive ISUP parameters\
             \ via SIP headers. (Only when available and only when using TCP or TLS\
             \ transport.)"
-          default: false
           enum:
           - true
           - false
+          default: false
         prack_enabled:
           type: boolean
           description: Enable PRACK messages as defined in RFC3262.
@@ -19212,11 +19212,11 @@ components:
           type: string
           description: "Selects which `sip_region` to receive inbound calls from.\
             \ If null, the default region (US) will be used."
-          default: US
           enum:
           - US
           - Europe
           - Australia
+          default: US
         sip_subdomain:
           type: string
           description: "Specifies a subdomain that can be used to receive Inbound\
@@ -19279,19 +19279,19 @@ components:
           type: string
           description: This setting allows you to set the format with which the caller's
             number (ANI) is sent for inbound phone calls.
-          default: E.164-national
           enum:
           - +E.164
           - E.164
           - +E.164-national
           - E.164-national
+          default: E.164-national
         dnis_number_format:
           type: string
-          default: e164
           enum:
           - +e164
           - e164
           - national
+          default: e164
         codecs:
           type: array
           description: "Defines the list of codecs that Telnyx will send for inbound\
@@ -19323,19 +19323,19 @@ components:
           type: boolean
           description: Generate ringback tone through 183 session progress message
             with early media.
-          default: false
           enum:
           - true
           - false
+          default: false
         isup_headers_enabled:
           type: boolean
           description: "When set, inbound phone calls will receive ISUP parameters\
             \ via SIP headers. (Only when available and only when using TCP or TLS\
             \ transport.)"
-          default: false
           enum:
           - true
           - false
+          default: false
         prack_enabled:
           type: boolean
           description: Enable PRACK messages as defined in RFC3262.
@@ -19355,11 +19355,11 @@ components:
           type: string
           description: "Selects which `sip_region` to receive inbound calls from.\
             \ If null, the default region (US) will be used."
-          default: US
           enum:
           - US
           - Europe
           - Australia
+          default: US
         sip_subdomain:
           type: string
           description: "Specifies a subdomain that can be used to receive Inbound\
@@ -19427,19 +19427,19 @@ components:
           type: string
           description: This setting allows you to set the format with which the caller's
             number (ANI) is sent for inbound phone calls.
-          default: E.164-national
           enum:
           - +E.164
           - E.164
           - +E.164-national
           - E.164-national
+          default: E.164-national
         dnis_number_format:
           type: string
-          default: e164
           enum:
           - +e164
           - e164
           - national
+          default: e164
         codecs:
           type: array
           description: "Defines the list of codecs that Telnyx will send for inbound\
@@ -19472,19 +19472,19 @@ components:
           type: boolean
           description: Generate ringback tone through 183 session progress message
             with early media.
-          default: false
           enum:
           - true
           - false
+          default: false
         isup_headers_enabled:
           type: boolean
           description: "When set, inbound phone calls will receive ISUP parameters\
             \ via SIP headers. (Only when available and only when using TCP or TLS\
             \ transport.)"
-          default: false
           enum:
           - true
           - false
+          default: false
         prack_enabled:
           type: boolean
           description: Enable PRACK messages as defined in RFC3262.
@@ -19504,11 +19504,11 @@ components:
           type: string
           description: "Selects which `sip_region` to receive inbound calls from.\
             \ If null, the default region (US) will be used."
-          default: US
           enum:
           - US
           - Europe
           - Australia
+          default: US
         sip_subdomain:
           type: string
           description: "Specifies a subdomain that can be used to receive Inbound\
@@ -20075,10 +20075,10 @@ components:
           description: Controls whether a number is billed per minute or uses your
             concurrent channels.
           example: pay-per-minute
-          default: pay-per-minute
           enum:
           - pay-per-minute
           - channel
+          default: pay-per-minute
         media_features:
           $ref: '#/components/schemas/phone_numbersidvoice_media_features'
         call_recording:
@@ -20120,11 +20120,11 @@ components:
           type: string
           description: Specifies when we apply your ani_override setting. Only applies
             when ani_override is not blank.
-          default: always
           enum:
           - always
           - normal
           - emergency
+          default: always
         channel_limit:
           type: integer
           description: "When set, this will limit the total number of outbound calls\
@@ -20138,10 +20138,10 @@ components:
           type: boolean
           description: Generate ringback tone through 183 session progress message
             with early media.
-          default: false
           enum:
           - true
           - false
+          default: false
         localization:
           type: string
           description: "A 2-character country code specifying the country whose national\
@@ -20155,7 +20155,6 @@ components:
             \ Voice Profiles. The setting dictates whether or not Telnyx sends a t.38\
             \ reinvite.<br/><br/> By default, Telnyx will send the re-invite. If set\
             \ to `customer`, the caller is expected to send the t.38 reinvite."
-          default: telnyx
           enum:
           - telnyx
           - customer
@@ -20163,6 +20162,7 @@ components:
           - passthru
           - caller-passthru
           - callee-passthru
+          default: telnyx
         tech_prefix:
           type: string
           description: "Numerical chars only, exactly 4 characters."
@@ -20170,10 +20170,10 @@ components:
         ip_authentication_method:
           type: string
           example: tech-prefix
-          default: tech-prefix
           enum:
           - tech-prefixp-charge-info
           - token
+          default: tech-prefix
         ip_authentication_token:
           type: string
           default: "null"
