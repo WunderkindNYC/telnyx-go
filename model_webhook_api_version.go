@@ -13,6 +13,6 @@ type WebhookApiVersion string
 
 // List of WebhookApiVersion
 const (
-	1__WebhookApiVersion WebhookApiVersion = "1"
-	2__WebhookApiVersion WebhookApiVersion = "2"
+	WebhookApiVersion1 WebhookApiVersion = "1"
+	WebhookApiVersion2 WebhookApiVersion = "2"
 )

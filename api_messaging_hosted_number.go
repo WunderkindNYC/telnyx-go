@@ -12,13 +12,13 @@ package telnyx
 
 import (
 	"context"
+	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
-	"fmt"
-	"github.com/antihax/optional"
 	"os"
+	"strings"
 )
 
 // Linger please
@@ -476,20 +476,7 @@ func (a *MessagingHostedNumberApiService) UploadFileMessagingHostedNumberOrder(c
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
-    var localVarFile *os.File
-	if localVarOptionals != nil && localVarOptionals.Bill.IsSet() {
-		localVarFileOk := false
-		localVarFile, localVarFileOk = localVarOptionals.Bill.Value().(*os.File)
-		if !localVarFileOk {
-				return localVarReturnValue, nil, reportError("bill should be *os.File")
-		}
-	}
-	if localVarFile != nil {
-		fbs, _ := ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
+
     var localVarFile *os.File
 	if localVarOptionals != nil && localVarOptionals.Loa.IsSet() {
 		localVarFileOk := false

@@ -17,3 +17,12 @@ type ValidateAddressResult struct {
 	Result string `json:"result"`
 	Suggested *ValidateAddress `json:"suggested"`
 }
+
+type ValidateAddress struct {
+	AdministrativeArea string `json:"administrative_area"`
+	CountryCode string `json:"country_code"`
+	ExtendedAddress string `json:"extended_address"`
+	Locality string `json:"locality"`
+	PostalCode string `json:"postal_code"`
+	StreetAddress string `json:"street_address"`
+}
