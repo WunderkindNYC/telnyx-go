@@ -34,11 +34,11 @@ type CreateNumberOrderRequest struct {
 }
 
 type PhoneNumber struct {
-	Id string `json:"id"`
-	PhoneNumber string `json:"phone_number"`
-	RecordType string `json:"record_type"`
-	RegulatoryGroupId string `json:"regulatory_group_id"`
-	RegulatoryRequirements []RegulatoryRequirement `json:"regulatory_requirements"`
-	RequirementsMet bool `json:"requirements_met"`
-	Status string `json:"status"`
+	Id string `json:"id,omitempty"`
+	PhoneNumber string `json:"phone_number,omitempty"`
+	RecordType string `json:"record_type,omitempty"`
+	RegulatoryGroupId string `json:"regulatory_group_id,omitempty"`
+	RegulatoryRequirements []RegulatoryRequirement `json:"regulatory_requirements,omitempty"`
+	RequirementsMet bool `json:"requirements_met,omitempty"`
+	Status string `json:"status,omitempty"`
 }
