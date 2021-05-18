@@ -314,6 +314,8 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 		delimiter = "\t"
 	case "csv":
 		delimiter = ","
+	case "multi":
+		delimiter = ","
 	}
 
 	if reflect.TypeOf(obj).Kind() == reflect.Slice {
